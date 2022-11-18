@@ -1,11 +1,17 @@
 import React from "react";
 import { render } from "react-dom";
-import App from './components/App'
+import OverView from './components/overview/index.jsx'
+import QuestionAnswers from './components/q&a/index.jsx'
+import RatingsReviews from './components/ratings&reviews/index.jsx'
+import RelatedItemsComp from './components/relatedItems&comp/index.jsx'
 
 render(
   <div>
-    <p>Front End Capstone</p>
-    <App/>
+    <h1>Front End Capstone</h1>
+    <OverView/>
+    <RatingsReviews/>
+    <QuestionAnswers/>
+    <RelatedItemsComp/>
   </div>,
   document.getElementById("root")
 );
