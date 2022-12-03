@@ -8,12 +8,16 @@ import  "/Users/yasereisa/HackReactor/Course/FEC/client/src/components/relatedIt
 function carousel (props) {
 
   const [activeIndex, setActiveIndex] = useState(0)
-  const updateIndex = () => {
-    if(activeIndex <4) {
-    setActiveIndex(activeIndex+1)
-    } else{
+  const updateIndex = (str) => {
+    if(activeIndex <4 && str === 'next') {
+      setActiveIndex(activeIndex+1)
+    } else if(str === 'next'){
       setActiveIndex(0)
-    }
+    } else if(activeIndex > 0 && str === 'prev') {
+       setActiveIndex(activeIndex-1)
+      } else if(str === 'prev'){
+        setActiveIndex(4)
+      }
   }
 
   return (
@@ -37,9 +41,12 @@ function carousel (props) {
           </div>
         </div>
       </div>
-      <button onClick={()=>{ updateIndex()}}>
-            Next
-          </button>
+      <button onClick={()=>{ updateIndex('prev')}}>
+        prev
+      </button>
+      <button onClick={()=>{ updateIndex('next')}}>
+        Next
+      </button>
   </div>
   )
 }
