@@ -1,7 +1,8 @@
 .carousel-container{
   background: whitesmoke;
   display: flex;
-  width: 30%;
+  width: 60%;
+  margin: auto;
   border-color: azure;
   flex-wrap: nowrap;
   overflow: hidden;
