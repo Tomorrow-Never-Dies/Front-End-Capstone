@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { render, screen, cleanup } from "@testing-library/react";
-import RelatedItemsComp from './index';
+import RelatedItemsComp from '../index';
 
 
 
