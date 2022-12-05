@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 
-function App(props) {
+function App (props) {
   return <h1> App component </h1>
 }
 
