@@ -6,6 +6,7 @@ let app = express();
 
 app.use(express.static(__dirname + '/../client/dist'));
 
+// app.get("/", (req, res)=>{
 
 
 
