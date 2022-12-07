@@ -1,0 +1,26 @@
+.singleReview {
+  border-style:dotted;
+}
+
+.Reviews{
+  display:flex;
+  flex-direction:row;
+}
+
+.IndividualReviews{
+  display:flex;
+  position:relative;
+  flex-direction:column;
+}
+
+.starStats{
+  display:flex;
+  flex-direction:column;
+}
+
+.UserAndDate{
+  position: relative;
+  float: right;
+  background-color:greenyellow;
+
+}
