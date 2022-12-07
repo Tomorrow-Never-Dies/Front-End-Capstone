@@ -3,16 +3,18 @@ import axios from 'axios';
 import IndividualReview from './Reviews/IndividualReview.jsx';
 import sampleData from '../../../../fixtures/ReviewExampleData.js'
 import StarOverview from './Stars/StarOverview.jsx'
+import Form from './Reviews/Form.jsx'
 import './reviews.css';
 
 function RatingsReviews (props) {
   const [reviews, setReviews] = useState(sampleData.sampleData.results);
+  const [enableForm, setForm] = useState(false);
+
   const mappedReviews = reviews.map((review) => {
-    return <IndividualReview reviewInfo = {review}/>
+    return <IndividualReview reviewInfo = {review} key = {review.review_id}/>
   })
   useEffect(() => {
-    console.log(`sampleData.results is equal to ${JSON.stringify(sampleData.sampleData.results)}`);
-    console.log(`item state is equal to ${JSON.stringify(reviews)}`);
+    console.log(`enableform is equal to ${enableForm}`);
     axios.get('/getReview', {
       params: {
         id: '1'
@@ -24,21 +26,32 @@ function RatingsReviews (props) {
       })
   }, [])
 
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+    setForm(true);
+  }
+  const changeView = (e) => {
+    e.preventDefault();
+    setForm(false);
+  }
   return (
-  <div className = 'Reviews'>
-    <StarOverview/>
-    <div className = 'IndividualReviews'>
-    {mappedReviews}
-  <div className = 'ReviewButtons'>
-    <button>
-    MORE REVIEWS
+    <div>
+   {enableForm === false
+     ? <div className = 'Reviews'> <StarOverview/>
+     <div className = 'IndividualReviews'> {mappedReviews}
+     <div className = 'ReviewButtons'>
+     <button>
+     MORE REVIEWS
     </button>
-    <button>
+    <button onClick = {onFormSubmit}>
     ADD A REVIEW
     </button>
-  </div>
     </div>
-  </div>
+    </div>
+    </div>
+     : <div><Form changeView = {changeView}/></div>}
+    </div>
+
   )
 }
 export default RatingsReviews
