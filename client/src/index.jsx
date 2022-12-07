@@ -9,9 +9,9 @@ render(
   <div>
     <h1>Front End Capstone</h1>
     <OverView/>
-    <RatingsReviews/>
-    <QuestionAnswers/>
     <RelatedItemsComp/>
+    <QuestionAnswers/>
+    <RatingsReviews/>
   </div>,
   document.getElementById("root")
 );
