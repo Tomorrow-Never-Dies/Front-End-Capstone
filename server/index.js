@@ -11,7 +11,6 @@ app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/products', (req,res) => {
 
-
     axios({
     method: 'get',
     url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/',
