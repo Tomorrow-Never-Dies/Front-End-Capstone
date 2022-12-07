@@ -23,28 +23,29 @@ function carousel (props) {
   return (
     <div>
       <div  data-testid='main-component' className ="carousel-container">
-        <div className = "inner" style={{transform: `translateX(-${activeIndex*100}%)` }}>
-          <div className ="carousel-item">
+        <div data-testid='inner-component' className = "inner" style={{transform: `translateX(-${activeIndex*100}%)` }}>
+
+          <div data-testid='item-component1' className ="carousel-item">
               item 1
           </div>
-          <div className ="carousel-item">
+          <div data-testid='item-component2' className ="carousel-item">
               item 2
           </div>
-          <div className ="carousel-item">
+          <div data-testid='item-component3' className ="carousel-item">
               item 3
           </div>
-          <div className ="carousel-item">
+          <div data-testid='item-component4' className ="carousel-item">
               item 4
           </div>
-          <div className ="carousel-item">
+          <div data-testid='item-component5' className ="carousel-item">
               item 5
           </div>
         </div>
       </div>
-      <button onClick={()=>{ updateIndex('prev')}}>
+      <button data-testid='prev-button' onClick={()=>{ updateIndex('prev')}}>
         prev
       </button>
-      <button onClick={()=>{ updateIndex('next')}}>
+      <button data-testid='next-button' onClick={()=>{ updateIndex('next')}}>
         Next
       </button>
   </div>
