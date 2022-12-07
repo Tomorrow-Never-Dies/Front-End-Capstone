@@ -24,8 +24,15 @@ function Form (props) {
     setReview({ ...newReview, Photos: e.target.files[0] })
   }
   function handleSubmit (e) {
-    console.log('submitting!')
-    props.changeView(e);
+    e.preventDefault();
+    console.log('submitting!');
+    axios.post('addReview', newReview)
+      .then((result) => {
+        console.log(`result from posting a new review is ${result}`);
+      })
+      .then(() => {
+        props.changeView(e);
+      })
   }
 
   useEffect(() => {

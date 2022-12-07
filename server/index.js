@@ -17,7 +17,9 @@ app.get('/getReview', (req, res) => {
     })
 })
 
-
+app.post('/addReview', (req, res) => {
+  console.log(`input for addReview is ${JSON.stringify(req.body)}`);
+})
 
 
 

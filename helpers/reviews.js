@@ -6,7 +6,8 @@ const apiOptions = (itemid) => {
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/:hr-rpp/reviews/?product_id=${itemid}`,
     headers: {
       'User-Agent': ' request',
-      Authorization: `${config.TOKEN}`
+      Authorization: `${config.TOKEN}`,
+      body: {}
     }
   }
   return options;
@@ -22,10 +23,11 @@ const getReviews = (itemid) => {
 
 const addReviews = (review) => {
   const options = apiOptions(review.product_id)
-  return axios.post(options.url, options)
+  return axios.post(options.url, { ...options, headers: { ...options.headers, body: review } })
     .then((response) => {
       console.log(`addReviews response is equal to ${JSON.stringify(response.data)}`);
       return response.data
     })
 }
-module.exports.getReviews = getReviews
+module.exports.getReviews = getReviews;
+module.exports.addReviews = addReviews;
