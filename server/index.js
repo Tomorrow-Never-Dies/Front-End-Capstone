@@ -1,9 +1,11 @@
 const express = require('express');
+const axios = require('axios')
+
+
 let app = express();
 const { getReviews } = require('../helpers/reviews.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
-app.use(express.json());
 
 app.get('/getReview', (req, res) => {
   console.log(`getting review!, ${req.query.id}`)
@@ -17,9 +19,34 @@ app.get('/getReview', (req, res) => {
     })
 })
 
+<<<<<<< HEAD
 app.post('/addReview', (req, res) => {
   console.log(`input for addReview is ${JSON.stringify(req.body)}`);
 })
+=======
+
+
+app.get('/products', (req,res) => {
+
+    axios({
+    method: 'get',
+    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/',
+    headers :{
+      'Authorization': `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`
+    }
+  })
+  .then((result) =>{
+    console.log(result.data, 'data')
+    res.send(result.data)
+  })
+  .catch((error) =>{
+    console.log(error, "error")
+    return error
+  })
+
+})
+
+>>>>>>> 50b1b6036aff4a1f71225554f2100a922cd3cc8b
 
 
 

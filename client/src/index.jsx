@@ -10,8 +10,13 @@ root.render(
   <div>
     <h1>Front End Capstone</h1>
     <OverView/>
-    <RatingsReviews/>
-    <QuestionAnswers/>
     <RelatedItemsComp/>
+<<<<<<< HEAD
   </div>
+=======
+    <QuestionAnswers/>
+    <RatingsReviews/>
+  </div>,
+  document.getElementById("root")
+>>>>>>> 50b1b6036aff4a1f71225554f2100a922cd3cc8b
 );
