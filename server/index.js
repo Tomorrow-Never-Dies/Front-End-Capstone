@@ -3,9 +3,10 @@ const axios = require('axios')
 
 
 let app = express();
-const { getReviews } = require('../helpers/reviews.js');
+const { getReviews, addReviews } = require('../helpers/reviews.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
+app.use(express.json());
 
 app.get('/getReview', (req, res) => {
   console.log(`getting review!, ${req.query.id}`)
@@ -19,11 +20,12 @@ app.get('/getReview', (req, res) => {
     })
 })
 
-<<<<<<< HEAD
 app.post('/addReview', (req, res) => {
   console.log(`input for addReview is ${JSON.stringify(req.body)}`);
-})
-=======
+  addReviews(req.body)
+  .then((response) => {
+    console.log(`response from addReview is ${response}`)
+  })
 
 
 app.get('/products', (req,res) => {
@@ -42,11 +44,10 @@ app.get('/products', (req,res) => {
   .catch((error) =>{
     console.log(error, "error")
     return error
-  })
+})
 
 })
 
->>>>>>> 50b1b6036aff4a1f71225554f2100a922cd3cc8b
 
 
 
