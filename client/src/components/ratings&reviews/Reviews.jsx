@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import IndividualReview from './Reviews/IndividualReview.jsx';
-import sampleData from '../../../../fixtures/ReviewExampleData.js'
+import sampleData from '../../../../fixtures/ratings&reviews/ReviewExampleData.js'
 import StarOverview from './Stars/StarOverview.jsx'
 import Form from './Reviews/Form.jsx'
 import './reviews.css';

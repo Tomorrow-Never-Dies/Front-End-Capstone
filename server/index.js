@@ -26,7 +26,7 @@ app.post('/addReview', (req, res) => {
   .then((response) => {
     console.log(`response from addReview is ${response}`)
   })
-
+})
 
 app.get('/products', (req,res) => {
 
