@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
+<<<<<<< HEAD
 import  "./styles/carousel.css"
+=======
+//import '../styles/carousel.css'
+>>>>>>> b29874998e7dad1b7cc95880e853ebbfcc6d8bad
 
 
 

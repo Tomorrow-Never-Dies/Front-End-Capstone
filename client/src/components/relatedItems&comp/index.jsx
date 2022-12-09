@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
+<<<<<<< HEAD
 import  "./styles/carousel.css"
+=======
+//import  "/Users/yasereisa/HackReactor/Course/FEC/client/src/components/relatedItems&comp/styles/carousel.css"
+>>>>>>> b29874998e7dad1b7cc95880e853ebbfcc6d8bad
 import Carousel from "./carousel.jsx";
 import ProductCards from "./productcard.jsx";
 
