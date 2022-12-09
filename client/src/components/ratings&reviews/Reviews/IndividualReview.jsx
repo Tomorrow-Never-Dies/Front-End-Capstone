@@ -4,7 +4,7 @@ import ReviewDate from './ReviewDate.jsx'
 
 export default function IndividualReview (props) {
   useEffect(() => {
-    console.log(`props.reviewInfo is equal to ${JSON.stringify(props.reviewInfo)}`);
+    //console.log(`props.reviewInfo is equal to ${JSON.stringify(props.reviewInfo)}`);
   }, [])
   return (
   <div className = 'singleReview'>

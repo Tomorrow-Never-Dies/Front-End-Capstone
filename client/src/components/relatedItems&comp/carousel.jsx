@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import  "/Users/yasereisa/HackReactor/Course/FEC/client/src/components/relatedItems&comp/styles/carousel.css"
+//import '../styles/carousel.css'
 
 
 
