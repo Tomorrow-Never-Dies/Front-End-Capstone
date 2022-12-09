@@ -1,8 +1,6 @@
 const express = require('express');
 const axios = require('axios')
-
-
-let app = express();
+const app = express();
 const { getReviews, addReviews } = require('../helpers/reviews.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
@@ -15,20 +13,25 @@ app.get('/getReview', (req, res) => {
       res.send(response)
     })
     .catch((err) => {
-      console.log(`err found while getting a review! : ${err}`)
-      throw(err)
+      console.log(`err found while getting a review ${err}!`);
+      throw (err);
     })
 })
 
 app.post('/addReview', (req, res) => {
   console.log(`input for addReview is ${JSON.stringify(req.body)}`);
   addReviews(req.body)
-  .then((response) => {
-    console.log(`response from addReview is ${response}`)
-  })
+    .then((response) => {
+      console.log(`response from addReview is ${response}`)
+    })
+    .catch((err) => {
+      console.log(`err while adding Review is equal to ${err}`);
+      throw (err);
+    })
 })
 
 app.get('/products', (req,res) => {
+  console.log(`getting products`);
 
     axios({
     method: 'get',

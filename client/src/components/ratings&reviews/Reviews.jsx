@@ -14,15 +14,14 @@ function RatingsReviews (props) {
     return <IndividualReview reviewInfo = {review} key = {review.review_id}/>
   })
   useEffect(() => {
-    console.log(`enableform is equal to ${enableForm}`);
     axios.get('/getReview', {
       params: {
         id: '1'
       }
     })
       .then((result) => {
-        //setReviews([...result.data.results]);
-        console.log(`result from getReview request is equal to ${result.data}`);
+        setReviews([...result.data.results]);
+        //console.log(`result from getReview request is equal to ${result.data}`);
       })
   }, [])
 
