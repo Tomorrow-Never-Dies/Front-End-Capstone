@@ -1,18 +1,8 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import OverView from './components/overview/index.jsx'
-import QuestionAnswers from './components/q&a/index.jsx'
-import RatingsReviews from './components/ratings&reviews/Reviews.jsx'
-import RelatedItemsComp from './components/relatedItems&comp/index.jsx'
-const root = ReactDOM.createRoot(document.getElementById("root"));
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App.jsx'
 
-root.render(
-  <div>
-    <h1>Front End Capstone</h1>
-    <OverView/>
-    <RelatedItemsComp/>
-    <QuestionAnswers/>
-    <RatingsReviews/>
-  </div>,
-  document.getElementById("root")
-);
+
+
+
+ReactDOM.render(<App />, document.getElementById("root"));
