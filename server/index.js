@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios')
 const app = express();
 const { getReviews, addReviews } = require('../helpers/reviews.js');
+const config = require('../config.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.json());
@@ -37,7 +38,7 @@ app.get('/products', (req,res) => {
     method: 'get',
     url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/',
     headers :{
-      'Authorization': `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`
+      'Authorization': `${config.TOKEN}`
     }
   })
   .then((result) =>{
