@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import IndividualReview from './Reviews/IndividualReview.jsx';
+<<<<<<< HEAD
+import sampleData from '../../../../fixtures/ratings&reviews/ReviewExampleData.js'
+=======
 import sampleData from '../../../../fixtures/ratings&reviews/ReviewExampleData.js';
+>>>>>>> b29874998e7dad1b7cc95880e853ebbfcc6d8bad
 import StarOverview from './Stars/StarOverview.jsx'
 import Form from './Reviews/Form.jsx'
 import './reviews.css';
@@ -14,15 +18,14 @@ function RatingsReviews (props) {
     return <IndividualReview reviewInfo = {review} key = {review.review_id}/>
   })
   useEffect(() => {
-    console.log(`enableform is equal to ${enableForm}`);
     axios.get('/getReview', {
       params: {
         id: '1'
       }
     })
       .then((result) => {
-        //setReviews([...result.data.results]);
-        console.log(`result from getReview request is equal to ${result.data}`);
+        setReviews([...result.data.results]);
+        //console.log(`result from getReview request is equal to ${result.data}`);
       })
   }, [])
 
