@@ -11,12 +11,13 @@ export default class OverView extends React.Component {
       product: {},
       styles: [],
       reviews: [],
-      selectedStyle: {},
+      selectedStyle: sampleProductIdStyles.sampleProductIdStyles.results[0],
       selectedSize: {},
       starToggled: false
     };
     this.initialRender = this.initialRender.bind(this);
     this.starToggle = this.starToggle.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
 
   initialRender () {
@@ -25,37 +26,57 @@ export default class OverView extends React.Component {
     this.setState({ reviews: sampleData.sampleData.results })
     this.setState({ selectedStyle: sampleProductIdStyles.sampleProductIdStyles.results[0] })
   }
+
   starToggle () {
-    this.setState({starToggled: !this.state.starToggled}) //need to communitcate to yassir
+    console.log(this.state.starToggled, 'togggleeee')
+    this.setState({ starToggled: !this.state.starToggled }) // need to communitcate to yassir
+  }
+
+  addToCart () {
+    console.log('added to cart!')
   }
 
   componentDidMount () { this.initialRender() }
   render () {
-    // console.log(this.state.selectedStyle.photos, "photooooos")
-    // if (this.state.selectedStyle.photos[0] === {}) {
-    //   return (
-    //     <div>  Please Wait while we load our products... </div>
-    //   );
-    // } else {
-      return (
+    return (
       <div>
        <p> OverView Place Holder </p>
        <div data-testid='name header'>NAME: {this.state.product.name}</div>
-       <div>PRICE: {this.state.selectedSize.price}</div>
+       <div>PRICE: {this.state.selectedStyle.original_price}</div>
        <div>CATEGORY: {this.state.product.category}</div>
        <div>TITLE:{this.state.product.slogan} </div>
        <div>DESCRIPTION: {this.state.product.description} </div>
        <div>STAR RATINGS: </div>
        <a className="skip-link" href="#Reviews">Read all {this.state.reviews.length} reviews</a>
+       <div></div>
        {/* Still need to fix href link to reviews component */}
        <button onClick = {this.starToggle}>Star toggle</button>
-       {/* <img src={this.state.selectedStyle.photos[0].url} alt="Girl in a jacket" width="500" height="600"/> */}
+       <div></div>
+       {this.state.selectedStyle.photos !== {}
+         ? <img src={this.state.selectedStyle.photos[0].url} alt="Selected style image" width="500" height="600"/>
+         : <div>  Please Wait while we load our products... </div> }
        {this.state.styles.map(style => (<div key = {style.style_id}>
         <img src={style.photos[0].thumbnail_url} alt="style thumbNail" width="500" height="600"/>
           </div>)
-      )}
-       </div>
-      )
-    }
+       )}
+        <form>
+        <b> Select your Size </b>
+        <select id = "mySize" >
+        <option> ---Choose size--- </option>
+        <option> place holder1 </option>
+        <option> place holder2 </option>
+        </select>
+        </form>
+        <form>
+        <b> Select your Quantity </b>
+        <select id = "myQuantity" >
+        <option> ---Choose Quantity--- </option>
+        <option> place holder1 </option>
+        <option> place holder2 </option>
+        </select>
+        </form>
+        <button onClick = {this.addToCart}>Add to cart!</button>
+      </div>
+    )
   }
-//}
+}
