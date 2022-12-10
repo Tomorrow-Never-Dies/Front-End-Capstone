@@ -3,32 +3,22 @@ import '../reviews.css'
 import axios from 'axios'
 
 export default function StarOverview (props) {
-  const [meta, setMeta] = useState({});
   const [rating, setRating] = useState(null)
   useEffect(() => {
-    axios.get('/getReviewMeta', {
-      params: {
-        id: '71697'
-      }
-    })
-      .then((result) => {
-        console.log(`result from getMeta request is equal to ${JSON.stringify(result.data)}`)
-        return setMeta(result.data);
-      })
-  }, [])
-
-  useEffect(() => {
-    let ratings = meta.ratings
+    console.log(`props meta is equal to ${JSON.stringify(props.data)}`);
+    let ratings = props.data.ratings
     let weightedSum = 0;
     let total = 0;
-    console.log(`meta ratings is equal to ${JSON.stringify(ratings)}`);
-    Object.keys(ratings || {}).forEach(function( key, index) {
+    Object.keys(ratings || {}).forEach(function (key, index) {
       weightedSum += Number(ratings[key]) * Number(key);
       total += Number(ratings[key]);
-      console.log(`total is equal to ${total} and weight is equal to ${weightedSum}`);
     });
-    setRating((weightedSum / total).toFixed(1));
-  }, [meta.ratings])
+    const excessFinalRating = (weightedSum / total)
+    const finalRating = excessFinalRating.toFixed(1)
+    console.log(`finalRating is equal to ${finalRating}`)
+    setRating(finalRating);
+  }, [props.data])
+
   return (
     <div className = 'starStats'>
       {rating > 0 ? rating : 'stars' }
