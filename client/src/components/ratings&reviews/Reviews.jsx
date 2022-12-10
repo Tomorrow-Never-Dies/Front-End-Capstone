@@ -8,22 +8,30 @@ import './reviews.css';
 
 function RatingsReviews (props) {
   const [reviews, setReviews] = useState(sampleData.sampleData.results);
+  const [metaData, setMeta] = useState({});
   const [enableForm, setForm] = useState(false);
-
   const mappedReviews = reviews.map((review) => {
     return <IndividualReview reviewInfo = {review} key = {review.review_id}/>
   })
+
   useEffect(() => {
-    axios.get('/getReview', {
-      params: {
-        id: '1'
-      }
-    })
-      .then((result) => {
-        setReviews([...result.data.results]);
-        //console.log(`result from getReview request is equal to ${result.data}`);
+    const fetchData = async () => {
+      const reviewData = await axios.get('/getReview', {
+        params: {
+          id: props.id // swap this to parent prop id after testing
+        }
       })
-  }, [])
+      const metaData = await axios.get('/getReviewMeta', {
+        params: {
+          id: props.id
+        }
+      })
+      setReviews([...reviewData.data.results]);
+      setMeta(metaData.data);
+    }
+    fetchData();
+  }, [props.id])
+
 
   const onFormSubmit = (e) => {
     e.preventDefault();
@@ -36,19 +44,20 @@ function RatingsReviews (props) {
   return (
     <div>
    {enableForm === false
-     ? <div className = 'Reviews'> <StarOverview/>
+     ? <div className = 'Reviews'> <StarOverview key = {metaData} data = { metaData} />
+     {metaData.product_id}
      <div className = 'IndividualReviews'> {mappedReviews}
      <div className = 'ReviewButtons'>
      <button>
      MORE REVIEWS
     </button>
-    <button onClick = {onFormSubmit}>
+    <button onClick = {onFormSubmit} >
     ADD A REVIEW
     </button>
     </div>
     </div>
     </div>
-     : <div><Form changeView = {changeView}/></div>}
+     : <div><Form changeView = {changeView} id = {props.id}/></div>}
     </div>
 
   )

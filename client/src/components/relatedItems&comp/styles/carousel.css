@@ -1,4 +1,5 @@
 .carousel-container{
+  position: relative;
   background: whitesmoke;
   display: flex;
   width: 60%;
@@ -9,9 +10,10 @@
 }
 
 .carousel-item{
+  position: relative;
   height: 20rem;
-  width: 100%;
-  display: inline-flex;
+  width: 13rem;
+  /* display: inline-flex; */
   align-items: center;
   justify-content: center;
   transition: 1s cubic-bezier(0.39, 0.575, 0.565, 1)
@@ -19,5 +21,12 @@
 
 .inner{
   white-space: nowrap;
+  display: inline-flex;
+  /* width: 100%; */
   transition: transform 0.3s;
+}
+
+.item-price{
+  position: relative;
+  font: red;
 }

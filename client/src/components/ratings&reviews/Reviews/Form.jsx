@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import StarRating from './StarRating.jsx';
 import axios from 'axios';
+import {FaStar} from 'react-icons/fa';
 
 function Form (props) {
   const [newReview, setReview] = useState({
-    product_id: 1,
+    product_id: props.id,
     rating: '',
     recommended: '',
     characteristics: { 14: '', 15: '', 16: '', 17: '', 18: '', 19: '' },
@@ -13,8 +15,10 @@ function Form (props) {
     name: '',
     email: ''
   })
+  function onRatingChange (e) {
+    setReview({ ...newReview, rating: Number(e.target.value) })
+  }
   function onChangeForm (e) {
-    e.preventDefault();
     setReview({ ...newReview, [e.target.name]: e.target.value })
   }
   function onCharacteristicChange (e) {
@@ -22,6 +26,13 @@ function Form (props) {
   }
   function onFileChange (e) {
     setReview({ ...newReview, Photos: e.target.files[0] })
+  }
+  function onRecommendChange(e) {
+    if (e.target.value === 'true') {
+      setReview({...newReview, recommended: true })
+    } else {
+      setReview({...newReview, recommended: false })
+    }
   }
   function handleSubmit (e) {
     e.preventDefault();
@@ -41,16 +52,15 @@ function Form (props) {
   }, [newReview]);
   return (
     <form>
-      <label onChange = {onChangeForm}>
-        Overall rating -mandatory - star rating:
-        <input type = 'text' name ='rating'/>
+      <label>
+        <StarRating handleStarRating = {onRatingChange}/>
       </label>
       <br />
-      <label onChange = {onChangeForm}>
+      <label onChange = {onRecommendChange}>
         Recommended
-          <input type = 'radio' value = 'Yes' name = 'recommended'/>
+          <input type = 'radio' value = 'true' name = 'recommended'/>
           Yes
-          <input type = 'radio' value = 'No' name = 'recommended'/>
+          <input type = 'radio' value = 'false' name = 'recommended'/>
           No
       </label>
       <br />

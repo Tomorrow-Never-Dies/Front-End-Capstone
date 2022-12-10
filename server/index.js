@@ -1,15 +1,13 @@
 const express = require('express');
 const axios = require('axios')
 const app = express();
-const { getReviews, addReviews } = require('../helpers/reviews.js');
-const { getQuestions } = require('../helpers/q&a.js');
+const { getReviews, addReviews, getMeta } = require('../helpers/reviews.js');
 const config = require('../config.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.json());
 
 app.get('/getReview', (req, res) => {
-  //console.log(`getting review!, ${req.query.id}`)
   getReviews(req.query.id)
     .then((response) => {
       res.send(response)
@@ -19,7 +17,12 @@ app.get('/getReview', (req, res) => {
       throw (err);
     })
 })
-
+app.get('/getReviewMeta', (req, res) => {
+  getMeta(req.query.id)
+    .then((response) => {
+      res.send(response)
+    })
+})
 app.post('/addReview', (req, res) => {
   console.log(`input for addReview is ${JSON.stringify(req.body)}`);
   addReviews(req.body)
@@ -47,7 +50,7 @@ app.get('/products', (req,res) => {
     res.send(result.data)
   })
   .catch((error) =>{
-    console.log(error, "error")
+    console.log(error, "error all products")
     return error
 })
 
@@ -57,14 +60,65 @@ app.get('/products/:product_id', (req,res) => {
 
   axios({
   method: 'get',
-  url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.body.id}`,
+  url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products`,
+  params:{
+    "products_id": req.query.id
+  },
+  headers :{
+    'Authorization': `${config.TOKEN}`
+  }
 })
 .then((result) =>{
-  //console.log(result.data, 'data')
   res.send(result.data)
 })
 .catch((error) =>{
   console.log(error, "error")
+  console.log(req.query.id)
+  return error
+})
+
+})
+
+
+app.get('/products/:product_id/styles', (req,res) => {
+
+  axios({
+  method: 'get',
+  url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${71701}/styles`,
+  headers: {
+    Authorization: `${config.TOKEN}`,
+    body: {}
+  }
+})
+.then((result) =>{
+  console.log(result.data.results[0].photos, "result")
+  res.send(result.data)
+})
+.catch((error) =>{
+  console.log(error, "error")
+  console.log(req.query.id)
+  return error
+})
+
+})
+
+app.get('/products/:product_id/related', (req,res) => {
+
+  axios({
+  method: 'get',
+  url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${71701}/styles`,
+  headers: {
+    Authorization: `${config.TOKEN}`,
+    body: {}
+  }
+})
+.then((result) =>{
+  console.log(result.data.results[0].photos, "result")
+  res.send(result.data)
+})
+.catch((error) =>{
+  console.log(error, "error")
+  console.log(req.query.id)
   return error
 })
 
