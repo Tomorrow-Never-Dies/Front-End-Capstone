@@ -24,3 +24,12 @@
   background-color:greenyellow;
 
 }
+
+.starRating{
+  display:none;
+}
+
+.star-form{
+  cursor:pointer;
+  transition: color 200ms;
+}
