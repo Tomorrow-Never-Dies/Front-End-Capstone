@@ -19,7 +19,7 @@ const getReviews = (itemid) => {
       body: {}
     }
   }
-  return axios.get(options.url, options)
+  return axios.get(options.url, {})
     .then((response) => {
       console.log(`response is equal to ${JSON.stringify(response.data)}`);
       return response.data

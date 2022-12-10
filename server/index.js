@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios')
 const app = express();
 const { getReviews, addReviews } = require('../helpers/reviews.js');
+const { getQuestions } = require('../helpers/q&a.js');
 const config = require('../config.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
@@ -67,6 +68,11 @@ app.get('/products/:product_id', (req,res) => {
   return error
 })
 
+})
+
+// Questions and Answers
+app.get('/qa/questions', (req, res) => {
+  console.log('Getting questions');
 })
 
 app.listen(3033, function() {
