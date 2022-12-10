@@ -124,6 +124,11 @@ app.get('/products/:product_id/related', (req,res) => {
 
 })
 
+// Questions and Answers
+app.get('/qa/questions', (req, res) => {
+  console.log('Getting questions');
+})
+
 app.listen(3033, function() {
   console.log(`listening on port 3033`);
 });
