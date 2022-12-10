@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import StarRating from './StarRating.jsx';
 import axios from 'axios';
 
 function Form (props) {
@@ -14,7 +15,6 @@ function Form (props) {
     email: ''
   })
   function onChangeForm (e) {
-    e.preventDefault();
     setReview({ ...newReview, [e.target.name]: e.target.value })
   }
   function onCharacteristicChange (e) {
@@ -41,9 +41,8 @@ function Form (props) {
   }, [newReview]);
   return (
     <form>
-      <label onChange = {onChangeForm}>
-        Overall rating -mandatory - star rating:
-        <input type = 'text' name ='rating'/>
+      <label>
+        <StarRating/>
       </label>
       <br />
       <label onChange = {onChangeForm}>
