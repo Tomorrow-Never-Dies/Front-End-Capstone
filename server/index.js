@@ -50,7 +50,7 @@ app.get('/products', (req,res) => {
     res.send(result.data)
   })
   .catch((error) =>{
-    console.log(error, "error")
+    console.log(error, "error all products")
     return error
 })
 
@@ -60,14 +60,65 @@ app.get('/products/:product_id', (req,res) => {
 
   axios({
   method: 'get',
-  url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.body.id}`,
+  url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products`,
+  params:{
+    "products_id": req.query.id
+  },
+  headers :{
+    'Authorization': `${config.TOKEN}`
+  }
 })
 .then((result) =>{
-  //console.log(result.data, 'data')
   res.send(result.data)
 })
 .catch((error) =>{
   console.log(error, "error")
+  console.log(req.query.id)
+  return error
+})
+
+})
+
+
+app.get('/products/:product_id/styles', (req,res) => {
+
+  axios({
+  method: 'get',
+  url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${71701}/styles`,
+  headers: {
+    Authorization: `${config.TOKEN}`,
+    body: {}
+  }
+})
+.then((result) =>{
+  console.log(result.data.results[0].photos, "result")
+  res.send(result.data)
+})
+.catch((error) =>{
+  console.log(error, "error")
+  console.log(req.query.id)
+  return error
+})
+
+})
+
+app.get('/products/:product_id/related', (req,res) => {
+
+  axios({
+  method: 'get',
+  url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${71701}/styles`,
+  headers: {
+    Authorization: `${config.TOKEN}`,
+    body: {}
+  }
+})
+.then((result) =>{
+  console.log(result.data.results[0].photos, "result")
+  res.send(result.data)
+})
+.catch((error) =>{
+  console.log(error, "error")
+  console.log(req.query.id)
   return error
 })
 
