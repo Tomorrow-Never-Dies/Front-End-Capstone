@@ -17,7 +17,7 @@ export default class OverView extends React.Component {
   }
   componentDidMount () { this.initialRender() }
   render () {
-    console.log(this.state, "photooooos")
+
 
     return (
       <div>
