@@ -1,14 +1,13 @@
 const express = require('express');
 const axios = require('axios')
 const app = express();
-const { getReviews, addReviews } = require('../helpers/reviews.js');
+const { getReviews, addReviews, getMeta } = require('../helpers/reviews.js');
 const config = require('../config.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.json());
 
 app.get('/getReview', (req, res) => {
-  //console.log(`getting review!, ${req.query.id}`)
   getReviews(req.query.id)
     .then((response) => {
       res.send(response)
@@ -18,7 +17,12 @@ app.get('/getReview', (req, res) => {
       throw (err);
     })
 })
-
+app.get('/getReviewMeta', (req, res) => {
+  getMeta(req.query.id)
+    .then((response) => {
+      res.send(response)
+    })
+})
 app.post('/addReview', (req, res) => {
   console.log(`input for addReview is ${JSON.stringify(req.body)}`);
   addReviews(req.body)

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {FaStar} from 'react-icons/fa';
 import '../reviews.css'
-const StarRating = () => {
+const StarRating = (props) => {
   const [starRating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
 
@@ -15,7 +15,7 @@ const StarRating = () => {
   const fiveStars = [...Array(5)].map((star, i) => {
     const ratingValue = i + 1;
     return (
-      <label key = {ratingValue}>
+      <label key = {ratingValue} onChange = {props.handleStarRating}>
         <input type = 'radio'
         name = 'starRating'
         className = 'starRating'

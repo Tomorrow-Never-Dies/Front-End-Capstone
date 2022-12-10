@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import StarRating from './StarRating.jsx';
 import axios from 'axios';
+import {FaStar} from 'react-icons/fa';
 
 function Form (props) {
   const [newReview, setReview] = useState({
@@ -14,6 +15,9 @@ function Form (props) {
     name: '',
     email: ''
   })
+  function onRatingChange (e) {
+    setReview({ ...newReview, rating: Number(e.target.value) })
+  }
   function onChangeForm (e) {
     setReview({ ...newReview, [e.target.name]: e.target.value })
   }
@@ -42,7 +46,7 @@ function Form (props) {
   return (
     <form>
       <label>
-        <StarRating/>
+        <StarRating handleStarRating = {onRatingChange}/>
       </label>
       <br />
       <label onChange = {onChangeForm}>
