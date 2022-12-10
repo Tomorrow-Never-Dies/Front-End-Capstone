@@ -1,21 +1,11 @@
 import React from "react";
+import Answers from "./answers.jsx";
 
-
-function IndividualQuestion(props) {
-
-  const getCurrentAnswer = (input) => {
-    var answerKeys = Object.keys(input.currentAnswer);
-    for (var i = 0; i < answerKeys.length; i++) {
-      var oneAnswer = input.currentAnswer[answerKeys[i]].body
-      console.log(oneAnswer);
-      return oneAnswer;
-    }
-  }
-
+function IndividualQuestion (props) {
   return (
     <aside>
-      <p> Q: { props.currentQuestion }</p>
-      <small> A: { getCurrentAnswer(props)}</small>
+      <p> Q: {props.currentQuestion}</p>
+      <small>{}<Answers answers={props.currentAnswer}/></small>
     </aside>
   )
 }
