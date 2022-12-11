@@ -8,7 +8,6 @@ import ProductCards from "./productcard.jsx";
 class RelatedItemsComp extends React.Component{
   constructor(props){
     super(props)
-    console.log(props, "propyprops")
     this.state = {
       productsID: props.id,
       products:[],
