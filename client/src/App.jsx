@@ -9,20 +9,30 @@ class App extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      productsID: 71697
+      productsID:  71697
     }
+    this.onclick = this.onclick.bind(this)
+  }
+
+  onclick(id){
+    this.setState({
+      productsID: id
+    }, () =>{
+      console.log(this.state.productsID)
+    })
 
   }
 
 
   render(){
     return(
+      console.log("render"),
       <div>
         <h1>Front End Capstone</h1>
         <OverView id ={this.state.productsID}/>
-        <RelatedItemsComp id ={this.state.productsID}/>
-        <QuestionAnswers id ={this.state.productsID}/>
-        <RatingsReviews id ={this.state.productsID}/>
+        <RelatedItemsComp id ={this.state.productsID} click = {this.onclick}/>
+        <QuestionAnswers id ={this.state.productsID} />
+        {/* <RatingsReviews id ={this.state.productsID}/> */}
       </div>
     )
   }
