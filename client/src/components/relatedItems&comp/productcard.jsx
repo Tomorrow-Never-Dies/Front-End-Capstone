@@ -11,6 +11,7 @@ function ProductCards (props) {
   }
   return(
     <div className="carousel-item" onClick={() => (
+      props.click(props.id),
       props.id_update(props.id)
       )}>
       <img src = {url}/ >
