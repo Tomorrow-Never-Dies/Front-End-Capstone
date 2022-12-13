@@ -3,9 +3,11 @@ const axios = require('axios')
 const app = express();
 const { getReviews, addReviews, getMeta } = require('../helpers/reviews.js');
 const config = require('../config.js');
+const cors = require('cors');
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.json());
+app.use(cors());
 
 app.get('/getReview', (req, res) => {
   getReviews(req.query.id)
