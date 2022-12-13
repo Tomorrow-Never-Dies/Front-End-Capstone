@@ -19,7 +19,6 @@ class Outfits extends React.Component{
   }
 
   get_products(){
-    console.log("outfits")
         axios({
             method: 'get',
             url: "/products/:product_id/styles",
@@ -68,7 +67,7 @@ class Outfits extends React.Component{
   render(){
     return(
       <div>
-        <Outfit_Carousel add ={this.add} products = {this.state.product_styles} id_update = {this.update_id} />
+        <Outfit_Carousel add ={this.add} products = {this.state.product_styles} id_update = {this.update_id} click = {this.props.click} />
       </div>
     )
   }

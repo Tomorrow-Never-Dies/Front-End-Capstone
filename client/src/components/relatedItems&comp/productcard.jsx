@@ -10,7 +10,7 @@ function ProductCards (props) {
     url = props.item.photos[0].thumbnail_url
   }
   return(
-    <div className="carousel-item" onClick={() => (
+    <div data-testid='product-card' className="carousel-item" onClick={() => (
       props.click(props.id),
       props.id_update(props.id)
       )}>

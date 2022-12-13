@@ -91,7 +91,7 @@ app.get('/products/:product_id/styles', (req,res) => {
   }
 })
 .then((result) =>{
-  console.log(result.data.results[0].photos, "result")
+  //console.log(result.data.results[0].photos, "result")
   res.send(result.data)
 })
 .catch((error) =>{
@@ -113,12 +113,12 @@ app.get('/products/:product_id/related', (req,res) => {
   }
 })
 .then((result) =>{
-  console.log(result, "result")
+  //console.log(result.data.results[0].photos, "result")
   res.send(result.data)
 })
 .catch((error) =>{
   console.log(error, "error")
-  console.log(req.query.id)
+  console.log(req.query.id, "related")
   return error
 })
 

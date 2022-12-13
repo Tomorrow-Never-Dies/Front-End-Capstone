@@ -37,7 +37,7 @@ function Outfit_Carousel (props) {
                ))}
           </div>
         </div>
-        <button data-testid='next-button' onClick={()=>{
+        <button data-testid='add-button' onClick={()=>{
           props.add()}}>
           Add
         </button>
