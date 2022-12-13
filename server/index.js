@@ -26,10 +26,11 @@ app.get('/getReviewMeta', (req, res) => {
     })
 })
 app.post('/addReview', (req, res) => {
-  console.log(`input for addReview is ${JSON.stringify(req.body)}`);
+  //console.log(`input for addReview is ${JSON.stringify(req.body)}`);
   addReviews(req.body)
     .then((response) => {
-      console.log(`response from addReview is ${response}`)
+      //console.log(`response from addReview is ${response}`)
+      res.send(response)
     })
     .catch((err) => {
       console.log(`err while adding Review is equal to ${err}`);
