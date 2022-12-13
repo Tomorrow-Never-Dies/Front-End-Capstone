@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1670896530036" clover="3.2.0">
-  <project timestamp="1670896530036" name="All files">
+<coverage generated="1670909326368" clover="3.2.0">
+  <project timestamp="1670909326368" name="All files">
     <metrics statements="119" coveredstatements="77" conditionals="14" coveredconditionals="5" methods="46" coveredmethods="22" elements="179" coveredelements="104" complexity="0" loc="119" ncloc="119" packages="10" files="18" classes="18"/>
     <package name="Front-End-Capstone">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -70,25 +70,25 @@
       <metrics statements="19" coveredstatements="15" conditionals="2" coveredconditionals="1" methods="6" coveredmethods="4"/>
       <file name="Reviews.jsx" path="/Users/andyma/Desktop/Hack Reactor Sprints/Front-End-Capstone/client/src/components/ratings&reviews/Reviews.jsx">
         <metrics statements="19" coveredstatements="15" conditionals="2" coveredconditionals="1" methods="6" coveredmethods="4"/>
-        <line num="10" count="4" type="stmt"/>
-        <line num="11" count="3" type="stmt"/>
-        <line num="12" count="3" type="stmt"/>
-        <line num="13" count="3" type="stmt"/>
-        <line num="14" count="6" type="stmt"/>
-        <line num="17" count="3" type="stmt"/>
-        <line num="18" count="3" type="stmt"/>
-        <line num="19" count="3" type="stmt"/>
-        <line num="24" count="3" type="stmt"/>
-        <line num="29" count="3" type="stmt"/>
-        <line num="30" count="3" type="stmt"/>
-        <line num="32" count="3" type="stmt"/>
-        <line num="36" count="3" type="stmt"/>
+        <line num="10" count="6" type="stmt"/>
+        <line num="11" count="5" type="stmt"/>
+        <line num="12" count="5" type="stmt"/>
+        <line num="13" count="5" type="stmt"/>
+        <line num="14" count="10" type="stmt"/>
+        <line num="17" count="5" type="stmt"/>
+        <line num="18" count="5" type="stmt"/>
+        <line num="19" count="5" type="stmt"/>
+        <line num="24" count="5" type="stmt"/>
+        <line num="29" count="5" type="stmt"/>
+        <line num="30" count="5" type="stmt"/>
+        <line num="32" count="5" type="stmt"/>
+        <line num="36" count="5" type="stmt"/>
         <line num="37" count="0" type="stmt"/>
         <line num="38" count="0" type="stmt"/>
-        <line num="40" count="3" type="stmt"/>
+        <line num="40" count="5" type="stmt"/>
         <line num="41" count="0" type="stmt"/>
         <line num="42" count="0" type="stmt"/>
-        <line num="44" count="3" type="stmt"/>
+        <line num="44" count="5" type="stmt"/>
       </file>
     </package>
     <package name="Front-End-Capstone.client.src.components.ratings&reviews.Reviews">
@@ -115,14 +115,14 @@
       </file>
       <file name="IndividualReview.jsx" path="/Users/andyma/Desktop/Hack Reactor Sprints/Front-End-Capstone/client/src/components/ratings&reviews/Reviews/IndividualReview.jsx">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-        <line num="6" count="6" type="stmt"/>
-        <line num="7" count="6" type="stmt"/>
-        <line num="9" count="6" type="stmt"/>
+        <line num="6" count="10" type="stmt"/>
+        <line num="7" count="10" type="stmt"/>
+        <line num="9" count="10" type="stmt"/>
       </file>
       <file name="ReviewDate.jsx" path="/Users/andyma/Desktop/Hack Reactor Sprints/Front-End-Capstone/client/src/components/ratings&reviews/Reviews/ReviewDate.jsx">
         <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="6" count="6" type="stmt"/>
-        <line num="11" count="6" type="stmt"/>
+        <line num="6" count="10" type="stmt"/>
+        <line num="11" count="10" type="stmt"/>
       </file>
       <file name="StarRating.jsx" path="/Users/andyma/Desktop/Hack Reactor Sprints/Front-End-Capstone/client/src/components/ratings&reviews/Reviews/StarRating.jsx">
         <metrics statements="14" coveredstatements="1" conditionals="4" coveredconditionals="0" methods="7" coveredmethods="0"/>
@@ -146,20 +146,20 @@
       <metrics statements="14" coveredstatements="12" conditionals="4" coveredconditionals="3" methods="3" coveredmethods="2"/>
       <file name="StarOverview.jsx" path="/Users/andyma/Desktop/Hack Reactor Sprints/Front-End-Capstone/client/src/components/ratings&reviews/Stars/StarOverview.jsx">
         <metrics statements="14" coveredstatements="12" conditionals="4" coveredconditionals="3" methods="3" coveredmethods="2"/>
-        <line num="6" count="6" type="stmt"/>
-        <line num="7" count="6" type="stmt"/>
-        <line num="8" count="3" type="stmt"/>
-        <line num="9" count="3" type="stmt"/>
-        <line num="10" count="3" type="stmt"/>
-        <line num="11" count="3" type="stmt"/>
-        <line num="12" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="6" count="10" type="stmt"/>
+        <line num="7" count="10" type="stmt"/>
+        <line num="8" count="5" type="stmt"/>
+        <line num="9" count="5" type="stmt"/>
+        <line num="10" count="5" type="stmt"/>
+        <line num="11" count="5" type="stmt"/>
+        <line num="12" count="5" type="cond" truecount="2" falsecount="0"/>
         <line num="13" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
-        <line num="16" count="3" type="stmt"/>
-        <line num="17" count="3" type="stmt"/>
-        <line num="18" count="3" type="stmt"/>
-        <line num="19" count="3" type="stmt"/>
-        <line num="22" count="6" type="stmt"/>
+        <line num="16" count="5" type="stmt"/>
+        <line num="17" count="5" type="stmt"/>
+        <line num="18" count="5" type="stmt"/>
+        <line num="19" count="5" type="stmt"/>
+        <line num="22" count="10" type="stmt"/>
       </file>
     </package>
     <package name="Front-End-Capstone.fixtures.Overview">

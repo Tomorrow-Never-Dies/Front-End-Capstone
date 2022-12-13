@@ -52,7 +52,7 @@ function RatingsReviews (props) {
      <button>
      MORE REVIEWS
     </button>
-    <button  data-testid = "addReviewButton" onClick = {onFormSubmit} >
+    <button data-testid = "addReviewButton" onClick = {onFormSubmit} >
     ADD A REVIEW
     </button>
     </div>
