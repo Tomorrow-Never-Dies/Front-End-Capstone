@@ -39,6 +39,18 @@ test("add", () => {
   fireEvent.click(button);
 });
 
+test("prev", () => {
+  render(<Outfits/>);
+  const button = screen.getByTestId('prev-button');
+  fireEvent.click(button);
+});
+
+test("next", () => {
+  render(<Outfits/>);
+  const button = screen.getByTestId('next-button');
+  fireEvent.click(button);
+});
+
 test("Clicking on a product card adds product", () => {
   render(<Outfits/>);
   const button = screen.getByTestId('add-button');
