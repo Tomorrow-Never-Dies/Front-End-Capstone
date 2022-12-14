@@ -3,9 +3,11 @@ const axios = require('axios')
 const app = express();
 const { getReviews, addReviews, getMeta } = require('../helpers/reviews.js');
 const config = require('../config.js');
+const cors = require('cors');
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.json());
+app.use(cors());
 
 app.get('/getReview', (req, res) => {
   getReviews(req.query.id)
@@ -24,10 +26,11 @@ app.get('/getReviewMeta', (req, res) => {
     })
 })
 app.post('/addReview', (req, res) => {
-  console.log(`input for addReview is ${JSON.stringify(req.body)}`);
+  //console.log(`input for addReview is ${JSON.stringify(req.body)}`);
   addReviews(req.body)
     .then((response) => {
-      console.log(`response from addReview is ${response}`)
+      //console.log(`response from addReview is ${response}`)
+      res.send(response)
     })
     .catch((err) => {
       console.log(`err while adding Review is equal to ${err}`);
