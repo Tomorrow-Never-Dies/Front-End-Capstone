@@ -21,10 +21,10 @@ class QuestionAnswers extends React.Component {
           questions: result.data.results
         })
       });
-    getAnswers.getAnswers(this.state.item_id)
-      .then((result) => {
-        console.log('HERE ARE ANSWER RESULTS:', result)
-      })
+    // getAnswers.getAnswers(this.state.item_id)
+    //   .then((result) => {
+    //     console.log('HERE ARE ANSWER RESULTS:', result)
+    //   })
   };
 
   render () {

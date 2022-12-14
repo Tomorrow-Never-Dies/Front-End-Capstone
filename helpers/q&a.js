@@ -24,13 +24,15 @@ const getQuestions = function (itemid) {
 
 // const getAnswers = function (question_id) {
 //   const options = {
-//     url: `https://app-hrsei-api.herokuapp.com/api/fec2/:hr-rpp/qa/questions/:question_id/answers`,
+//     url: `https://app-hrsei-api.herokuapp.com/api/fec2/:hr-rpp/qa/questions/${71697}/answers`,
 //     headers: {
 //       Authorization: `${config.TOKEN}`,
 //       'Content-Type': 'application/json'
 //     },
 //     params: {
-//       question_id: question_id,
+//       question_id: 71697,
+//       page: 1,
+//       count: 5
 //     }
 //   };
 //   return axios.get(options.url, options)
@@ -43,4 +45,4 @@ const getQuestions = function (itemid) {
 // }
 
 module.exports.getQuestions = getQuestions;
-// module.exports.getAnswers = getAnswers;
+module.exports.getAnswers = getAnswers;
