@@ -3,9 +3,11 @@ const axios = require('axios')
 const app = express();
 const { getReviews, addReviews, getMeta } = require('../helpers/reviews.js');
 const config = require('../config.js');
+const cors = require('cors');
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.json());
+app.use(cors());
 
 app.get('/getReview', (req, res) => {
   getReviews(req.query.id)
@@ -24,10 +26,11 @@ app.get('/getReviewMeta', (req, res) => {
     })
 })
 app.post('/addReview', (req, res) => {
-  console.log(`input for addReview is ${JSON.stringify(req.body)}`);
+  //console.log(`input for addReview is ${JSON.stringify(req.body)}`);
   addReviews(req.body)
     .then((response) => {
-      console.log(`response from addReview is ${response}`)
+      //console.log(`response from addReview is ${response}`)
+      res.send(response)
     })
     .catch((err) => {
       console.log(`err while adding Review is equal to ${err}`);
@@ -84,14 +87,14 @@ app.get('/products/:product_id/styles', (req,res) => {
 
   axios({
   method: 'get',
-  url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${71701}/styles`,
+  url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.query.id}/styles`,
   headers: {
     Authorization: `${config.TOKEN}`,
     body: {}
   }
 })
 .then((result) =>{
-  console.log(result.data.results[0].photos, "result")
+  //console.log(result.data.results[0].photos, "result")
   res.send(result.data)
 })
 .catch((error) =>{
@@ -106,19 +109,19 @@ app.get('/products/:product_id/related', (req,res) => {
 
   axios({
   method: 'get',
-  url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${71701}/styles`,
+  url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.query.id}/related`,
   headers: {
     Authorization: `${config.TOKEN}`,
     body: {}
   }
 })
 .then((result) =>{
-  console.log(result.data.results[0].photos, "result")
+  //console.log(result.data.results[0].photos, "result")
   res.send(result.data)
 })
 .catch((error) =>{
   console.log(error, "error")
-  console.log(req.query.id)
+  console.log(req.query.id, "related")
   return error
 })
 

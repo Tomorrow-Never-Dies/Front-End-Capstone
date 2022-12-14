@@ -7,7 +7,7 @@ export default function IndividualReview (props) {
     // console.log(`props.reviewInfo is equal to ${JSON.stringify(props.reviewInfo)}`);
   }, [])
   return (
-  <div className = 'singleReview'>
+  <div className = 'singleReview' data-testid = "singleReview">
     <ReviewDate username = {props.reviewInfo.reviewer_name} date = {props.reviewInfo.date}/>
     <h1>{props.reviewInfo.summary}</h1>
     <p>{props.reviewInfo.body}</p>

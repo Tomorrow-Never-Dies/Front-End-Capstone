@@ -21,7 +21,7 @@ const getReviews = (itemid) => {
       body: {}
     }
   }
-  return axios.get(options.url, {})
+  return axios.get(options.url, options)
     .then((response) => {
       return response.data
     })
