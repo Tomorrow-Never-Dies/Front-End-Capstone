@@ -31,9 +31,13 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
+<<<<<<< HEAD
     "stream-http": "^3.2.0",
     "style-loader": "^3.3.1",
     "url": "^0.11.0"
+=======
+    "style-loader": "^3.3.1"
+>>>>>>> f9d93904f84bc20c4bd7876ae24b1f982c3b3b1d
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
@@ -54,4 +58,6 @@
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.0"
   }
+
+
 }
