@@ -28,10 +28,7 @@
     "jest-environment-jsdom": "^29.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-<<<<<<< HEAD
-=======
     "react-icons": "^4.7.1",
->>>>>>> 96eb1852a4e9b5e7b9c6b745ed2d9323d20c4d34
     "style-loader": "^3.3.1"
   },
   "devDependencies": {
@@ -53,11 +50,7 @@
     "react-test-renderer": "^18.2.0",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.0"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css|less|scss|sass)$": "identity-obj-proxy"
-    }
   }
+
+
 }

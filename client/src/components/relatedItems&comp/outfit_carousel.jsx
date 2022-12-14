@@ -6,8 +6,8 @@ import './styles/carousel.css'
 
 
 
-function Carousel (props) {
-  console.log(props)
+function Outfit_Carousel (props) {
+  console.log(props.products[0])
   const [activeIndex, setActiveIndex] = useState(0)
   const updateIndex = (str) => {
     if(activeIndex <4 && str === 'next') {
@@ -20,12 +20,12 @@ function Carousel (props) {
         setActiveIndex(4)
       }
   }
-  if(props.products.length > 0 ){
+
     return (
       <div>
         <div  data-testid='main-component' className ="carousel-container">
           <div data-testid='inner-component' className = "inner" style={{transform: `translateX(-${activeIndex*100}%)` }}>
-            {props.products.map(item =>
+          {props.products.map(item =>
                (
                <ProductCards
                item = {item.data.results[0] }
@@ -37,6 +37,10 @@ function Carousel (props) {
                ))}
           </div>
         </div>
+        <button data-testid='add-button' onClick={()=>{
+          props.add()}}>
+          Add
+        </button>
         <button data-testid='prev-button' onClick={()=>{ updateIndex('prev')}}>
           prev
         </button>
@@ -45,23 +49,6 @@ function Carousel (props) {
         </button>
     </div>
     )
-  } else {
-    return (
-      <div>
-        <div  data-testid='main-component' className ="carousel-container">
-          <div data-testid='inner-component' className = "inner" style={{transform: `translateX(-${activeIndex*100}%)` }}>
-            {/* {props.products.results.map(item =><ProductCards item = {item} />)} */}
-          </div>
-        </div>
-        <button data-testid='prev-button' onClick={()=>{ updateIndex('prev')}}>
-          prev
-        </button>
-        <button data-testid='next-button' onClick={()=>{ updateIndex('next')}}>
-          Next
-        </button>
-    </div>
-    )
-  }
 
 }
-export default Carousel;
+export default Outfit_Carousel;
