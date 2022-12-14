@@ -38,12 +38,12 @@ class RelatedItemsComp extends React.Component{
       }
     })
     .then((result)=>{
-      console.log(result)
+      // console.log(result)
       this.setState({
         products: result.data
       })
 
-      console.log(this.state.products, "state")
+      // console.log(this.state.products, "state")
     })
     .catch((err) => {
       console.log(err, "error")

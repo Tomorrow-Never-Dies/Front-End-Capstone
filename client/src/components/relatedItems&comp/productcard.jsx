@@ -3,7 +3,7 @@ import './styles/carousel.css'
 import OverView from '../overview/index.jsx'
 
 function ProductCards (props) {
-  console.log("product cards")
+  // console.log("product cards")
   return(
     <div className="carousel-item" onClick={() => <OverView id = {props.item.id}/>}>
       <div> {props.item.name}</div>

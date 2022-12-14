@@ -5,7 +5,7 @@ import axios from 'axios'
 export default function StarOverview (props) {
   const [rating, setRating] = useState(null)
   useEffect(() => {
-    console.log(`props meta is equal to ${JSON.stringify(props.data)}`);
+    // console.log(`props meta is equal to ${JSON.stringify(props.data)}`);
     let ratings = props.data.ratings
     let weightedSum = 0;
     let total = 0;
@@ -15,7 +15,7 @@ export default function StarOverview (props) {
     });
     const excessFinalRating = (weightedSum / total)
     const finalRating = excessFinalRating.toFixed(1)
-    console.log(`finalRating is equal to ${finalRating}`)
+    // console.log(`finalRating is equal to ${finalRating}`)
     setRating(finalRating);
   }, [props.data])
 
