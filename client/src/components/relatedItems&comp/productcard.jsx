@@ -1,6 +1,6 @@
 import React from "react"
 import './styles/carousel.css'
-import App from "/Users/yasereisa/HackReactor/Course/FEC/client/src/App.jsx"
+import App from "../../../../client/src/App.jsx"
 
 function ProductCards (props) {
   var url=''
@@ -19,5 +19,6 @@ function ProductCards (props) {
 
   )
 }
+
 
 export default ProductCards
