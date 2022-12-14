@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import IndividualReview from './Reviews/IndividualReview.jsx';
-import sampleData from '../../../../fixtures/ratings&reviews/ReviewExampleData.js'
+import { sampleData } from '../../../../fixtures/ratings&reviews/ReviewExampleData.js'
 import StarOverview from './Stars/StarOverview.jsx'
 import Form from './Reviews/Form.jsx'
 import './reviews.css';
 
 function RatingsReviews (props) {
-  const [reviews, setReviews] = useState(sampleData.sampleData.results);
+  const [reviews, setReviews] = useState(sampleData.results);
   const [metaData, setMeta] = useState({});
   const [enableForm, setForm] = useState(false);
   const mappedReviews = reviews.map((review) => {
@@ -43,6 +43,7 @@ function RatingsReviews (props) {
   }
   return (
     <div>
+      Ratings & Reviews
    {enableForm === false
      ? <div className = 'Reviews'> <StarOverview key = {metaData} data = { metaData} />
      {metaData.product_id}
@@ -51,7 +52,7 @@ function RatingsReviews (props) {
      <button>
      MORE REVIEWS
     </button>
-    <button onClick = {onFormSubmit} >
+    <button data-testid = "addReviewButton" onClick = {onFormSubmit} >
     ADD A REVIEW
     </button>
     </div>

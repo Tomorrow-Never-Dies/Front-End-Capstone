@@ -39,17 +39,17 @@ function Form (props) {
     console.log('submitting!');
     props.changeView(e);
     axios.post('addReview', newReview)
-      .then((result) => {
-        console.log(`result from posting a new review is ${JSON.stringify(result)}`);
-      })
+      // .then((result) => {
+      //   console.log(`result from posting a new review is ${JSON.stringify(result)}`);
+      // })
       .then(() => {
         props.changeView(e);
       })
   }
 
-  useEffect(() => {
-    console.log(`newReview is equal to ${JSON.stringify(newReview)}`);
-  }, [newReview]);
+  // useEffect(() => {
+  //   console.log(`newReview is equal to ${JSON.stringify(newReview)}`);
+  // }, [newReview]);
   return (
     <form>
       <label>

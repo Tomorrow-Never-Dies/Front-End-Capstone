@@ -1,17 +1,24 @@
 import React from "react"
 import './styles/carousel.css'
-import OverView from '../overview/index.jsx'
+import App from "../../../../client/src/App.jsx"
 
 function ProductCards (props) {
-  console.log("product cards")
+  var url=''
+  if(props.item.photos[0].thumbnail_url === undefined){
+    url = "https://upload.wikimedia.org/wikipedia/commons/d/d1/Image_not_available.png"
+  } else{
+    url = props.item.photos[0].thumbnail_url
+  }
   return(
-    <div className="carousel-item" onClick={() => <OverView id = {props.item.id}/>}>
-      <div> {props.item.name}</div>
-      <div> {props.item.category}</div>
-      <div className ="item-price"> {props.item.default_price}</div>
+    <div data-testid='product-card' className="carousel-item" onClick={() => (
+      props.click(props.id),
+      props.id_update(props.id)
+      )}>
+      <img src = {url}/ >
     </div>
 
   )
 }
+
 
 export default ProductCards
