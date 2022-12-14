@@ -3,11 +3,13 @@ import sampleProducts from '../../../../fixtures/Overview/Products.js';
 import sampleProductIdStyles from '../../../../fixtures/Overview/IdProducts.js';
 import sampleProductId from '../../../../fixtures/Overview/ProductsID.js';
 import sampleData from '../../../../fixtures/ratings&reviews/ReviewExampleData.js'
+import $ from 'jquery';
 
 export default class OverView extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
+      products: [],
       product: {},
       styles: [],
       reviews: [],
@@ -32,14 +34,64 @@ export default class OverView extends React.Component {
     this.setState({ starToggled: !this.state.starToggled }) // need to communitcate to yassir
   }
 
+  getproducts () {
+    $.ajax({
+      type: 'GET',
+      contentType: 'application/json',
+      context: this,
+      url: `/products/${this.props.id}`,
+      success: (data) => {
+        console.log(data, 'dataaaaaa22')
+        this.setState({ product: data });
+      },
+      error: (error) => {
+        console.log(error, 'error geting data in ajaxxxx');
+      }
+    });
+    $.ajax({
+      type: 'GET',
+      contentType: 'application/json',
+      context: this,
+      url: `/products/${this.props.id}/styles`,
+      success: (data) => {
+        console.log(data, 'data from stylesssss')
+        this.setState({ styles: data.results, selectedStyle: data.results[0] });
+      },
+      error: (error) => {
+        console.log(error, 'error geting data in ajaxxxx');
+      }
+    });
+    // $.ajax({
+    //   type: 'GET',
+    //   contentType: 'application/json',
+    //   context: this,
+    //   data: {id: this.props.id},
+    //   url: `/getReview/${this.props.id}`,
+    //   success: (data) => {
+    //     console.log(data, 'data from reviewwww')
+    //     //this.setState({ reviews: data});
+    //   },
+    //   error: (error) => {
+    //     console.log(error, 'error geting data in ajaxxxx');
+    //   }
+    // });
+  }
+
   addToCart () {
     console.log('added to cart!')
   }
 
-  componentDidMount () { this.initialRender() }
+  componentDidMount () { this.getproducts() }
   render () {
-
-    return (
+    console.log(this.state.product, 'productssssss')
+    if (this.state.product === {}) {
+      return (
+        <div>  Render products overview here...
+          <div id="placeholder-div">fetching data. Please wait...</div>
+        </div>
+      );
+    } else {
+      return (
       <div>
        <p> OverView Place Holder </p>
        <div data-testid='name header'>NAME: {this.state.product.name}</div>
@@ -78,6 +130,7 @@ export default class OverView extends React.Component {
         </form>
         <button onClick = {this.addToCart}>Add to cart!</button>
       </div>
-    )
+      )
+    }
   }
 }
