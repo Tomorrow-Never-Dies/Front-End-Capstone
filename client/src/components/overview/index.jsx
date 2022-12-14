@@ -30,7 +30,7 @@ export default class OverView extends React.Component {
   }
 
   starToggle () {
-    console.log(this.state.starToggled, 'togggleeee')
+    //console.log(this.state.starToggled, 'togggleeee')
     this.setState({ starToggled: !this.state.starToggled }) // need to communitcate to yassir
   }
 
@@ -41,7 +41,7 @@ export default class OverView extends React.Component {
       context: this,
       url: `/products/${this.props.id}`,
       success: (data) => {
-        console.log(data, 'dataaaaaa22')
+        //console.log(data, 'dataaaaaa22')
         this.setState({ product: data });
       },
       error: (error) => {
@@ -54,7 +54,7 @@ export default class OverView extends React.Component {
       context: this,
       url: `/products/${this.props.id}/styles`,
       success: (data) => {
-        console.log(data, 'data from stylesssss')
+        //console.log(data, 'data from stylesssss')
         this.setState({ styles: data.results, selectedStyle: data.results[0] });
       },
       error: (error) => {
@@ -83,7 +83,7 @@ export default class OverView extends React.Component {
 
   componentDidMount () { this.getproducts() }
   render () {
-    console.log(this.state.product, 'productssssss')
+    //console.log(this.state.product, 'productssssss')
     if (this.state.product === {}) {
       return (
         <div>  Render products overview here...
