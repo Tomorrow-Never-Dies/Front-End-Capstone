@@ -61,15 +61,46 @@
   left: 0;
   width: 100%;
   overflow: hidden;
-  color: #f80;
+  color: #ffc107;
 }
+
+#star-75:after {
+  font-family: FontAwesome;
+  content: "\f005";
+  position: absolute;
+  left: 0;
+  width: 75%;
+  overflow: hidden;
+  color: #ffc107;
+}
+
+#star-50:after {
+  font-family: FontAwesome;
+  content: "\f005";
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+  color: #ffc107;
+}
+
 #star-25:after {
   font-family: FontAwesome;
   content: "\f005";
   position: absolute;
   left: 0;
-  width: 30%;
+  width: 25%;
   overflow: hidden;
-  color: #f80;
+  color: #ffc107;
+}
+
+#star-0:after {
+  font-family: FontAwesome;
+  content: "\f005";
+  position: absolute;
+  left: 0;
+  width: 0%;
+  overflow: hidden;
+  color: #ffc107;
 }
 

@@ -33,6 +33,11 @@ function RatingsReviews (props) {
   }, [props.id])
 
 
+  useEffect(() => {
+    console.log(`metaData is equal to ${JSON.stringify(metaData)}`);
+  }, [metaData])
+
+
   const onFormSubmit = (e) => {
     e.preventDefault();
     setForm(true);
