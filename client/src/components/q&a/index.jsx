@@ -9,7 +9,7 @@ class QuestionAnswers extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      item_id: 71697,
+      item_id: 71699,
       questions: []
     }
   }

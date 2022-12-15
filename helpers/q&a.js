@@ -45,4 +45,4 @@ const getQuestions = function (itemid) {
 // }
 
 module.exports.getQuestions = getQuestions;
-module.exports.getAnswers = getAnswers;
+// module.exports.getAnswers = getAnswers;

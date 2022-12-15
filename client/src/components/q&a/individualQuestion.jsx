@@ -1,5 +1,5 @@
 import React from "react";
-import Answers from "./answers.jsx";
+// import Answers from "./answers.jsx";
 
 function IndividualQuestion (props) {
   return (

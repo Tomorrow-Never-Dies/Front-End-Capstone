@@ -7,11 +7,13 @@ function Answers (props) {
       // console.log('CURRENT ANSWER:', input.currentAnswers[key].body)
       results.push(input.currentAnswers[key].body);
     }
-    console.log(results);
+    // console.log('ANSWERS:', results);
     return results;
   }
   return (
-    <small>A: </small>
+    <small>{getAnswer(props).map((curr) => (
+    <div>A: {curr}</div>
+    ))}</small>
   )
 }
 
