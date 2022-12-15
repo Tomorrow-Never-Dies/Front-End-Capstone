@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import '../reviews.css'
 import axios from 'axios'
+import {FaStar, FaStarHalfAlt} from 'react-icons/fa';
 
 export default function StarOverview (props) {
   const [rating, setRating] = useState(null)
@@ -20,8 +21,16 @@ export default function StarOverview (props) {
   }, [props.data])
 
   return (
-    <div className = 'starStats'>
-      {rating > 0 ? rating : 'stars' }
+    <div id = 'staroverview'>
+      <span className= "fa fa-star empty-star" id = "star-100" />
+      <span className= "fa fa-star empty-star" id = "star-100"/>
+      <span className= "fa fa-star empty-star" id = "star-100"/>
+      <span className= "fa fa-star empty-star" id = "star-100"/>
+      <span className= "fa fa-star empty-star" id = "star-25"/>
     </div>
+
+
+
   )
 }
+

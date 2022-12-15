@@ -13,10 +13,7 @@
   flex-direction:column;
 }
 
-.starStats{
-  display:flex;
-  flex-direction:column;
-}
+
 
 .UserAndDate{
   position: relative;
@@ -33,3 +30,46 @@
   cursor:pointer;
   transition: color 200ms;
 }
+/* STAR OVERVIEW */
+
+.empty-star {
+  display: inline-block;
+  position: relative;
+  font-size: 1em;
+  color: #ddd;
+}
+.full-star:after {
+  font-family: FontAwesome;
+  content: "\f005";
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  color: #f80;
+}
+#staroverview {
+  margin-right: 2em;
+
+  display: inline-block;
+}
+#star-100:after {
+  font-family: FontAwesome;
+  content: "\f005";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  color: #f80;
+}
+#star-25:after {
+  font-family: FontAwesome;
+  content: "\f005";
+  position: absolute;
+  left: 0;
+  width: 30%;
+  overflow: hidden;
+  color: #f80;
+}
+
