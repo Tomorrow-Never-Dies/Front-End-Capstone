@@ -51,7 +51,6 @@ function RatingsReviews (props) {
       Ratings & Reviews
    {enableForm === false
      ? <div className = 'Reviews'> <StarOverview key = {metaData} data = { metaData} />
-     {metaData.product_id}
      <div className = 'IndividualReviews'> {mappedReviews}
      <div className = 'ReviewButtons'>
      <button>

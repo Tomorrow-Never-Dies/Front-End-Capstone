@@ -13,7 +13,7 @@ const reviewHelpers = {
     });
     let ratingResult = (weightedSum / totalRating)
     console.log(`ratingResult is equal to ${ratingResult}`);
-    return ratingResult;
+    return parseFloat(""+ratingResult).toFixed(1);
   },
 
   avgStarRating  : (rating) => {
@@ -39,6 +39,14 @@ const reviewHelpers = {
     })
     console.log(`fiveStars is equal to ${JSON.stringify(fiveStars)}`);
     return fiveStars
+  },
+
+  barChartPercentage : (ratings) => {
+    let totalRatings = 0;
+    Object.keys(ratings || {}).forEach(function (key, index) {
+      totalRatings += Number(ratings[key]);
+    });
+    return totalRatings;
   }
 
 }
