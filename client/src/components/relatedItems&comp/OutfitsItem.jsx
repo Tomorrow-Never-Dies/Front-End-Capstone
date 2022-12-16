@@ -65,7 +65,6 @@ class Outfits extends React.Component{
   }
 
   carousel(str){
-    console.log(this.state.activeIndex, "activeindex")
     if(this.state.activeIndex < this.state.product_ids.length  && str === 'next') {
       this.setState({
         activeIndex: this.state.activeIndex+.5
