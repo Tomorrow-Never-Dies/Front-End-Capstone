@@ -19,7 +19,6 @@ class App extends React.Component{
     this.setState({
       productsID: id
     }, () =>{
-      console.log(this.state.productsID)
     })
 
   }
@@ -27,7 +26,6 @@ class App extends React.Component{
 
   render(){
     return(
-      console.log("render"),
       <div>
         <h1>Front End Capstone</h1>
         <OverView id ={this.state.productsID}/>

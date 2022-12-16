@@ -60,10 +60,7 @@ app.get('/products/:product_id', (req,res) => {
 
   axios({
   method: 'get',
-  url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products`,
-  params:{
-    "products_id": req.query.id
-  },
+  url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.query.id}`,
   headers :{
     'Authorization': `${config.TOKEN}`
   }

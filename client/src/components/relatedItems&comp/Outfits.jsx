@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Outfit_Carousel from "./Outfit_Carousel.jsx";
-import ProductCards from "./productcard.jsx";
+import Items from "./items.jsx"
+
 
 
 
@@ -11,11 +11,13 @@ class Outfits extends React.Component{
     this.state = {
       productsID: props.id,
       product_ids: [],
-      product_styles:[]
+      product_styles:[],
+      activeIndex: 0
     }
     this.add = this.add.bind(this)
     this.get_products = this.get_products.bind(this)
     this.update_id = this.update_id.bind(this)
+    this.carousel = this.carousel.bind(this)
   }
 
   get_products(){
@@ -46,10 +48,8 @@ class Outfits extends React.Component{
           product_ids: this.state.product_ids.concat(this.state.productsID)
         }, () =>{
           this.get_products()
-          console.log(this.state.product_ids, "state")
         })
       } else{
-        console.log(this.state)
       }
 
 
@@ -64,11 +64,46 @@ class Outfits extends React.Component{
     })
   }
 
+  carousel(str){
+    console.log(this.state.activeIndex, "activeindex")
+    if(this.state.activeIndex < this.state.product_ids.length  && str === 'next') {
+      this.setState({
+        activeIndex: this.state.activeIndex+.5
+      })
+    } else if(str === 'next'){
+      this.setState({
+        activeIndex: 0
+      })
+    } else if(this.state.activeIndex > 0 && str === 'prev') {
+      this.setState({
+       activeIndex: this.state.activeIndex-.5
+      })
+      } else if(str === 'prev'){
+        this.setState({
+          activeIndex: this.state.product_ids.length
+        })
+      }
+ }
+
   render(){
     return(
       <div>
-        <Outfit_Carousel add ={this.add} products = {this.state.product_styles} id_update = {this.update_id} click = {this.props.click} />
-      </div>
+           <div  data-testid='main-component' className ="carousel-container">
+              <div data-testid='inner-component' className = "inner" style={{transform: `translateX(-${this.state.activeIndex*100}%)`}}>
+              <Items add ={this.add} products = {this.state.product_styles} id_update = {this.update_id} click = {this.props.click} />
+              </div>
+           </div>
+        <button data-testid='add-button' onClick={
+          this.add}>
+          Add
+        </button>
+        <button data-testid='prev-button' onClick={()=>{ this.carousel('prev')}}>
+            prev
+          </button>
+          <button data-testid='next-button' onClick={()=>{ this.carousel('next')}}>
+            Next
+          </button>
+    </div>
     )
   }
 }

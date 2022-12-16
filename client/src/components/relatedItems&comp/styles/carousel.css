@@ -2,29 +2,30 @@
   position: relative;
   background: whitesmoke;
   display: flex;
-  width: 60%;
+  width: 70%;
   margin: auto;
   border-color: azure;
   flex-wrap: nowrap;
   overflow: hidden;
 }
 
+.inner{
+  white-space: nowrap;
+  display: flex;
+  /* transition: transform 0.3s; */
+}
+
 .carousel-item{
   position: relative;
   height: 20rem;
   width: 13rem;
-  /* display: inline-flex; */
+  padding: 5%;
   align-items: center;
   justify-content: center;
   transition: 1s cubic-bezier(0.39, 0.575, 0.565, 1)
 }
 
-.inner{
-  white-space: nowrap;
-  display: inline-flex;
-  /* width: 100%; */
-  transition: transform 0.3s;
-}
+
 
 .item-price{
   position: relative;
