@@ -3,13 +3,13 @@ import sampleData from "./fixtures/sampleData"
 import IndividualQuestion from "./individualQuestion.jsx"
 import Answers from "./answers.jsx"
 const getQuestions = require('../../../../helpers/q&a.js');
-const getAnswers = require('../../../../helpers/q&a.js');
+// const getAnswers = require('../../../../helpers/q&a.js');
 
 class QuestionAnswers extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
-      item_id: 71699,
+      item_id: 71698,
       questions: []
     }
   }
@@ -42,12 +42,7 @@ class QuestionAnswers extends React.Component {
           {/* {console.log('WE HAVE QUESTIONS:', this.state.questions)} */}
           <h4 id="Question">
             {this.state.questions.map((current) => (
-              <IndividualQuestion key={current.question_id} currentQuestion={current.question_body} />
-            ))}
-          </h4>
-          <h4 id="Answers">
-            {this.state.questions.map((current) => (
-              <Answers currentAnswers={current.answers}/>
+              <IndividualQuestion key={current.question_id} currentQuestion={current.question_body} currentAnswers={current.answers}/>
             ))}
           </h4>
         </div>
