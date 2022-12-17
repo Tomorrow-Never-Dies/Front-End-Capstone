@@ -10,7 +10,7 @@ export default function ReviewDate (props) {
   // }, [])
   return (
     <div className = 'UserAndDate'>
-        <p>{props.username}, {dateObject.toDateString()} </p>
+        <p>{props.username}, {dateObject.toDateString().split(' ').slice(1).join(' ')} </p>
     </div>
 
   )

@@ -33,6 +33,11 @@ function RatingsReviews (props) {
   }, [props.id])
 
 
+  useEffect(() => {
+    console.log(`metaData is equal to ${JSON.stringify(metaData)}`);
+  }, [metaData])
+
+
   const onFormSubmit = (e) => {
     e.preventDefault();
     setForm(true);
@@ -46,13 +51,12 @@ function RatingsReviews (props) {
       Ratings & Reviews
    {enableForm === false
      ? <div className = 'Reviews'> <StarOverview key = {metaData} data = { metaData} />
-     {metaData.product_id}
      <div className = 'IndividualReviews'> {mappedReviews}
      <div className = 'ReviewButtons'>
      <button>
      MORE REVIEWS
     </button>
-    <button data-testid = "addReviewButton" onClick = {onFormSubmit} >
+    <button name = "addReviewButton" data-testid = "addReviewButton" onClick = {onFormSubmit} >
     ADD A REVIEW
     </button>
     </div>

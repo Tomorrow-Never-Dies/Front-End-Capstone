@@ -55,7 +55,7 @@ const addReviews = (review) => {
   }
   const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/`;
   const sampleReview = { product_id: 71697, rating: 1, summary: 'awesome! FWGWEGWEGWEGWGWGEWFWEGEWGWEDDDDDDDDDGWGWEGEWG',
-    body : 'a gift for my granddaughter. She loves them and has them on anytime they are clean. Good product easy care and stretch is just right.',
+    body: 'a gift for my granddaughter. She loves them and has them on anytime they are clean. Good product easy care and stretch is just right.',
     recommend: true, name: 'Andy', email: 'andy@test.com', photos:[],
     characteristics:{["240583"]:1, ["240584"]:2, ["240585"]:3}}
 

@@ -13,11 +13,6 @@
   flex-direction:column;
 }
 
-.starStats{
-  display:flex;
-  flex-direction:column;
-}
-
 .UserAndDate{
   position: relative;
   float: right;
@@ -30,6 +25,113 @@
 }
 
 .star-form{
+  cursor:pointer;
+  transition: color 200ms;
+}
+/* STAR OVERVIEW */
+
+.ReviewOverview {
+  display:flex;
+  position:relative;
+  flex-direction:column;
+}
+.empty-star {
+  display: inline-block;
+  position: relative;
+  font-size: 1em;
+  color: #ddd;
+}
+.full-star:after {
+  font-family: FontAwesome;
+  content: "\f005";
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  color: #f80;
+}
+#staroverview {
+  margin-right: 2em;
+
+  display: inline-block;
+}
+#star-100:after {
+  font-family: FontAwesome;
+  content: "\f005";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  color: #ffc107;
+}
+
+#star-75:after {
+  font-family: FontAwesome;
+  content: "\f005";
+  position: absolute;
+  left: 0;
+  width: 75%;
+  overflow: hidden;
+  color: #ffc107;
+}
+
+#star-50:after {
+  font-family: FontAwesome;
+  content: "\f005";
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+  color: #ffc107;
+}
+
+#star-25:after {
+  font-family: FontAwesome;
+  content: "\f005";
+  position: absolute;
+  left: 0;
+  width: 25%;
+  overflow: hidden;
+  color: #ffc107;
+}
+
+#star-0:after {
+  font-family: FontAwesome;
+  content: "\f005";
+  position: absolute;
+  left: 0;
+  width: 0%;
+  overflow: hidden;
+  color: #ffc107;
+}
+/* bar chart */
+.barChart {
+  display:flex;
+}
+
+
+.title {
+  font-size: 1.4em;
+  font-weight: 300;
+}
+
+.bar-group .name-label {
+  text-anchor: end;
+  font-weight: 300;
+  font-size: 1em;
+  fill: #333;
+}
+
+.bar-group .value-label {
+  text-anchor: end;
+  fill: #fff;
+  font-weight: 900;
+  font-size: 0.7em;
+}
+
+.star-breakdown {
   cursor:pointer;
   transition: color 200ms;
 }
