@@ -10,24 +10,25 @@ export default class OverView extends React.Component {
     super(props);
     this.state = {
       products: [],
-      product: {},
-      styles: [],
+      product: undefined,
+      styles: undefined,
       reviews: [],
-      selectedStyle: sampleProductIdStyles.sampleProductIdStyles.results[0],
+      selectedStyle: {},
       selectedSize: {},
       starToggled: false
     };
-    this.initialRender = this.initialRender.bind(this);
+   // this.initialRender = this.initialRender.bind(this);
     this.starToggle = this.starToggle.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.getproducts = this.getproducts.bind(this);
   }
 
-  initialRender () {
-    this.setState({ product: sampleProducts.sampleProducts[0] })
-    this.setState({ styles: sampleProductIdStyles.sampleProductIdStyles.results })
-    this.setState({ reviews: sampleData.sampleData.results })
-    this.setState({ selectedStyle: sampleProductIdStyles.sampleProductIdStyles.results[0] })
-  }
+  // initialRender () {
+  //   this.setState({ product: sampleProducts.sampleProducts[0] })
+  //   this.setState({ styles: sampleProductIdStyles.sampleProductIdStyles.results })
+  //   this.setState({ reviews: sampleData.sampleData.results })
+  //   this.setState({ selectedStyle: sampleProductIdStyles.sampleProductIdStyles.results[0] })
+  // }
 
   starToggle () {
     //console.log(this.state.starToggled, 'togggleeee')
@@ -40,9 +41,10 @@ export default class OverView extends React.Component {
       contentType: 'application/json',
       context: this,
       url: `/products/${this.props.id}`,
+      data: {id: this.props.id},
       success: (data) => {
         //console.log(data, 'dataaaaaa22')
-        this.setState({ product: data });
+        this.setState({ product: data[0] });
       },
       error: (error) => {
         console.log(error, 'error geting data in ajaxxxx');
@@ -53,6 +55,9 @@ export default class OverView extends React.Component {
       contentType: 'application/json',
       context: this,
       url: `/products/${this.props.id}/styles`,
+      data: {
+        id: this.props.id,
+      },
       success: (data) => {
         //console.log(data, 'data from stylesssss')
         this.setState({ styles: data.results, selectedStyle: data.results[0] });
@@ -84,7 +89,7 @@ export default class OverView extends React.Component {
   componentDidMount () { this.getproducts() }
   render () {
     //console.log(this.state.product, 'productssssss')
-    if (this.state.product === {}) {
+    if (this.state.styles === undefined || this.state.product === undefined) {
       return (
         <div>  Render products overview here...
           <div id="placeholder-div">fetching data. Please wait...</div>
