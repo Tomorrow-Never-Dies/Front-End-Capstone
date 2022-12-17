@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Carousel from "./carousel.jsx";
-import ProductCards from "./productcard.jsx";
+import Items from "./items.jsx";
+
 
 
 
@@ -12,10 +12,15 @@ class RelatedItemsComp extends React.Component{
       productsID: props.id,
       products:[],
       related_products:[],
-      products_array:[]
+      products_array:[],
+      current_product:[],
+      compare_product:[],
+      activeIndex: 0
     }
     this.get_update = this.get_update.bind(this)
     this.update_id = this.update_id.bind(this)
+    this.compare = this.compare.bind(this)
+    this.carousel = this.carousel.bind(this)
   }
 
   componentDidMount(){
@@ -23,7 +28,6 @@ class RelatedItemsComp extends React.Component{
   }
 
   get_update(){
-    console.log("related")
     var get_promises =[]
     axios({
       method: 'get',
@@ -46,7 +50,7 @@ class RelatedItemsComp extends React.Component{
             }
           })
           .catch((err) =>{
-            console.log(err, "inner error")
+
           }))
         }
       })
@@ -55,29 +59,94 @@ class RelatedItemsComp extends React.Component{
           this.setState({
             products: result
           }, function(){
-            console.log(this.state.products, "products")
           })
         })
     })
     .catch((err) => {
-      console.log(err, "error")
     })
 
   }
+
+
   update_id(id){
     this.setState({
       productsID: id
     }, () =>{
-      console.log(this.state.productsID)
       this.get_update()
     })
   }
+
+
+  compare(id){
+    axios({
+      method: 'get',
+      url: "/products/:product_id",
+      params:{
+        id: this.state.productsID
+      }
+    })
+    .then((result) =>{
+      this.setState({
+        current_product: this.state.current_product.concat(result.data.features)
+      })
+    })
+    .then(()=>{
+      axios({
+        method: 'get',
+        url: "/products/:product_id",
+        params:{
+          id: id
+        }
+      })
+      .then((result) =>{
+        this.setState({
+          compare_product: this.state.compare_product.concat(result.data.features)
+        })
+
+      })
+    })
+
+  }
+ carousel(str){
+    if(this.state.activeIndex < this.state.related_products.length -3.5 && str === 'next') {
+      this.setState({
+        activeIndex: this.state.activeIndex+.3
+      })
+    } else if(str === 'next'){
+      this.setState({
+        activeIndex: 0
+      })
+    } else if(this.state.activeIndex > 0 && str === 'prev') {
+      this.setState({
+       activeIndex: this.state.activeIndex-.3
+      })
+      } else if(str === 'prev'){
+        this.setState({
+          activeIndex: this.state.related_products.length -3.5
+        })
+      }
+ }
   render(){
     return(
       <div>
-        {/* <ProductCards data = {this.state.products} /> */}
-        <Carousel products = {this.state.products} click = {this.props.click} id_update = {this.update_id}/>
+         <div  data-testid='main-component' className ="carousel-container">
+            <div data-testid='inner-component' className = "inner" style={{transform: `translateX(-${this.state.activeIndex*100}%)`}}>
+              <Items
+                products = {this.state.products}
+                click = {this.props.click}
+                id_update = {this.update_id}
+                compare = {this.compare}
+              />
+            </div>
+         </div>
+      <button data-testid='prev-button' onClick={()=>{ this.carousel('prev')}}>
+          prev
+        </button>
+        <button data-testid='next-button' onClick={()=>{ this.carousel('next')}}>
+          Next
+        </button>
       </div>
+
     )
   }
 }

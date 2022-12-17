@@ -32,6 +32,7 @@ export default class OverView extends React.Component {
 
   starToggle () {
     //console.log(this.state.starToggled, 'togggleeee')
+
     this.setState({ starToggled: !this.state.starToggled }) // need to communitcate to yassir
   }
 
@@ -43,6 +44,7 @@ export default class OverView extends React.Component {
       url: `/products/${this.props.id}`,
       data: {id: this.props.id},
       success: (data) => {
+
         //console.log(data, 'dataaaaaa22')
         this.setState({ product: data[0] });
       },
@@ -59,6 +61,7 @@ export default class OverView extends React.Component {
         id: this.props.id,
       },
       success: (data) => {
+
         //console.log(data, 'data from stylesssss')
         this.setState({ styles: data.results, selectedStyle: data.results[0] });
       },
@@ -66,6 +69,9 @@ export default class OverView extends React.Component {
         console.log(error, 'error geting data in ajaxxxx');
       }
     });
+
+
+
     // $.ajax({
     //   type: 'GET',
     //   contentType: 'application/json',
@@ -89,6 +95,7 @@ export default class OverView extends React.Component {
   componentDidMount () { this.getproducts() }
   render () {
     //console.log(this.state.product, 'productssssss')
+
     if (this.state.styles === undefined || this.state.product === undefined) {
       return (
         <div>  Render products overview here...
@@ -113,7 +120,9 @@ export default class OverView extends React.Component {
        {this.state.selectedStyle.photos !== {}
          ? <img src={this.state.selectedStyle.photos[0].url} alt="Selected style image" width="500" height="600"/>
          : <div>  Please Wait while we load our products... </div> }
+
        {this.state.styles.map(style => (<div key = {style.style_id}>
+
         <img src={style.photos[0].thumbnail_url} alt="style thumbNail" width="500" height="600"/>
           </div>)
        )}
@@ -130,6 +139,7 @@ export default class OverView extends React.Component {
         <select id = "myQuantity" >
         <option> ---Choose Quantity--- </option>
         <option> place holder1 </option>
+
         <option> place holder2 </option>
         </select>
         </form>
