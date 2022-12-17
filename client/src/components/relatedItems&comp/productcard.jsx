@@ -1,6 +1,7 @@
 import React from "react"
 import './styles/carousel.css'
-import App from "../../../../client/src/App.jsx"
+
+
 
 function ProductCards (props) {
   var url=''
@@ -10,13 +11,15 @@ function ProductCards (props) {
     url = props.item.photos[0].thumbnail_url
   }
   return(
-    <div data-testid='product-card' className="carousel-item" onClick={() => (
-      props.click(props.id),
-      props.id_update(props.id)
-      )}>
-      <img src = {url}/ >
+    <div data-testid='product-card' className="carousel-item" style={{
+      backgroundImage:`url(${url})` }}  onClick={() => (
+        props.click(props.id),
+        props.id_update(props.id)
+        )}>
+       <button className = "compare-button" onClick={() => props.compare(props.id)} >
+        compare
+       </button>
     </div>
-
   )
 }
 

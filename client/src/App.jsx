@@ -4,7 +4,7 @@ import OverView from './components/overview/index.jsx'
 import QuestionAnswers from './components/q&a/index.jsx'
 import RatingsReviews from './components/ratings&reviews/Reviews.jsx'
 import RelatedItemsComp from './components/relatedItems&comp/RelatedItemsComp.jsx'
-import Outfits from './components/relatedItems&comp/Outfits.jsx'
+import Outfits from './components/relatedItems&comp/OutfitsItem.jsx'
 
 class App extends React.Component{
   constructor(props){
@@ -19,7 +19,6 @@ class App extends React.Component{
     this.setState({
       productsID: id
     }, () =>{
-      console.log(this.state.productsID)
     })
 
   }
@@ -27,7 +26,6 @@ class App extends React.Component{
 
   render(){
     return(
-      console.log("render"),
       <div>
         <h1>Front End Capstone</h1>
         <OverView id ={this.state.productsID}/>

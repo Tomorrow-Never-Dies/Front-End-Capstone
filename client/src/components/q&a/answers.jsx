@@ -3,10 +3,13 @@ import React from "react";
 function Answers(props) {
   const getAnswer = (input) => {
     const results = [];
+    for (const key in input.answers) {
+      results.push(input.answers[key].body);
     for (const key in input.currentAnswers) {
       // console.log('CURRENT PROPS:', input);
       // console.log('CURRENT ANSWER:', input.currentAnswers[key].body)
       results.push(input.currentAnswers[key].body);
+
     }
     return results;
   }
@@ -19,6 +22,7 @@ function Answers(props) {
       ))}
     </small>
   )
+}
 }
 
 export default Answers;

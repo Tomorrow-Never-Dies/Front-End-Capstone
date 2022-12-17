@@ -38,4 +38,4 @@ config.js
 node_modules
 .DS_Store
 
-.config
+.config.js
