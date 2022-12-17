@@ -17,12 +17,22 @@
 
 .carousel-item{
   position: relative;
-  height: 20rem;
-  width: 13rem;
-  padding: 5%;
+  height: 15rem;
+  width: 15rem;
+  padding: 10%;
+  margin-left: 20px;
+  margin-right: 20px;
   align-items: center;
   justify-content: center;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   transition: 1s cubic-bezier(0.39, 0.575, 0.565, 1)
+}
+.compare-button{
+  align-items: top;
+  height: 2rem;
+  width: 4rem;
 }
 
 

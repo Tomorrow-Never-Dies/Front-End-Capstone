@@ -60,7 +60,7 @@ class Outfits extends React.Component{
     this.setState({
       productsID: id
     }, () =>{
-      console.log(this.state.productsID)
+
     })
   }
 

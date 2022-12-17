@@ -66,14 +66,17 @@ class RelatedItemsComp extends React.Component{
     })
 
   }
+
+
   update_id(id){
     this.setState({
       productsID: id
     }, () =>{
-      console.log(this.state.productsID)
       this.get_update()
     })
   }
+
+
   compare(id){
     axios({
       method: 'get',
@@ -107,7 +110,7 @@ class RelatedItemsComp extends React.Component{
  carousel(str){
     if(this.state.activeIndex < this.state.related_products.length -3.5 && str === 'next') {
       this.setState({
-        activeIndex: this.state.activeIndex+.5
+        activeIndex: this.state.activeIndex+.3
       })
     } else if(str === 'next'){
       this.setState({
@@ -115,7 +118,7 @@ class RelatedItemsComp extends React.Component{
       })
     } else if(this.state.activeIndex > 0 && str === 'prev') {
       this.setState({
-       activeIndex: this.state.activeIndex-.5
+       activeIndex: this.state.activeIndex-.3
       })
       } else if(str === 'prev'){
         this.setState({

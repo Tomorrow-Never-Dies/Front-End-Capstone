@@ -46,12 +46,11 @@ app.get('/products', (req,res) => {
     }
   })
   .then((result) =>{
-    //console.log(result.data, 'data')
     res.send(result.data)
   })
   .catch((error) =>{
     console.log(error, "error all products")
-    return error
+    res.send(err)
 })
 
 })
@@ -79,6 +78,7 @@ app.get('/products/:product_id', (req,res) => {
 
 app.get('/products/:product_id/styles', (req,res) => {
 
+
   axios({
   method: 'get',
   url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.query.id}/styles`,
@@ -86,11 +86,11 @@ app.get('/products/:product_id/styles', (req,res) => {
     Authorization: `${config.TOKEN}`,
     body: {}
   }
-})
+  })
 .then((result) =>{
   //console.log(result.data.results[0].photos, "result")
   res.send(result.data)
-})
+  })
 .catch((error) =>{
   console.log(error, "error")
   console.log(req.query.id)

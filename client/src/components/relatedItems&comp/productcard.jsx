@@ -9,21 +9,15 @@ function ProductCards (props) {
     url = props.item.photos[0].thumbnail_url
   }
   return(
-    <div>
-       <button onClick={() => props.compare(props.id)} >
-        compare
-       </button>
-       <div data-testid='product-card' className="carousel-item" onClick={() => (
+    <div data-testid='product-card' className="carousel-item" style={{
+      backgroundImage:`url(${url})` }}  onClick={() => (
         props.click(props.id),
         props.id_update(props.id)
         )}>
-
-        <img src = {url}/ >
-      </div>
+       <button className = "compare-button" onClick={() => props.compare(props.id)} >
+        compare
+       </button>
     </div>
-
-
-
   )
 }
 
