@@ -3,7 +3,7 @@ import reviewHelpers from '../ReviewHelper.jsx'
 
 function BarGroup(props) {
   let barPadding = 2
-  let barColour = '6e6e6e'
+  let barColour = '#c1c1c1'
   let barColour2='#00db5a'
   let widthScale = d => d * 10
 
@@ -13,7 +13,7 @@ function BarGroup(props) {
   console.log(`totalpercentage is equal to ${totalPercentage}`)
   return <g className="bar-group">
     <text className="name-label" x="-6" y={yMid} alignmentBaseline="middle" >{props.d.name}</text>
-    <rect y={barPadding * 0.5} width={width} height={props.barHeight - barPadding} fill={barColour} />
+    <rect className = "star-breakdown"y={barPadding * 0.5} width={width} height={props.barHeight - barPadding} fill={barColour} />
     <rect y={barPadding * 0.5} width={totalPercentage} height={props.barHeight - barPadding} fill={barColour2} />
     <text className="value-label" x={width- 8} y={yMid} alignmentBaseline="middle" >{props.d.value}</text>
   </g>
@@ -21,14 +21,14 @@ function BarGroup(props) {
 
 
 export default function BarChart (props) {
-    const [barGraph, setBar] = useState([])
+    const [barGraph, setBar] = useState([]);
 
     useEffect(() => {
       console.log(`props.ratings is equal to ${props.ratings}`);
       let barHeight = 20
       let totalNumOfRatings = reviewHelpers.barChartPercentage(props.ratings)
       let barGroups = [...Array(5)].map((d, i) => {
-        let index = i+1;
+        let index = 5-i; //makes 5 star bar on top
         var ratingData = {name:`${index} stars`, value:props.ratings[index.toString()]};
         return (<g transform={`translate(0, ${i * barHeight})`}>
               <BarGroup d={ratingData} totalNumOfRatings = {totalNumOfRatings} barHeight={barHeight} />

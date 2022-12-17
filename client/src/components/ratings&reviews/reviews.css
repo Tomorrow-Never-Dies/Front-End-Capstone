@@ -13,8 +13,6 @@
   flex-direction:column;
 }
 
-
-
 .UserAndDate{
   position: relative;
   float: right;
@@ -131,4 +129,9 @@
   fill: #fff;
   font-weight: 900;
   font-size: 0.7em;
+}
+
+.star-breakdown {
+  cursor:pointer;
+  transition: color 200ms;
 }
