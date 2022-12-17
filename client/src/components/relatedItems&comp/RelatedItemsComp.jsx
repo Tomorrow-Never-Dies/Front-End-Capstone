@@ -37,7 +37,7 @@ class RelatedItemsComp extends React.Component{
       }
     })
     .then((result)=>{
-      console.log(result)
+      // console.log(result)
       this.setState({
         related_products :result.data
       }, function(){

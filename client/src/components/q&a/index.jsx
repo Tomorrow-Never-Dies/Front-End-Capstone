@@ -1,18 +1,30 @@
 import React from "react";
 import sampleData from "./fixtures/sampleData"
 import IndividualQuestion from "./individualQuestion.jsx"
+import Answers from "./answers.jsx"
 const getQuestions = require('../../../../helpers/q&a.js');
+// const getAnswers = require('../../../../helpers/q&a.js');
 
 class QuestionAnswers extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-
+      item_id: 71698,
+      questions: []
     }
   }
 
   componentDidMount () {
-    getQuestions.getQuestions(1);
+    getQuestions.getQuestions(this.state.item_id)
+      .then((result) => {
+        this.setState({
+          questions: result.data.results
+        })
+      });
+    // getAnswers.getAnswers(this.state.item_id)
+    //   .then((result) => {
+    //     console.log('HERE ARE ANSWER RESULTS:', result)
+    //   })
   };
 
   render () {
@@ -27,10 +39,10 @@ class QuestionAnswers extends React.Component {
           placeholder="Have a Question?"
         />
         <div id="QuestionList">
-          {/* <p>{sampleData.results.map((curr) => console.log('1 question', curr))}</p> */}
+          {/* {console.log('WE HAVE QUESTIONS:', this.state.questions)} */}
           <h4 id="Question">
-            {sampleData.results.map((current) => (
-              <IndividualQuestion key={current.question_id} currentQuestion={current.question_body} currentAnswer={current.answers} />
+            {this.state.questions.map((current) => (
+              <IndividualQuestion key={current.question_id} currentQuestion={current.question_body} currentAnswers={current.answers}/>
             ))}
           </h4>
         </div>

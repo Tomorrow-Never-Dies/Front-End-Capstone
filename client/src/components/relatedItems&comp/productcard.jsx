@@ -1,6 +1,8 @@
 import React from "react"
 import './styles/carousel.css'
 
+
+
 function ProductCards (props) {
   var url=''
   if(props.item.photos[0].thumbnail_url === undefined){
@@ -20,5 +22,6 @@ function ProductCards (props) {
     </div>
   )
 }
+
 
 export default ProductCards

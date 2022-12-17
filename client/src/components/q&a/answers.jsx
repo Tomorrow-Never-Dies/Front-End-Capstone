@@ -1,16 +1,28 @@
 import React from "react";
 
-function Answers (props) {
+function Answers(props) {
   const getAnswer = (input) => {
     const results = [];
     for (const key in input.answers) {
       results.push(input.answers[key].body);
+    for (const key in input.currentAnswers) {
+      // console.log('CURRENT PROPS:', input);
+      // console.log('CURRENT ANSWER:', input.currentAnswers[key].body)
+      results.push(input.currentAnswers[key].body);
+
     }
     return results;
   }
+  // Need to pass Answer Author to props, create an iteratable structure for both Answer & Author pairs
   return (
-    <h1>A: {getAnswer(props)}</h1>
+    <small>
+      {/* {console.log(props)} */}
+      {getAnswer(props).map((curr) => (
+        <div>A: {curr}</div>
+      ))}
+    </small>
   )
+}
 }
 
 export default Answers;

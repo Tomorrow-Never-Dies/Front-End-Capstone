@@ -3,42 +3,107 @@ import sampleProducts from '../../../../fixtures/Overview/Products.js';
 import sampleProductIdStyles from '../../../../fixtures/Overview/IdProducts.js';
 import sampleProductId from '../../../../fixtures/Overview/ProductsID.js';
 import sampleData from '../../../../fixtures/ratings&reviews/ReviewExampleData.js'
+import $ from 'jquery';
 
 export default class OverView extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      product: {},
-      styles: [],
+      products: [],
+      product: undefined,
+      styles: undefined,
       reviews: [],
-      selectedStyle: sampleProductIdStyles.sampleProductIdStyles.results[0],
+      selectedStyle: {},
       selectedSize: {},
       starToggled: false
     };
-    this.initialRender = this.initialRender.bind(this);
+   // this.initialRender = this.initialRender.bind(this);
     this.starToggle = this.starToggle.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.getproducts = this.getproducts.bind(this);
   }
 
-  initialRender () {
-    this.setState({ product: sampleProducts.sampleProducts[0] })
-    this.setState({ styles: sampleProductIdStyles.sampleProductIdStyles.results })
-    this.setState({ reviews: sampleData.sampleData.results })
-    this.setState({ selectedStyle: sampleProductIdStyles.sampleProductIdStyles.results[0] })
-  }
+  // initialRender () {
+  //   this.setState({ product: sampleProducts.sampleProducts[0] })
+  //   this.setState({ styles: sampleProductIdStyles.sampleProductIdStyles.results })
+  //   this.setState({ reviews: sampleData.sampleData.results })
+  //   this.setState({ selectedStyle: sampleProductIdStyles.sampleProductIdStyles.results[0] })
+  // }
 
   starToggle () {
+    //console.log(this.state.starToggled, 'togggleeee')
+
     this.setState({ starToggled: !this.state.starToggled }) // need to communitcate to yassir
+  }
+
+  getproducts () {
+    $.ajax({
+      type: 'GET',
+      contentType: 'application/json',
+      context: this,
+      url: `/products/${this.props.id}`,
+      data: {id: this.props.id},
+      success: (data) => {
+
+        //console.log(data, 'dataaaaaa22')
+        this.setState({ product: data[0] });
+      },
+      error: (error) => {
+        console.log(error, 'error geting data in ajaxxxx');
+      }
+    });
+    $.ajax({
+      type: 'GET',
+      contentType: 'application/json',
+      context: this,
+      url: `/products/${this.props.id}/styles`,
+      data: {
+        id: this.props.id,
+      },
+      success: (data) => {
+
+        //console.log(data, 'data from stylesssss')
+        this.setState({ styles: data.results, selectedStyle: data.results[0] });
+      },
+      error: (error) => {
+        console.log(error, 'error geting data in ajaxxxx');
+      }
+    });
+
+
+
+    // $.ajax({
+    //   type: 'GET',
+    //   contentType: 'application/json',
+    //   context: this,
+    //   data: {id: this.props.id},
+    //   url: `/getReview/${this.props.id}`,
+    //   success: (data) => {
+    //     console.log(data, 'data from reviewwww')
+    //     //this.setState({ reviews: data});
+    //   },
+    //   error: (error) => {
+    //     console.log(error, 'error geting data in ajaxxxx');
+    //   }
+    // });
   }
 
   addToCart () {
     console.log('added to cart!')
   }
 
-  componentDidMount () { this.initialRender() }
+  componentDidMount () { this.getproducts() }
   render () {
+    //console.log(this.state.product, 'productssssss')
 
-    return (
+    if (this.state.styles === undefined || this.state.product === undefined) {
+      return (
+        <div>  Render products overview here...
+          <div id="placeholder-div">fetching data. Please wait...</div>
+        </div>
+      );
+    } else {
+      return (
       <div>
        <p> OverView Place Holder </p>
        <div data-testid='name header'>NAME: {this.state.product.name}</div>
@@ -55,7 +120,9 @@ export default class OverView extends React.Component {
        {this.state.selectedStyle.photos !== {}
          ? <img src={this.state.selectedStyle.photos[0].url} alt="Selected style image" width="500" height="600"/>
          : <div>  Please Wait while we load our products... </div> }
+
        {this.state.styles.map(style => (<div key = {style.style_id}>
+
         <img src={style.photos[0].thumbnail_url} alt="style thumbNail" width="500" height="600"/>
           </div>)
        )}
@@ -72,11 +139,13 @@ export default class OverView extends React.Component {
         <select id = "myQuantity" >
         <option> ---Choose Quantity--- </option>
         <option> place holder1 </option>
+
         <option> place holder2 </option>
         </select>
         </form>
         <button onClick = {this.addToCart}>Add to cart!</button>
       </div>
-    )
+      )
+    }
   }
 }
