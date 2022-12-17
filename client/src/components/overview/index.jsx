@@ -32,6 +32,7 @@ export default class OverView extends React.Component {
 
   starToggle () {
     //console.log(this.state.starToggled, 'togggleeee')
+
     this.setState({ starToggled: !this.state.starToggled }) // need to communitcate to yassir
   }
 
