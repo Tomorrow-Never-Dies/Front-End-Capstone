@@ -30,8 +30,8 @@ class App extends React.Component{
       console.log("render"),
       <div>
         <h1>Front End Capstone</h1>
-        <OverView id ={this.state.productsID}/>
-        <RelatedItemsComp id ={this.state.productsID} click = {this.onclick}/>
+        {/* <OverView id ={this.state.productsID}/> */}
+        {/* <RelatedItemsComp id ={this.state.productsID} click = {this.onclick}/> */}
         <Outfits id ={this.state.productsID} click = {this.onclick} />
         <QuestionAnswers id ={this.state.productsID} />
         <RatingsReviews id ={this.state.productsID}/>

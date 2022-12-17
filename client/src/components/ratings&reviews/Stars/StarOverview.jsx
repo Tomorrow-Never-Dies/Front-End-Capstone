@@ -1,27 +1,37 @@
 import React, { useState, useEffect } from 'react'
 import '../reviews.css'
 import axios from 'axios'
+import reviewHelpers from '../ReviewHelper.jsx'
+import BarChart from './BarChart.jsx'
 
 export default function StarOverview (props) {
-  const [rating, setRating] = useState(null)
+  const [rating, setRating] = useState(null);
+  const [starRating,setStarRating] = useState([]);
   useEffect(() => {
-    //console.log(`props meta is equal to ${JSON.stringify(props.data)}`);
-    let ratings = props.data.ratings
-    let weightedSum = 0;
-    let total = 0;
-    Object.keys(ratings || {}).forEach(function (key, index) {
-      weightedSum += Number(ratings[key]) * Number(key);
-      total += Number(ratings[key]);
-    });
-    const excessFinalRating = (weightedSum / total)
-    const finalRating = excessFinalRating.toFixed(1)
-    //console.log(`finalRating is equal to ${finalRating}`)
-    setRating(finalRating);
+    console.log(`props meta is equal to ${JSON.stringify(props.data.ratings)}`);
+    let ratings = props.data.ratings;
+    let totalStars = reviewHelpers.avgStarRating(ratings);
+    setStarRating(totalStars);
+    setRating(reviewHelpers.calculateAverage(ratings));
   }, [props.data])
 
   return (
-    <div className = 'starStats'>
-      {rating > 0 ? rating : 'stars' }
+    <div className = 'ReviewOverview'>
+      <div className = 'StarOverview'>
+      {rating}
+      {starRating}
+      </div>
+      {props.data.ratings ? <BarChart ratings = {props.data.ratings}/> : "loading"}
     </div>
+
+
+
+
+
+
+
+
   )
 }
+
+

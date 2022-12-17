@@ -10,24 +10,25 @@ export default class OverView extends React.Component {
     super(props);
     this.state = {
       products: [],
-      product: {},
-      styles: [],
+      product: undefined,
+      styles: undefined,
       reviews: [],
-      selectedStyle: sampleProductIdStyles.sampleProductIdStyles.results[0],
+      selectedStyle: {},
       selectedSize: {},
       starToggled: false
     };
-    this.initialRender = this.initialRender.bind(this);
+   // this.initialRender = this.initialRender.bind(this);
     this.starToggle = this.starToggle.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.getproducts = this.getproducts.bind(this);
   }
 
-  initialRender () {
-    this.setState({ product: sampleProducts.sampleProducts[0] })
-    this.setState({ styles: sampleProductIdStyles.sampleProductIdStyles.results })
-    this.setState({ reviews: sampleData.sampleData.results })
-    this.setState({ selectedStyle: sampleProductIdStyles.sampleProductIdStyles.results[0] })
-  }
+  // initialRender () {
+  //   this.setState({ product: sampleProducts.sampleProducts[0] })
+  //   this.setState({ styles: sampleProductIdStyles.sampleProductIdStyles.results })
+  //   this.setState({ reviews: sampleData.sampleData.results })
+  //   this.setState({ selectedStyle: sampleProductIdStyles.sampleProductIdStyles.results[0] })
+  // }
 
   starToggle () {
     //console.log(this.state.starToggled, 'togggleeee')
@@ -40,9 +41,11 @@ export default class OverView extends React.Component {
       contentType: 'application/json',
       context: this,
       url: `/products/${this.props.id}`,
+      data: {id: this.props.id},
       success: (data) => {
+
         //console.log(data, 'dataaaaaa22')
-        this.setState({ product: data });
+        this.setState({ product: data[0] });
       },
       error: (error) => {
         console.log(error, 'error geting data in ajaxxxx');
@@ -53,7 +56,11 @@ export default class OverView extends React.Component {
       contentType: 'application/json',
       context: this,
       url: `/products/${this.props.id}/styles`,
+      data: {
+        id: this.props.id,
+      },
       success: (data) => {
+
         //console.log(data, 'data from stylesssss')
         this.setState({ styles: data.results, selectedStyle: data.results[0] });
       },
@@ -61,6 +68,9 @@ export default class OverView extends React.Component {
         console.log(error, 'error geting data in ajaxxxx');
       }
     });
+
+
+
     // $.ajax({
     //   type: 'GET',
     //   contentType: 'application/json',
@@ -84,7 +94,8 @@ export default class OverView extends React.Component {
   componentDidMount () { this.getproducts() }
   render () {
     //console.log(this.state.product, 'productssssss')
-    if (this.state.product === {}) {
+
+    if (this.state.styles === undefined || this.state.product === undefined) {
       return (
         <div>  Render products overview here...
           <div id="placeholder-div">fetching data. Please wait...</div>
@@ -108,7 +119,9 @@ export default class OverView extends React.Component {
        {this.state.selectedStyle.photos !== {}
          ? <img src={this.state.selectedStyle.photos[0].url} alt="Selected style image" width="500" height="600"/>
          : <div>  Please Wait while we load our products... </div> }
+
        {this.state.styles.map(style => (<div key = {style.style_id}>
+
         <img src={style.photos[0].thumbnail_url} alt="style thumbNail" width="500" height="600"/>
           </div>)
        )}
@@ -125,6 +138,7 @@ export default class OverView extends React.Component {
         <select id = "myQuantity" >
         <option> ---Choose Quantity--- </option>
         <option> place holder1 </option>
+
         <option> place holder2 </option>
         </select>
         </form>
