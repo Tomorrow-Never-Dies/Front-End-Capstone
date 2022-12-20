@@ -12,7 +12,7 @@ const reviewHelpers = {
       totalRating += Number(ratings[key]);
     });
     let ratingResult = (weightedSum / totalRating)
-    console.log(`ratingResult is equal to ${ratingResult}`);
+    //console.log(`ratingResult is equal to ${ratingResult}`);
     return parseFloat(""+ratingResult).toFixed(1);
   },
 
@@ -37,7 +37,7 @@ const reviewHelpers = {
         return  <span className= "fa fa-star empty-star" id = "star-0" />
       }
     })
-    console.log(`fiveStars is equal to ${JSON.stringify(fiveStars)}`);
+    //console.log(`fiveStars is equal to ${JSON.stringify(fiveStars)}`);
     return fiveStars
   },
 
@@ -47,6 +47,49 @@ const reviewHelpers = {
       totalRatings += Number(ratings[key]);
     });
     return totalRatings;
+  },
+
+  factorBreakDown : (FactorRatings) => {
+    console.log(`factorratings is equal to ${JSON.stringify(FactorRatings['Fit']['value'])}`);
+
+    const tickTitles = {
+      Size: { first: 'Too Small', third: 'Perfect', fifth: 'Too Large' },
+      Width: { first: 'Too Narrow', third: 'Perfect', fifth: 'Too Large' },
+      Comfort: { first: 'Poor', fifth: 'Perfect' },
+      Quality: { first: 'Poor', third: 'What I Expected', fifth: 'Perfect' },
+      Length: { first: 'Runs Short', third: 'Perfect', fifth: 'Runs Long' },
+      Fit: { first: 'Too Small', third: 'Perfect', fifth: 'Too Long' }
+    };
+
+    let factorBreakdownResult = Object.keys(FactorRatings || {}).map( (key, index) => {
+        if(tickTitles[key].length === 3) {
+          return (
+          <div key = {FactorRatings.id}>
+               {key}
+            <input type="range" min="0" max="5" value={Number(FactorRatings[key]['value'])} step = "0.1" class="slider" readonly/>
+              <div class="sliderticks">
+              <p>{tickTitles[key]['first']}</p>
+              <p>{tickTitles[key]['third']}</p>
+              <p>{tickTitles[key]['fifth']}</p>
+            </div>
+          </div>
+          )
+      } else {
+          return (
+            <div key = {FactorRatings.id} >
+              {key}
+            <input type="range" min="0" max="5" value={Number(FactorRatings[key]['value'])} step = "0.1" class="slider" readonly/>
+              <div class="sliderticks">
+                <p>{tickTitles[key]['first']}</p>
+                <p>{tickTitles[key]['fifth']}</p>
+            </div>
+            </div>
+          )
+
+        }
+    })
+    console.log(`typeof reviewhelper breakdown is ${JSON.stringify(factorBreakdownResult)}`)
+    return factorBreakdownResult
   }
 
 }
