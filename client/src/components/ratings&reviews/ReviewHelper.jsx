@@ -64,7 +64,7 @@ const reviewHelpers = {
     let factorBreakdownResult = Object.keys(FactorRatings || {}).map( (key, index) => {
         if(tickTitles[key].length === 3) {
           return (
-          <div key = {FactorRatings.id}>
+          <div key = {key + index}>
                {key}
             <input key = {FactorRatings[key]['value']}  type="range" min="0" max="5" value={Number(FactorRatings[key]['value'])} step = "0.1" className="slider" readOnly/>
               <div className="sliderticks" key = {FactorRatings.id + 'sliderticks' + index + key}>
@@ -76,13 +76,13 @@ const reviewHelpers = {
           )
       } else {
           return (
-            <div key = {FactorRatings.id} >
+            <div key = {key+ index} >
               {key}
             <input key = {FactorRatings[key]['value']} type="range" min="0" max="5" value={Number(FactorRatings[key]['value'])} step = "0.1" className="slider" readOnly/>
               <div className="sliderticks" key = {FactorRatings.id + 'sliderticks' + index}>
                 <p key = {FactorRatings.id + 'tick1' + index + key}>{tickTitles[key]['first']}</p>
                 <p key = {FactorRatings.id + 'tick3' + index + key}>{tickTitles[key]['fifth']}</p>
-            </div>
+              </div>
             </div>
           )
 
