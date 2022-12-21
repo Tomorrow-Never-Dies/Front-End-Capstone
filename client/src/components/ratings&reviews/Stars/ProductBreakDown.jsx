@@ -17,7 +17,7 @@ function ProductBreakdown (props) {
   },[breakdown])
 
   return (
-    <div className = 'ProductBreakDown'>
+    <div className = 'ProductBreakDown' key= 'ProductBreakDown'>
       {breakdown.length !==0 ? breakdown: "loading"}
     </div>
 

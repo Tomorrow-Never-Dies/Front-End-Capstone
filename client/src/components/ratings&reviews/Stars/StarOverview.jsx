@@ -17,8 +17,8 @@ export default function StarOverview (props) {
   }, [props.data])
 
   return (
-    <div className = 'ReviewOverview'>
-      <div className = 'StarOverview'>
+    <div className = 'ReviewOverview' key = 'ReviewOverview'>
+      <div className = 'StarOverview' key = 'StarOverview'>
       {rating}
       {starRating}
       </div>
