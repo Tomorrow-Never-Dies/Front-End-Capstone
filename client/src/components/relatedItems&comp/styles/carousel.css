@@ -60,11 +60,22 @@
   cursor: pointer;
 
 }
-
+.card{
+  border-style: solid;
+}
 .card-info{
-color:black;
-font-weight: bold;
+flex-direction: column;
 display: flex;
+width: 15rem;
+margin-left: 20px;
+margin-right: 20px;
+}
+.product-name{
+  font-size: medium;
+}
+.product-price{
+  font-size:small;
+  color:cadetblue;
 }
 
 

@@ -13,7 +13,7 @@ function ProductCards (props) {
   }
   return(
     //article
-    <div>
+    <article className="card">
          <div data-testid='product-card' className="carousel-item" style={{
       backgroundImage:`url(${url})` }}  onClick={() => (
         props.click(props.id)
@@ -23,15 +23,14 @@ function ProductCards (props) {
           </button>
        </div>
        <div className="card-info">
-        <div className="product-name">
-          {props.item.name}
-        </div>
-        <div className="product-price">
-          {props.item.original_price}
-        </div>
-
+          <div className="product-name">
+            {props.item.name}
+          </div>
+          <div className="product-price">
+            {props.item.original_price}
+          </div>
        </div>
-   </div>
+   </article>
 
   )
 }
