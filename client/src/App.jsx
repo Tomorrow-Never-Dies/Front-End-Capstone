@@ -19,6 +19,7 @@ class App extends React.Component{
     this.setState({
       productsID: id
     }, () =>{
+      console.log("app.jsx")
     })
 
   }
@@ -28,11 +29,11 @@ class App extends React.Component{
     return(
       <div>
         <h1>Front End Capstone</h1>
-        <OverView id ={this.state.productsID}/>
+        {/* <OverView id ={this.state.productsID}/> */}
         <RelatedItemsComp id ={this.state.productsID} click = {this.onclick}/>
         <Outfits id ={this.state.productsID} click = {this.onclick} />
-        <QuestionAnswers id ={this.state.productsID} />
-        <RatingsReviews id ={this.state.productsID}/>
+        {/* <QuestionAnswers id ={this.state.productsID} />
+        <RatingsReviews id ={this.state.productsID}/> */}
       </div>
     )
   }

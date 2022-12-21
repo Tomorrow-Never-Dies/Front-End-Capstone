@@ -86,21 +86,24 @@ class Outfits extends React.Component{
 
   render(){
     return(
-      <div>
+      <div className="main">
+            <button data-testid='prev-button' className="scroll-left" onClick={()=>{ this.carousel('prev')}}>
+              &larr;
+           </button>
            <div  data-testid='main-component' className ="carousel-container">
               <div data-testid='inner-component' className = "inner" style={{transform: `translateX(-${this.state.activeIndex*100}%)`}}>
-              <Items add ={this.add} products = {this.state.product_styles} id_update = {this.update_id} click = {this.props.click} />
+                <button data-testid='add-button' className="carousel-item"  onClick={() => (this.add())}>
+                + Add item
+              </button>
+              <Items
+                add ={this.add}
+                products = {this.state.product_styles}
+                id_update = {this.update_id}
+                click = {this.props.click} />
               </div>
            </div>
-        <button data-testid='add-button' onClick={
-          this.add}>
-          Add
-        </button>
-        <button data-testid='prev-button' onClick={()=>{ this.carousel('prev')}}>
-            prev
-          </button>
-          <button data-testid='next-button' onClick={()=>{ this.carousel('next')}}>
-            Next
+        <button data-testid='next-button' className="scroll-right" onClick={()=>{ this.carousel('next')}}>
+         &rarr;
           </button>
     </div>
     )
