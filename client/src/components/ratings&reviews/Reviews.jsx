@@ -34,7 +34,7 @@ function RatingsReviews (props) {
 
 
   useEffect(() => {
-    console.log(`metaData is equal to ${JSON.stringify(metaData)}`);
+    //console.log(`metaData is equal to ${JSON.stringify(metaData)}`);
   }, [metaData])
 
 
@@ -51,6 +51,7 @@ function RatingsReviews (props) {
       Ratings & Reviews
    {enableForm === false
      ? <div className = 'Reviews'> <StarOverview key = {metaData} data = { metaData} />
+     <br/>
      <div className = 'IndividualReviews'> {mappedReviews}
      <div className = 'ReviewButtons'>
      <button>
