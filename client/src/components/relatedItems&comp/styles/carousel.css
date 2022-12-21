@@ -2,7 +2,8 @@
   position: relative;
   background: whitesmoke;
   display: flex;
-  width: 70%;
+  width: 80%;
+  height: 25rem;
   margin: auto;
   border-color: azure;
   flex-wrap: nowrap;
@@ -12,14 +13,21 @@
 .inner{
   white-space: nowrap;
   display: flex;
+  height: 25rem;
   /* transition: transform 0.3s; */
+}
+
+.main{
+  white-space: nowrap;
+  height: 25rem;
+  display: flex;
+  align-items: center;
 }
 
 .carousel-item{
   position: relative;
-  height: 15rem;
+  height: 20rem;
   width: 15rem;
-  padding: 10%;
   margin-left: 20px;
   margin-right: 20px;
   align-items: center;
@@ -27,17 +35,48 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  transition: 1s cubic-bezier(0.39, 0.575, 0.565, 1)
+  transition: 1s cubic-bezier(0.39, 0.575, 0.565, 1);
+  cursor: pointer;
 }
 .compare-button{
   align-items: top;
   height: 2rem;
   width: 4rem;
+  cursor: pointer;
+}
+.scroll-left{
+  background-color: white;
+  border: none;
+  height: 25rem;
+  width: 7rem;
+  cursor: pointer;
+}
+
+.scroll-right{
+  background-color: white;
+  border: none;
+  height: 25rem;
+  width: 7rem;
+  cursor: pointer;
+
+}
+.card{
+  border-style: solid;
+}
+.card-info{
+flex-direction: column;
+display: flex;
+width: 15rem;
+margin-left: 20px;
+margin-right: 20px;
+}
+.product-name{
+  font-size: medium;
+}
+.product-price{
+  font-size:small;
+  color:cadetblue;
 }
 
 
 
-.item-price{
-  position: relative;
-  font: red;
-}
