@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Items from "./items.jsx";
+import Comparison from "./Comparison.jsx";
 
 
 
+// Refactor repeated code.
 
 class RelatedItemsComp extends React.Component{
   constructor(props){
@@ -15,19 +17,21 @@ class RelatedItemsComp extends React.Component{
       products_array:[],
       current_product:[],
       compare_product:[],
-      activeIndex: 0
+      activeIndex: 0,
+      compared: false
     }
     this.get_update = this.get_update.bind(this)
-    this.update_id = this.update_id.bind(this)
     this.compare = this.compare.bind(this)
     this.carousel = this.carousel.bind(this)
   }
 
   componentDidMount(){
+    console.log("testt")
     this.get_update()
   }
 
   get_update(){
+    console.log(this.state.productsID, "state id")
     var get_promises =[]
     axios({
       method: 'get',
@@ -67,14 +71,19 @@ class RelatedItemsComp extends React.Component{
 
   }
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.id !== this.state.productsID){
+      this.setState({
+        productsID:nextProps.id
+      },() =>{
+        console.log(this.state.productsID, "state id")
+        this.get_update()
+      })
+    }
 
-  update_id(id){
-    this.setState({
-      productsID: id
-    }, () =>{
-      this.get_update()
-    })
   }
+
+
 
 
   compare(id){
@@ -100,7 +109,8 @@ class RelatedItemsComp extends React.Component{
       })
       .then((result) =>{
         this.setState({
-          compare_product: this.state.compare_product.concat(result.data.features)
+          compare_product: this.state.compare_product.concat(result.data.features),
+          compared: true
         })
 
       })
@@ -128,23 +138,23 @@ class RelatedItemsComp extends React.Component{
  }
   render(){
     return(
-      <div>
+      <div className="main">
+        {this.state.compared ? <Comparison current = {this.state.current_product} compare = {this.state.compare_product}/> : null}
+        <button data-testid='prev-button' className="scroll-left" onClick={()=>{ this.carousel('prev')}}>
+        &larr;
+        </button>
          <div  data-testid='main-component' className ="carousel-container">
             <div data-testid='inner-component' className = "inner" style={{transform: `translateX(-${this.state.activeIndex*100}%)`}}>
               <Items
                 products = {this.state.products}
                 click = {this.props.click}
-                id_update = {this.update_id}
                 compare = {this.compare}
               />
             </div>
          </div>
-      <button data-testid='prev-button' onClick={()=>{ this.carousel('prev')}}>
-          prev
-        </button>
-        <button data-testid='next-button' onClick={()=>{ this.carousel('next')}}>
-          Next
-        </button>
+         <button data-testid='next-button' className="scroll-right" onClick={()=>{ this.carousel('next')}}>
+         &rarr;
+          </button>
       </div>
 
     )
