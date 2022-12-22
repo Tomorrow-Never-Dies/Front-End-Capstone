@@ -41,6 +41,30 @@ const reviewHelpers = {
     return fiveStars
   },
 
+  IndividualStarRating  : (rating, reviewId) => {
+    let averageRating = rating
+    let totalStars = 5;
+    const fiveStars = [...Array(5)].map((star, i) => {
+      if ( averageRating >= 1) {
+        averageRating--;
+        return  <span className= "fa fa-star empty-star" id = "star-100" key = {rating + 'star-100'+ reviewId + i}/>
+      } else if (averageRating === 0.75) {
+        averageRating = averageRating - 0.75
+        return  <span className= "fa fa-star empty-star" id = "star-75" key = {rating + 'star-75'+ reviewId+i } />
+      } else if (averageRating === 0.50) {
+        averageRating = averageRating - 0.50
+        return  <span className= "fa fa-star empty-star" id = "star-50" key = {rating + 'star-50'+ reviewId+i } />
+      } else if (averageRating === 0.25) {
+        averageRating = averageRating - 0.25
+        return  <span className= "fa fa-star empty-star" id = "star-25" key = {rating + 'star-25'+ reviewId + i } />
+      }else if (averageRating === 0) {
+        return  <span className= "fa fa-star empty-star" id = "star-0"  key = {rating + 'star-0'+ reviewId + i }/>
+      }
+    })
+    //console.log(`fiveStars is equal to ${JSON.stringify(fiveStars)}`);
+    return fiveStars
+  },
+
   barChartPercentage : (ratings) => {
     let totalRatings = 0;
     Object.keys(ratings || {}).forEach(function (key, index) {
