@@ -4,7 +4,7 @@ import sampleProductIdStyles from '../../../../fixtures/Overview/IdProducts.js';
 import sampleProductId from '../../../../fixtures/Overview/ProductsID.js';
 import sampleData from '../../../../fixtures/ratings&reviews/ReviewExampleData.js'
 import $ from 'jquery';
-import './look.css';
+import './style.css';
 
 export default class OverView extends React.Component {
   constructor (props) {
@@ -16,12 +16,15 @@ export default class OverView extends React.Component {
       reviews: [],
       selectedStyle: {},
       selectedSize: {},
-      starToggled: false
+      starToggled: false,
+      mainImg: undefined
     };
     // this.initialRender = this.initialRender.bind(this);
     this.starToggle = this.starToggle.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.getproducts = this.getproducts.bind(this);
+    this.changeSelectedStyle = this.changeSelectedStyle.bind(this);
+    this.changeMainImg = this.changeMainImg.bind(this);
   }
 
   // initialRender () {
@@ -62,7 +65,7 @@ export default class OverView extends React.Component {
       },
       success: (data) => {
         console.log(data.results, 'data from stylesssss333')
-        this.setState({ styles: data.results, selectedStyle: data.results[0] });
+        this.setState({ styles: data.results, selectedStyle: data.results[0], mainImg: data.results[0].photos[0].url });
       },
       error: (error) => {
         console.log(error, 'error geting data in ajaxxxx');
@@ -96,10 +99,13 @@ export default class OverView extends React.Component {
     // also need to add checkmark
   }
 
+  changeMainImg (event) {
+    //console.log(event.target.src, 'change main img')
+    this.setState({ mainImg: event.target.src })
+  }
+
   componentDidMount () { this.getproducts() }
   render () {
-    // console.log(this.state.product, 'productssssss')
-
     if (this.state.styles === undefined || this.state.product === undefined) {
       return (
         <div>  Render products overview here...
@@ -110,16 +116,21 @@ export default class OverView extends React.Component {
       return (
       <div>
        <p> OverView Place Holder </p>
-       <div className = "gallery">
-       {this.state.selectedStyle.photos !== {}
-         ? <img className = "mainImg" src={this.state.selectedStyle.photos[0].url} />
-         : <div>  Please Wait while we load our products... </div> }
 
+       <div className = "gallery">
+        <div>
+       {this.state.selectedStyle.photos !== {}
+         ? <img className = "mainImg" src={this.state.mainImg} />
+         : <div>  Please Wait while we load our products... </div> }
+        </div>
+        <div>
         {this.state.selectedStyle.photos.map(image => (
-          <img className="selectedStyleImages" src={image.thumbnail_url} />
+          <img className="selectedStyleImages" src={image.thumbnail_url} onClick = {this.changeMainImg}/>
         )
         )}
+        </div>
        </div>
+
        <div data-testid='name header'>NAME: {this.state.product.name}</div>
        <div>PRICE: ${this.state.selectedStyle.original_price}</div>
        <div>CATEGORY: {this.state.product.category}</div>
