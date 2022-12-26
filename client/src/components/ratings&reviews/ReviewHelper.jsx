@@ -41,6 +41,13 @@ const reviewHelpers = {
     return fiveStars
   },
 
+  recommend : (recommendedRating) => {
+    var notRecommended = Number(recommendedRating.false);
+    var recommended = Number(recommendedRating.true);
+    var total = notRecommended + recommended;
+    var percentage = Math.ceil(Number(recommended/total)*100);
+    return Math.ceil(percentage);
+  },
   IndividualStarRating  : (rating, reviewId) => {
     let averageRating = rating
     let totalStars = 5;

@@ -4,12 +4,22 @@ import IndividualReview from './Reviews/IndividualReview.jsx';
 import { sampleData } from '../../../../fixtures/ratings&reviews/ReviewExampleData.js'
 import StarOverview from './Stars/StarOverview.jsx'
 import Form from './Reviews/Form.jsx'
+import FormModal from './Reviews/FormModal.jsx'
 import './reviews.css';
 
 function RatingsReviews (props) {
   const [reviews, setReviews] = useState(sampleData.results);
   const [metaData, setMeta] = useState({});
   const [enableForm, setForm] = useState(false);
+  const [showModal, setModal] =useState(false);
+  const [modalData, setData] = useState(null);
+  const [totalNumOfReviews, setNumReviews] = useState(null);
+  const hideModal = () => {
+    setModal(false);
+  };
+  const getModal = data => {
+    setModal(true);
+  };
   const mappedReviews = reviews.map((review) => {
     return <IndividualReview reviewInfo = {review} key = {review.review_id}/>
   })
@@ -34,9 +44,16 @@ function RatingsReviews (props) {
 
 
   useEffect(() => {
-    //console.log(`metaData is equal to ${JSON.stringify(metaData)}`);
+    if(metaData.recommended) {
+    var totalNum = Number(metaData.recommended.true) + Number(metaData.recommended.false);
+    setNumReviews(totalNum)
+    }
   }, [metaData])
 
+
+  useEffect(() => {
+    console.log(`reviews is equal to ${JSON.stringify(reviews)}`);
+  }, [reviews])
 
   const onFormSubmit = (e) => {
     e.preventDefault();
@@ -49,23 +66,22 @@ function RatingsReviews (props) {
   return (
     <div>
       Ratings & Reviews
-   {enableForm === false
-     ? <div className = 'Reviews'> <StarOverview key = {metaData} data = { metaData} />
-     <br/>
-     <div className = 'IndividualReviews'> {mappedReviews}
-     <div className = 'ReviewButtons'>
-     <button>
-     MORE REVIEWS
-    </button>
-    <button name = "addReviewButton" data-testid = "addReviewButton" onClick = {onFormSubmit} >
-    ADD A REVIEW
-    </button>
+    <div className = 'Reviews'> <StarOverview key = {metaData} data = { metaData} />
+     <div className = 'IndividualReviews'>
+     Total reviews : {totalNumOfReviews}
+     {mappedReviews}
+     <FormModal show={showModal} onHide = {hideModal} />
+        <div className = 'ReviewButtons'>
+              <button>
+              MORE REVIEWS
+              </button>
+              <button name = "addReviewButton" data-testid = "addReviewButton" onClick = {getModal} >
+              ADD A REVIEW
+              </button>
+        </div>
+      </div>
     </div>
     </div>
-    </div>
-     : <div><Form changeView = {changeView} id = {props.id}/></div>}
-    </div>
-
   )
 }
 export default RatingsReviews
