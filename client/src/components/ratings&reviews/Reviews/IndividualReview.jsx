@@ -27,6 +27,7 @@ export default function IndividualReview (props) {
     {props.reviewInfo.photos.length === 0 ? '' : images}
     </div>
     {props.reviewInfo.recommend ? <div> <i className="fa fa-solid fa-check"></i> I recommend this product </div>: '' }
+    {props.reviewInfo.response !== null ? <div className = "response"> Response : {props.reviewInfo.response}</div> : ''}
     <br/>
     Was this review helpful? <button className = 'IndividualReviewButton'>Yes</button> {props.reviewInfo.helpfulness > 0 ? `(${props.reviewInfo.helpfulness})` : '' } |    <button className = 'IndividualReviewButton'>Report</button>
   </div>

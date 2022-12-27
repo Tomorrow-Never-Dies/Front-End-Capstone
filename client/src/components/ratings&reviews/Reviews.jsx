@@ -11,9 +11,11 @@ function RatingsReviews (props) {
   const [reviews, setReviews] = useState(sampleData.results);
   const [metaData, setMeta] = useState({});
   const [enableForm, setForm] = useState(false);
-  const [showModal, setModal] =useState(false);
+  const [showModal, setModal] = useState(false);
   const [modalData, setData] = useState(null);
   const [totalNumOfReviews, setNumReviews] = useState(null);
+  const [totalShownReviews, setShownReviews] = useState(5);
+  const [reviewFilter, setFilter] = useState('relevant')
   const hideModal = () => {
     setModal(false);
   };
@@ -24,11 +26,48 @@ function RatingsReviews (props) {
     return <IndividualReview reviewInfo = {review} key = {review.review_id}/>
   })
 
+  const setReviewFilter = (event) => {
+    setFilter(event.target.value)
+  }
+
+  const showAdditionalReviews = () => {
+    setShownReviews(totalShownReviews+2)
+  }
+
+  const getFilteredReviews = () => {
+    axios.get('/getReview2', {
+      params: {
+        id: props.id,
+        sort: reviewFilter,
+        count: totalShownReviews
+      }
+    })
+    .then ((reviews) => {
+      console.log(`filtered reviews is equal to ${JSON.stringify(reviews.data.results)}`);
+      setReviews(reviews.data.results)
+    })
+  }
+
+  const onFormSubmit = (e) => {
+    e.preventDefault();
+    setForm(true);
+  }
+  const changeView = (e) => {
+    e.preventDefault();
+    setForm(false);
+  }
+
+  useEffect(() => {
+    getFilteredReviews()
+  },[reviewFilter, totalShownReviews])
+
   useEffect(() => {
     const fetchData = async () => {
-      const reviewData = await axios.get('/getReview', {
+      const reviewData = await axios.get('/getReview2', {
         params: {
-          id: props.id // swap this to parent prop id after testing
+          id: props.id,// swap this to parent prop id after testing
+          sort:'relevant',
+          count: totalShownReviews
         }
       })
       const metaData = await axios.get('/getReviewMeta', {
@@ -55,29 +94,26 @@ function RatingsReviews (props) {
     console.log(`reviews is equal to ${JSON.stringify(reviews)}`);
   }, [reviews])
 
-  const onFormSubmit = (e) => {
-    e.preventDefault();
-    setForm(true);
-  }
-  const changeView = (e) => {
-    e.preventDefault();
-    setForm(false);
-  }
   return (
     <div>
       Ratings & Reviews
-    <div className = 'Reviews'> <StarOverview key = {metaData} data = { metaData} />
+    <div className = 'Reviews'> <StarOverview key = {metaData} data = {metaData} />
      <div className = 'IndividualReviews'>
-     Total reviews : {totalNumOfReviews}
+     <div class = "dropdown"> {totalNumOfReviews} reviews, sorted by  <select className = "selectReview" onChange={setReviewFilter}>
+          <option value="relevant">relevance</option>
+          <option value="helpful">Helpful</option>
+          <option value="newest">Newest</option>
+     </select>
+      </div>
      {mappedReviews}
      <FormModal show={showModal} onHide = {hideModal} />
-        <div className = 'ReviewButtons'>
-              <button>
+        <div className = 'ReviewButtons' onClick ={showAdditionalReviews}>
+            <button>
               MORE REVIEWS
-              </button>
-              <button name = "addReviewButton" data-testid = "addReviewButton" onClick = {getModal} >
+            </button>
+            <button name = "addReviewButton" data-testid = "addReviewButton" onClick = {getModal} >
               ADD A REVIEW
-              </button>
+            </button>
         </div>
       </div>
     </div>

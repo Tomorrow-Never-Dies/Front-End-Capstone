@@ -26,9 +26,11 @@
   position: relative;
   float: right;
   background-color:greenyellow;
-
 }
 
+.selectReview {
+  border:none;
+}
 .starRating{
   display:none;
 }
