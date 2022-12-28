@@ -25,6 +25,8 @@ export default class OverView extends React.Component {
     this.getproducts = this.getproducts.bind(this);
     this.changeSelectedStyle = this.changeSelectedStyle.bind(this);
     this.changeMainImg = this.changeMainImg.bind(this);
+    this.executeScroll = this.executeScroll.bind(this);
+    this.myRef = React.createRef();
   }
 
   // initialRender () {
@@ -36,7 +38,6 @@ export default class OverView extends React.Component {
 
   starToggle () {
     // console.log(this.state.starToggled, 'togggleeee')
-
     this.setState({ starToggled: !this.state.starToggled }) // need to communitcate to yassir
   }
 
@@ -48,7 +49,6 @@ export default class OverView extends React.Component {
       url: `/products/${this.props.id}`,
       data: { id: this.props.id },
       success: (data) => {
-        // console.log(data, 'dataaaaaa22')
         this.setState({ product: data[0] });
       },
       error: (error) => {
@@ -93,19 +93,25 @@ export default class OverView extends React.Component {
   }
 
   changeSelectedStyle (event) {
-    console.log('selected style changed');
-    console.log(event.target, 'eeeeeee')
-    // this.setState({selectedStyle: });
-    // also need to add checkmark
+    for (let i = 0; i < this.state.styles.length; i++) {
+      if (event.target.id == this.state.styles[i].style_id) {
+        this.setState({ selectedStyle: this.state.styles[i], mainImg: this.state.styles[i].photos[0].url })
+        break;
+      }
+    }
   }
 
   changeMainImg (event) {
-    //console.log(event.target.src, 'change main img')
     this.setState({ mainImg: event.target.src })
+  }
+
+  executeScroll () {
+    document.getElementsByClassName("Reviews")[0].scrollIntoView({behavior: "smooth"})
   }
 
   componentDidMount () { this.getproducts() }
   render () {
+    console.log(this.state.selectedStyle, 'eeeeddd')
     if (this.state.styles === undefined || this.state.product === undefined) {
       return (
         <div>  Render products overview here...
@@ -115,8 +121,6 @@ export default class OverView extends React.Component {
     } else {
       return (
       <div>
-       <p> OverView Place Holder </p>
-
        <div className = "gallery">
         <div>
        {this.state.selectedStyle.photos !== {}
@@ -136,12 +140,20 @@ export default class OverView extends React.Component {
        <div>CATEGORY: {this.state.product.category}</div>
        <div>TITLE:{this.state.product.slogan} </div>
        <div>DESCRIPTION: {this.state.product.description} </div>
-       <div>STAR RATINGS: </div>
-       <a className="skip-link" href="#Reviews">Read all {this.state.reviews.length} reviews</a>
+
+       <div>
+       {this.state.reviews.length == 0
+         ? <div> <div>STAR RATINGS: </div>
+       <a className="skip-link" href="#Reviews" onClick = {this.executeScroll}>Read all {this.state.reviews.length} reviews</a> </div>
+         : <div></div>}
+       </div>
        <button onClick = {this.starToggle}>Star toggle</button>
+       <div>
+        Selected Style Name: {this.state.selectedStyle.name}
+       </div>
        {this.state.styles.map(style => (<div key = {style.style_id}>
 
-        <img className="styleList" src={style.photos[0].thumbnail_url} onClick = {this.changeSelectedStyle} />
+        <img className="styleList" src={style.photos[0].thumbnail_url} id ={style.style_id} onClick = {this.changeSelectedStyle} />
           </div>)
        )}
 
@@ -163,6 +175,7 @@ export default class OverView extends React.Component {
         </select>
         </form>
         <button onClick = {this.addToCart}>Add to cart!</button>
+        <div ref={this.myRef}>Element to scroll to</div>
       </div>
       )
     }
