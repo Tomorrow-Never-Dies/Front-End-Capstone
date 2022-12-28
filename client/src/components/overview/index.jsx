@@ -64,7 +64,7 @@ export default class OverView extends React.Component {
         id: this.props.id
       },
       success: (data) => {
-        console.log(data.results, 'data from stylesssss333')
+        console.log(data.results[0], 'data from stylesssss333')
         this.setState({ styles: data.results, selectedStyle: data.results[0], mainImg: data.results[0].photos[0].url });
       },
       error: (error) => {
@@ -90,6 +90,7 @@ export default class OverView extends React.Component {
 
   addToCart () {
     console.log('added to cart!')
+    console.log(document.getElementById("mySize").selectedOptions[0].label, "slecteddddd")
   }
 
   changeSelectedStyle (event) {
@@ -106,12 +107,12 @@ export default class OverView extends React.Component {
   }
 
   executeScroll () {
-    document.getElementsByClassName("Reviews")[0].scrollIntoView({behavior: "smooth"})
+    document.getElementsByClassName('Reviews')[0].scrollIntoView({ behavior: 'smooth' })
   }
 
   componentDidMount () { this.getproducts() }
   render () {
-    console.log(this.state.selectedStyle, 'eeeeddd')
+    console.log(this.state.selectedStyle.skus, 'eeeeddd')
     if (this.state.styles === undefined || this.state.product === undefined) {
       return (
         <div>  Render products overview here...
@@ -142,7 +143,7 @@ export default class OverView extends React.Component {
        <div>DESCRIPTION: {this.state.product.description} </div>
 
        <div>
-       {this.state.reviews.length == 0
+       {this.state.reviews.length > 0
          ? <div> <div>STAR RATINGS: </div>
        <a className="skip-link" href="#Reviews" onClick = {this.executeScroll}>Read all {this.state.reviews.length} reviews</a> </div>
          : <div></div>}
@@ -156,22 +157,26 @@ export default class OverView extends React.Component {
         <img className="styleList" src={style.photos[0].thumbnail_url} id ={style.style_id} onClick = {this.changeSelectedStyle} />
           </div>)
        )}
-
+        <div>
         <form>
         <b> Select your Size </b>
         <select id = "mySize" >
-        <option> ---Choose size--- </option>
-        <option> place holder1 </option>
-        <option> place holder2 </option>
+        <option> ---Select size--- </option>
+        {
+          Object.keys(this.state.selectedStyle.skus).map((key) => {
+            if (this.state.selectedStyle.skus[key].quantity > 0) {
+              return <option> {this.state.selectedStyle.skus[key].size} </option>
+            }
+          })
+      }
         </select>
         </form>
+        </div>
         <form>
         <b> Select your Quantity </b>
         <select id = "myQuantity" >
         <option> ---Choose Quantity--- </option>
-        <option> place holder1 </option>
 
-        <option> place holder2 </option>
         </select>
         </form>
         <button onClick = {this.addToCart}>Add to cart!</button>
