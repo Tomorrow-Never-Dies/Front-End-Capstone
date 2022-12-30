@@ -13,13 +13,24 @@
   flex-direction:column;
 }
 
+.IndividualReviewButton{
+  background:none;
+    border:none;
+    margin:0;
+    padding:0;
+    cursor: pointer;
+    text-decoration:underline;
+}
+
 .UserAndDate{
   position: relative;
   float: right;
   background-color:greenyellow;
-
 }
 
+.selectReview {
+  border:none;
+}
 .starRating{
   display:none;
 }
@@ -200,4 +211,15 @@ input[type="range"] {
 
 .ProductBreakDown {
   padding:10px;
+}
+/*MODAL*/
+.modal {
+  position: fixed;
+  top: 10%;
+  right: 10%;
+  bottom: 10%;
+  left: 10%;
+  padding: 10px;
+  box-shadow: 0 10px 30px 0 rgba(127, 127, 127, 0.3);
+  background: rgba(255, 255, 255, 0.8);
 }

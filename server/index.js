@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios')
 const app = express();
-const { getReviews, addReviews, getMeta } = require('../helpers/reviews.js');
+const { getReviews, addReviews, getMeta, getReviews2 } = require('../helpers/reviews.js');
 const config = require('../config.js');
 const cors = require('cors');
 
@@ -12,6 +12,19 @@ app.use(cors());
 app.get('/getReview', (req, res) => {
   getReviews(req.query.id)
     .then((response) => {
+      res.send(response)
+    })
+    .catch((err) => {
+      console.log(`err found while getting a review ${err}!`);
+      throw (err);
+    })
+})
+
+app.get('/getReview2', (req, res) => {
+  console.log(`req.querycount is equal to ${req.query.count}`);
+  getReviews2(req.query.id, req.query.sort, req.query.count)
+    .then((response) => {
+      console.log(`response of getreviews2 is equal to ${response}`)
       res.send(response)
     })
     .catch((err) => {
