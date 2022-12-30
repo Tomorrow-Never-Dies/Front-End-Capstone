@@ -10,7 +10,7 @@ function BarGroup(props) {
   let width = widthScale(10)
   let yMid = props.barHeight * 0.5
   let totalPercentage = (props.d.value)/(props.totalNumOfRatings)*100
-  console.log(`totalpercentage is equal to ${totalPercentage}`)
+  // console.log(`totalpercentage is equal to ${totalPercentage}`)
   return <g className="bar-group" key = {totalPercentage}>
     <text className="name-label" x="-6" y={yMid} alignmentBaseline="middle" key = {props.d.value + 'name-label'}>{props.d.name}</text>
     <rect className = "star-breakdown"y={barPadding * 0.5} width={width} height={props.barHeight - barPadding} fill={barColour} key = {props.d.value + 'star-breakdown'} />

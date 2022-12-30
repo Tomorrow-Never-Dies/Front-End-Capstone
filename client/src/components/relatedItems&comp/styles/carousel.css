@@ -2,7 +2,7 @@
   position: relative;
   background: whitesmoke;
   display: flex;
-  width: 80%;
+  width: 170%;
   height: 25rem;
   margin: auto;
   border-color: azure;
@@ -14,7 +14,8 @@
   white-space: nowrap;
   display: flex;
   height: 25rem;
-  /* transition: transform 0.3s; */
+  align-items: center;
+  transition: transform 0.3s;
 }
 
 .main{
@@ -22,14 +23,15 @@
   height: 25rem;
   display: flex;
   align-items: center;
+  padding-top: 2em;
+  margin-top: 70px;
 }
 
 .carousel-item{
+
   position: relative;
   height: 20rem;
   width: 15rem;
-  margin-left: 20px;
-  margin-right: 20px;
   align-items: center;
   justify-content: center;
   background-position: center;
@@ -62,13 +64,21 @@
 }
 .card{
   border-style: solid;
+  position: relative;
+  height: 23rem;
+  width: 15rem;
+  margin-left: 20px;
+  margin-right: 20px;
+  align-items: center;
+  justify-content: center;
+  background-position: center;
 }
 .card-info{
 flex-direction: column;
 display: flex;
 width: 15rem;
-margin-left: 20px;
-margin-right: 20px;
+
+align-items: right;
 }
 .product-name{
   font-size: medium;
