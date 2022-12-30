@@ -5,6 +5,7 @@ import Comparison from "./Comparison.jsx";
 
 
 
+
 // Refactor repeated code.
 
 class RelatedItemsComp extends React.Component{
@@ -18,11 +19,14 @@ class RelatedItemsComp extends React.Component{
       current_product:[],
       compare_product:[],
       activeIndex: 0,
-      compared: false
+      metaData: [],
+      compared: false,
+      stars: false
     }
     this.get_update = this.get_update.bind(this)
     this.compare = this.compare.bind(this)
     this.carousel = this.carousel.bind(this)
+    this.index = this.index.bind(this)
   }
 
   componentDidMount(){
@@ -32,7 +36,8 @@ class RelatedItemsComp extends React.Component{
 
   get_update(){
     console.log(this.state.productsID, "state id")
-    var get_promises =[]
+    var style_promises =[]
+    var star_promises = []
     axios({
       method: 'get',
       url: "/products/:product_id/related",
@@ -46,7 +51,7 @@ class RelatedItemsComp extends React.Component{
         related_products :result.data
       }, function(){
         for(var i = 0 ; i<this.state.related_products.length; i++){
-          get_promises.push(   axios({
+          style_promises.push(   axios({
             method: 'get',
             url: "/products/:product_id/styles",
             params:{
@@ -56,14 +61,29 @@ class RelatedItemsComp extends React.Component{
           .catch((err) =>{
 
           }))
+          star_promises.push( axios.get('/getReviewMeta', {
+            params: {
+              id: this.state.related_products[i]
+            }
+          }))
         }
       })
-      Promise.all(get_promises)
+      Promise.all(style_promises)
         .then((result)=>{
           this.setState({
             products: result
           }, function(){
           })
+        })
+      Promise.all(star_promises)
+        .then((result) =>{
+          console.log(result)
+          this.setState({
+            metaData: result,
+            stars:true
+          }, ()=>{
+            console.log(this.state.related_products)
+            console.log(this.state.metaData)})
         })
     })
     .catch((err) => {
@@ -117,24 +137,37 @@ class RelatedItemsComp extends React.Component{
     })
 
   }
+
+
+ index(num_cards){
+  var index = ((num_cards/2.5)-1) *10
+  index = (index - (index%5))/10
+  var clicks = index * .2
+  return clicks
+ }
+
+
  carousel(str){
-    if(this.state.activeIndex < this.state.related_products.length -3.5 && str === 'next') {
+    console.log(this.state.related_products.length)
+    console.log(this.index(this.state.related_products.length))
+    if(this.state.activeIndex < this.state.related_products.length -3 && str === 'next') {
       this.setState({
-        activeIndex: this.state.activeIndex+.3
-      })
+        activeIndex: this.state.activeIndex+.20
+      }, ()=>{console.log(this.state.activeIndex)})
     } else if(str === 'next'){
       this.setState({
         activeIndex: 0
-      })
+      }, ()=>{console.log(this.state.activeIndex)})
     } else if(this.state.activeIndex > 0 && str === 'prev') {
       this.setState({
-       activeIndex: this.state.activeIndex-.3
-      })
+       activeIndex: this.state.activeIndex-.5
+      }, ()=>{console.log(this.state.activeIndex)})
       } else if(str === 'prev'){
         this.setState({
-          activeIndex: this.state.related_products.length -3.5
-        })
+          activeIndex: this.state.related_products.length -3
+        }, ()=>{console.log(this.state.activeIndex)})
       }
+
  }
   render(){
     return(
@@ -149,6 +182,8 @@ class RelatedItemsComp extends React.Component{
                 products = {this.state.products}
                 click = {this.props.click}
                 compare = {this.compare}
+                metaData = {this.state.metaData}
+                type = {"related"}
               />
             </div>
          </div>
