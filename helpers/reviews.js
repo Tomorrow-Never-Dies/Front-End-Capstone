@@ -48,6 +48,7 @@ const getReviews2 = (itemid, filter, count) => {
     })
 }
 const getMeta = (itemid) => {
+  itemid = parseInt(itemid)
   const options = {
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?product_id=${itemid}`,
     headers: {
