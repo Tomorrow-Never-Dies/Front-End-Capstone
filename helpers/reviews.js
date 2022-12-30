@@ -15,7 +15,25 @@ const apiOptions = (itemid) => {
 }
 const getReviews = (itemid) => {
   const options = {
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${71697}`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${itemid}`,
+    headers: {
+      Authorization: `${config.TOKEN}`,
+      body: {}
+    }
+  }
+  return axios.get(options.url, options)
+    .then((response) => {
+      return response.data
+    })
+    .catch((err) => {
+      console.log(`err while gettingreviews in helper function ${err}`);
+    })
+}
+
+const getReviews2 = (itemid, filter, count) => {
+  console.log(`itemid is equal to ${itemid} and filter is equal to ${filter} and count is equal to ${count}`);
+  const options = {
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${itemid}&sort=${filter}&count=${count}`,
     headers: {
       Authorization: `${config.TOKEN}`,
       body: {}
@@ -31,7 +49,7 @@ const getReviews = (itemid) => {
 }
 const getMeta = (itemid) => {
   const options = {
-    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?product_id=${71697}`,
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?product_id=${itemid}`,
     headers: {
       Authorization: `${config.TOKEN}`,
       body: {}
@@ -70,4 +88,5 @@ const addReviews = (review) => {
 }
 module.exports.getReviews = getReviews;
 module.exports.addReviews = addReviews;
+module.exports.getReviews2 = getReviews2;
 module.exports.getMeta = getMeta;

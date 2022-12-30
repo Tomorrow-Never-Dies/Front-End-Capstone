@@ -41,6 +41,37 @@ const reviewHelpers = {
     return fiveStars
   },
 
+  recommend : (recommendedRating) => {
+    var notRecommended = Number(recommendedRating.false);
+    var recommended = Number(recommendedRating.true);
+    var total = notRecommended + recommended;
+    var percentage = Math.ceil(Number(recommended/total)*100);
+    return Math.ceil(percentage);
+  },
+  IndividualStarRating  : (rating, reviewId) => {
+    let averageRating = rating
+    let totalStars = 5;
+    const fiveStars = [...Array(5)].map((star, i) => {
+      if ( averageRating >= 1) {
+        averageRating--;
+        return  <span className= "fa fa-star empty-star" id = "star-100" key = {rating + 'star-100'+ reviewId + i}/>
+      } else if (averageRating === 0.75) {
+        averageRating = averageRating - 0.75
+        return  <span className= "fa fa-star empty-star" id = "star-75" key = {rating + 'star-75'+ reviewId+i } />
+      } else if (averageRating === 0.50) {
+        averageRating = averageRating - 0.50
+        return  <span className= "fa fa-star empty-star" id = "star-50" key = {rating + 'star-50'+ reviewId+i } />
+      } else if (averageRating === 0.25) {
+        averageRating = averageRating - 0.25
+        return  <span className= "fa fa-star empty-star" id = "star-25" key = {rating + 'star-25'+ reviewId + i } />
+      }else if (averageRating === 0) {
+        return  <span className= "fa fa-star empty-star" id = "star-0"  key = {rating + 'star-0'+ reviewId + i }/>
+      }
+    })
+    //console.log(`fiveStars is equal to ${JSON.stringify(fiveStars)}`);
+    return fiveStars
+  },
+
   barChartPercentage : (ratings) => {
     let totalRatings = 0;
     Object.keys(ratings || {}).forEach(function (key, index) {
@@ -64,7 +95,7 @@ const reviewHelpers = {
     let factorBreakdownResult = Object.keys(FactorRatings || {}).map( (key, index) => {
         if(tickTitles[key].length === 3) {
           return (
-          <div key = {FactorRatings.id}>
+          <div key = {key + index}>
                {key}
             <input key = {FactorRatings[key]['value']}  type="range" min="0" max="5" value={Number(FactorRatings[key]['value'])} step = "0.1" className="slider" readOnly/>
               <div className="sliderticks" key = {FactorRatings.id + 'sliderticks' + index + key}>
@@ -76,13 +107,13 @@ const reviewHelpers = {
           )
       } else {
           return (
-            <div key = {FactorRatings.id} >
+            <div key = {key+ index} >
               {key}
             <input key = {FactorRatings[key]['value']} type="range" min="0" max="5" value={Number(FactorRatings[key]['value'])} step = "0.1" className="slider" readOnly/>
               <div className="sliderticks" key = {FactorRatings.id + 'sliderticks' + index}>
                 <p key = {FactorRatings.id + 'tick1' + index + key}>{tickTitles[key]['first']}</p>
                 <p key = {FactorRatings.id + 'tick3' + index + key}>{tickTitles[key]['fifth']}</p>
-            </div>
+              </div>
             </div>
           )
 
