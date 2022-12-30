@@ -21,6 +21,7 @@ app.get('/getReview', (req, res) => {
 })
 app.get('/getReviewMeta', (req, res) => {
   console.log(`getting meta data!!`);
+  console.log(req.query.id)
   getMeta(req.query.id)
     .then((response) => {
       res.send(response)

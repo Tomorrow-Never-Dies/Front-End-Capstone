@@ -18,6 +18,7 @@ class Outfits extends React.Component{
     this.get_products = this.get_products.bind(this)
     this.update_id = this.update_id.bind(this)
     this.carousel = this.carousel.bind(this)
+    this.delete = this.delete.bind(this)
   }
 
   get_products(){
@@ -55,6 +56,17 @@ class Outfits extends React.Component{
 
     })
 
+  }
+  delete(id){
+    console.log(id, "id")
+    console.log(Number(id), "id number")
+    console.log("delete", this.state.product_ids)
+    var index = this.state.product_ids.filter(item =>  Number(item) !== Number(id))
+    console.log(index, "index")
+    this.setState({
+      product_ids: this.state.product_ids.filter(item =>  Number(item) !== Number(id)),
+      product_styles:  this.state.product_styles.filter(item =>  Number(item.data.product_id) !== Number(id))
+    }, ()=>{console.log(this.state.product_styles, "state")})
   }
   update_id(id){
     this.setState({
@@ -99,7 +111,11 @@ class Outfits extends React.Component{
                 add ={this.add}
                 products = {this.state.product_styles}
                 id_update = {this.update_id}
-                click = {this.props.click} />
+                click = {this.props.click}
+                type = {"outfits"}
+                delete = {this.delete}
+
+                />
               </div>
            </div>
         <button data-testid='next-button' className="scroll-right" onClick={()=>{ this.carousel('next')}}>

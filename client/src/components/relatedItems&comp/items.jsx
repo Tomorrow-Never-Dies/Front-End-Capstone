@@ -13,6 +13,9 @@ function Items (props) {
                item = {item.data.results[0] }
                id ={item.data.product_id}
                click = {props.click}
+               metaData = {props.metaData}
+               type = {props.type}
+               delete = {props.delete}
                />
 
                ))}
