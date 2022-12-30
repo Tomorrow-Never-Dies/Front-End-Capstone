@@ -17,7 +17,8 @@ export default class OverView extends React.Component {
       selectedStyle: {},
       selectedSize: {},
       starToggled: false,
-      mainImg: undefined
+      mainImg: undefined,
+      outofstock: false
     };
     // this.initialRender = this.initialRender.bind(this);
     this.starToggle = this.starToggle.bind(this);
@@ -26,7 +27,9 @@ export default class OverView extends React.Component {
     this.changeSelectedStyle = this.changeSelectedStyle.bind(this);
     this.changeMainImg = this.changeMainImg.bind(this);
     this.executeScroll = this.executeScroll.bind(this);
-    this.myRef = React.createRef();
+    this.checkForInventory = this.checkForInventory.bind(this);
+    this.disableoptions = this.disableoptions.bind(this);
+    this.setQuantity = this.setQuantity.bind(this)
   }
 
   // initialRender () {
@@ -37,7 +40,6 @@ export default class OverView extends React.Component {
   // }
 
   starToggle () {
-    // console.log(this.state.starToggled, 'togggleeee')
     this.setState({ starToggled: !this.state.starToggled }) // need to communitcate to yassir
   }
 
@@ -66,6 +68,7 @@ export default class OverView extends React.Component {
       success: (data) => {
         console.log(data.results[0], 'data from stylesssss333')
         this.setState({ styles: data.results, selectedStyle: data.results[0], mainImg: data.results[0].photos[0].url });
+        this.checkForInventory()
       },
       error: (error) => {
         console.log(error, 'error geting data in ajaxxxx');
@@ -90,7 +93,10 @@ export default class OverView extends React.Component {
 
   addToCart () {
     console.log('added to cart!')
-    console.log(document.getElementById("mySize").selectedOptions[0].label, "slecteddddd")
+    if (document.getElementById('mySize').selectedOptions[0].label === '---Select size---' ||
+    document.getElementById('myQuantity').selectedOptions[0].label === '---Choose Quantity---') {
+      alert('Please select size and qauntity to add to cart!')
+    }
   }
 
   changeSelectedStyle (event) {
@@ -110,9 +116,33 @@ export default class OverView extends React.Component {
     document.getElementsByClassName('Reviews')[0].scrollIntoView({ behavior: 'smooth' })
   }
 
+  checkForInventory () {
+    let count = 0;
+    Object.keys(this.state.selectedStyle.skus).map((key) => {
+      if (this.state.selectedStyle.skus[key].quantity > 0) {
+        count++
+      }
+    })
+    if (count === 0) {
+      this.setState({ outofstock: true })
+    }
+  }
+
+  disableoptions () {
+    document.getElementById('sizeBanner').innerHTML = 'OUT OF STOCK';
+    Array.from(document.getElementsByClassName('sizes')).map((option) => {
+      option.disabled = true;
+    })
+  }
+
+  setQuantity () {
+    if (document.getElementById('mySize').selectedOptions[0].label === '---Select size---') {
+      return (<option>-</option>)
+    }
+  }
+
   componentDidMount () { this.getproducts() }
   render () {
-    console.log(this.state.selectedStyle.skus, 'eeeeddd')
     if (this.state.styles === undefined || this.state.product === undefined) {
       return (
         <div>  Render products overview here...
@@ -148,7 +178,7 @@ export default class OverView extends React.Component {
        <a className="skip-link" href="#Reviews" onClick = {this.executeScroll}>Read all {this.state.reviews.length} reviews</a> </div>
          : <div></div>}
        </div>
-       <button onClick = {this.starToggle}>Star toggle</button>
+       <button onClick = {this.starToggle}>LIKE</button>
        <div>
         Selected Style Name: {this.state.selectedStyle.name}
        </div>
@@ -160,27 +190,33 @@ export default class OverView extends React.Component {
         <div>
         <form>
         <b> Select your Size </b>
-        <select id = "mySize" >
-        <option> ---Select size--- </option>
+        <select id = 'mySize' >
+        <option id = 'sizeBanner' className = 'sizes'> ---Select size--- </option>
         {
           Object.keys(this.state.selectedStyle.skus).map((key) => {
             if (this.state.selectedStyle.skus[key].quantity > 0) {
-              return <option> {this.state.selectedStyle.skus[key].size} </option>
+              return <option className = 'sizes'> {this.state.selectedStyle.skus[key].size} </option>
             }
           })
       }
         </select>
         </form>
         </div>
+          {this.state.outofstock
+            ? this.disableoptions()
+            : null
+          }
         <form>
         <b> Select your Quantity </b>
         <select id = "myQuantity" >
         <option> ---Choose Quantity--- </option>
+        {document.getElementById('mySize') !== null
+          ? this.setQuantity()
+          : <div>waiting on page to load</div>}
 
         </select>
         </form>
         <button onClick = {this.addToCart}>Add to cart!</button>
-        <div ref={this.myRef}>Element to scroll to</div>
       </div>
       )
     }
