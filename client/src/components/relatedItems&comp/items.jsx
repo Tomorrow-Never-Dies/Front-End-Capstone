@@ -13,7 +13,6 @@ function Items (props) {
                item = {item.data.results[0] }
                id ={item.data.product_id}
                click = {props.click}
-               id_update = {props.id_update}
                />
 
                ))}

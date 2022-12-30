@@ -40,10 +40,10 @@ const postAnswer = function (questionId, body, name, email) {
   };
   return axios.post(options.url, options.answerBody, options.params)
     .then((response) => {
-      console.log('Posting successfully:', response);
+      // console.log('Posting successfully:', response);
     })
     .catch((error) => {
-      console.log('Posting failed', error)
+      // console.log('Posting failed', error)
     })
 }
 

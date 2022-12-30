@@ -28,7 +28,7 @@ class QuestionAnswers extends React.Component {
 
   showModal () {
     this.setState({ show: true });
-    console.log(this.state.show);
+    // console.log(this.state.show);
   }
 
   hideModal () {
