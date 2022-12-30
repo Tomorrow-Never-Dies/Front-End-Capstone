@@ -16,7 +16,7 @@ export default function ReviewImages(props) {
 
   return(
     <div className = 'reviewImages'>
-      <img className = 'singleReviewImage' src={props.src} key={props.src} alt="alt tag" onClick = {getModal}/>
+      <img className = 'singleReviewImage' width = "100" height = "100" src={props.src} key={props.src} alt="alt tag" onClick = {getModal}/>
       <ImageModal show = {showModal} onHide = {hideModal} img = {props.src} />
     </div>
   )
