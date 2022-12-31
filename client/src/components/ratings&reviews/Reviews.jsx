@@ -84,6 +84,7 @@ function RatingsReviews (props) {
 
   useEffect(() => {
     if(metaData.recommended) {
+      console.log(`metaData is equal to ${JSON.stringify(metaData)}`)
     var totalNum = Number(metaData.recommended.true) + Number(metaData.recommended.false);
     setNumReviews(totalNum)
     }
@@ -106,7 +107,7 @@ function RatingsReviews (props) {
      </select>
       </div>
      {mappedReviews}
-     <FormModal show={showModal} onHide = {hideModal} />
+     <FormModal show={showModal} onHide = {hideModal} characteristics = {metaData.characteristics} />
         <div className = 'ReviewButtons' onClick ={showAdditionalReviews}>
             <button>
               MORE REVIEWS
