@@ -5,6 +5,7 @@ const { getReviews, addReviews, getMeta, getReviews2 } = require('../helpers/rev
 const config = require('../config.js');
 const cors = require('cors');
 require('dotenv').config()
+const PORT = process.env.DEV_PORT || 3033;
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.json());
@@ -148,7 +149,7 @@ app.get('/products/:product_id/related', (req,res) => {
 //   console.log('Getting questions');
 // })
 
-app.listen(process.env.DEV_PORT, function() {
-  console.log(`listening on port 3033`);
+app.listen(PORT, function() {
+  console.log(`listening on port`, PORT);
 
 });
