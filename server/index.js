@@ -4,6 +4,8 @@ const app = express();
 const { getReviews, addReviews, getMeta, getReviews2 } = require('../helpers/reviews.js');
 const config = require('../config.js');
 const cors = require('cors');
+require('dotenv').config()
+const PORT = process.env.DEV_PORT || 3033;
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.json());
@@ -34,6 +36,7 @@ app.get('/getReview2', (req, res) => {
 })
 app.get('/getReviewMeta', (req, res) => {
   console.log(`getting meta data!!`);
+  console.log(req.query.id)
   getMeta(req.query.id)
     .then((response) => {
       res.send(response)
@@ -146,6 +149,7 @@ app.get('/products/:product_id/related', (req,res) => {
 //   console.log('Getting questions');
 // })
 
-app.listen(3033, function() {
-  console.log(`listening on port 3033`);
+app.listen(PORT, function() {
+  console.log(`listening on port`, PORT);
+
 });

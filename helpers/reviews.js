@@ -7,7 +7,7 @@ const apiOptions = (itemid) => {
   const options = {
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/?product_id=${id}`,
     headers: {
-      Authorization: `${config.TOKEN}`,
+      Authorization: `${process.env.GITHUB_API}`,
       body: {}
     }
   }
@@ -17,7 +17,7 @@ const getReviews = (itemid) => {
   const options = {
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${itemid}`,
     headers: {
-      Authorization: `${config.TOKEN}`,
+      Authorization: `${process.env.GITHUB_API}`,
       body: {}
     }
   }
@@ -35,7 +35,7 @@ const getReviews2 = (itemid, filter, count) => {
   const options = {
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews?product_id=${itemid}&sort=${filter}&count=${count}`,
     headers: {
-      Authorization: `${config.TOKEN}`,
+      Authorization: `${process.env.GITHUB_API}`,
       body: {}
     }
   }
@@ -48,10 +48,11 @@ const getReviews2 = (itemid, filter, count) => {
     })
 }
 const getMeta = (itemid) => {
+  itemid = parseInt(itemid)
   const options = {
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/meta?product_id=${itemid}`,
     headers: {
-      Authorization: `${config.TOKEN}`,
+      Authorization: `${process.env.GITHUB_API}`,
       body: {}
     }
   }
@@ -68,7 +69,7 @@ const addReviews = (review) => {
   // console.log(`options is equal to ${JSON.stringify(options)}`);
   const options = {
     headers: {
-      authorization: `${config.TOKEN}`
+      authorization: `${process.env.GITHUB_API}`
     }
   }
   const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/reviews/`;
