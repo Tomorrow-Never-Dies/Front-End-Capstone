@@ -10,53 +10,13 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./client/src/components/overview/index.jsx":
-/*!**************************************************!*\
-  !*** ./client/src/components/overview/index.jsx ***!
-  \**************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\nfunction OverView(props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"p\", null, \" OverView Place Holder \");\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (OverView);\n\n//# sourceURL=webpack://fec/./client/src/components/overview/index.jsx?");
-
-/***/ }),
-
-/***/ "./client/src/components/q&a/index.jsx":
-/*!*********************************************!*\
-  !*** ./client/src/components/q&a/index.jsx ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\nfunction QuestionAnswers(props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"p\", null, \" Question & Answers Place Holder \");\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (QuestionAnswers);\n\n//# sourceURL=webpack://fec/./client/src/components/q&a/index.jsx?");
-
-/***/ }),
-
-/***/ "./client/src/components/ratings&reviews/index.jsx":
-/*!*********************************************************!*\
-  !*** ./client/src/components/ratings&reviews/index.jsx ***!
-  \*********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\nfunction RatingsReviews(props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"p\", null, \" Ratings & Reviews Place Holder \");\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RatingsReviews);\n\n//# sourceURL=webpack://fec/./client/src/components/ratings&reviews/index.jsx?");
-
-/***/ }),
-
-/***/ "./client/src/components/relatedItems&comp/index.jsx":
-/*!***********************************************************!*\
-  !*** ./client/src/components/relatedItems&comp/index.jsx ***!
-  \***********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n\nfunction RelatedItemsComp(props) {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"p\", null, \" Related Items & Comparison Place Holder \");\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RelatedItemsComp);\n\n//# sourceURL=webpack://fec/./client/src/components/relatedItems&comp/index.jsx?");
-
-/***/ }),
-
 /***/ "./client/src/index.jsx":
 /*!******************************!*\
   !*** ./client/src/index.jsx ***!
   \******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var _components_overview_index_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/overview/index.jsx */ \"./client/src/components/overview/index.jsx\");\n/* harmony import */ var _components_q_a_index_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/q&a/index.jsx */ \"./client/src/components/q&a/index.jsx\");\n/* harmony import */ var _components_ratings_reviews_index_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/ratings&reviews/index.jsx */ \"./client/src/components/ratings&reviews/index.jsx\");\n/* harmony import */ var _components_relatedItems_comp_index_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/relatedItems&comp/index.jsx */ \"./client/src/components/relatedItems&comp/index.jsx\");\n\n\n\n\n\n\n(0,react_dom__WEBPACK_IMPORTED_MODULE_1__.render)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"div\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"h1\", null, \"Front End Capstone\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_overview_index_jsx__WEBPACK_IMPORTED_MODULE_2__[\"default\"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_ratings_reviews_index_jsx__WEBPACK_IMPORTED_MODULE_4__[\"default\"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_q_a_index_jsx__WEBPACK_IMPORTED_MODULE_3__[\"default\"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_relatedItems_comp_index_jsx__WEBPACK_IMPORTED_MODULE_5__[\"default\"], null)), document.getElementById(\"root\"));\n\n//# sourceURL=webpack://fec/./client/src/index.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\nObject(function webpackMissingModule() { var e = new Error(\"Cannot find module './App.jsx'\"); e.code = 'MODULE_NOT_FOUND'; throw e; }());\n\n\n\nreact_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Object(function webpackMissingModule() { var e = new Error(\"Cannot find module './App.jsx'\"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), null), document.getElementById(\"root\"));\n\n//# sourceURL=webpack://fec/./client/src/index.jsx?");
 
 /***/ }),
 
