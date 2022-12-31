@@ -99,7 +99,7 @@ function RatingsReviews (props) {
       Ratings & Reviews
     <div className = 'Reviews'> <StarOverview key = {metaData} data = {metaData} />
      <div className = 'IndividualReviews'>
-     <div class = "dropdown"> {totalNumOfReviews} reviews, sorted by  <select className = "selectReview" onChange={setReviewFilter}>
+     <div className = "dropdown"> {totalNumOfReviews} reviews, sorted by  <select className = "selectReview" onChange={setReviewFilter}>
           <option value="relevant">relevance</option>
           <option value="helpful">Helpful</option>
           <option value="newest">Newest</option>

@@ -10,7 +10,7 @@ const QuestionModal = props => {
         <div className={showHideClassName}>
             <section className="modal-main">
                 {props.children}
-                <button type="button" onClick={postAnswer.postAnswer(631378)}>
+                <button type="button">
                     Submit
                 </button>
                 <button type="button" onClick={props.handleClose}>

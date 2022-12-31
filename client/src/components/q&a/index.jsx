@@ -9,7 +9,7 @@ class QuestionAnswers extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      item_id: 71698, // this.props.productsID
+      item_id: this.props.productsID,
       questions: [],
       show: false
     };
@@ -33,7 +33,6 @@ class QuestionAnswers extends React.Component {
 
   hideModal () {
     this.setState({ show: false});
-
   }
 
   render () {
@@ -58,7 +57,7 @@ class QuestionAnswers extends React.Component {
           <button>More Answered Questions</button>
           <button type="button" onClick={this.showModal}>Ask a New Question</button>
           <QuestionModal show={this.state.show} handleClose={this.hideModal}>
-            <form id>
+            <form>
               <label>
                 Question:
                 <input type='text' name="question" required/>

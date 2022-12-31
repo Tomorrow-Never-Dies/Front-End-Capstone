@@ -6,34 +6,34 @@ import RatingsReviews from './components/ratings&reviews/Reviews.jsx'
 import RelatedItemsComp from './components/relatedItems&comp/RelatedItemsComp.jsx'
 import Outfits from './components/relatedItems&comp/OutfitsItem.jsx'
 
-class App extends React.Component{
-  constructor(props){
+class App extends React.Component {
+  constructor(props) {
     super(props)
     this.state = {
-      productsID:  71697
+      productsID: 71697
     }
     this.onclick = this.onclick.bind(this)
   }
 
-  onclick(id){
+  onclick(id) {
     this.setState({
       productsID: id
-    }, () =>{
+    }, () => {
       console.log("app.jsx")
     })
 
   }
 
 
-  render(){
-    return(
+  render() {
+    return (
       <div>
         <h1>Front End Capstone</h1>
-        <OverView id ={this.state.productsID}/>
-        <RelatedItemsComp id ={this.state.productsID} click = {this.onclick}/>
-        <Outfits id ={this.state.productsID} click = {this.onclick} />
-        <QuestionAnswers id ={this.state.productsID} />
-        <RatingsReviews id ={this.state.productsID}/>
+        <OverView id={this.state.productsID} />
+        <RelatedItemsComp id={this.state.productsID} click={this.onclick} />
+        <Outfits id={this.state.productsID} click={this.onclick} />
+        <QuestionAnswers id={this.state.productsID} />
+        <RatingsReviews id={this.state.productsID} />
       </div>
     )
   }
