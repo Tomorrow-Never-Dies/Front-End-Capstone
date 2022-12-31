@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import sampleProducts from '../../../../fixtures/Overview/Products.js';
 import sampleProductIdStyles from '../../../../fixtures/Overview/IdProducts.js';
 import sampleProductId from '../../../../fixtures/Overview/ProductsID.js';
@@ -10,6 +10,7 @@ export default class OverView extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
+      productsID: this.props.id,
       products: [],
       product: undefined,
       styles: undefined,
@@ -18,7 +19,8 @@ export default class OverView extends React.Component {
       selectedSize: {},
       starToggled: false,
       mainImg: undefined,
-      outofstock: false
+      outofstock: false,
+      reviewsLen: 0
     };
     // this.initialRender = this.initialRender.bind(this);
     this.starToggle = this.starToggle.bind(this);
@@ -48,8 +50,8 @@ export default class OverView extends React.Component {
       type: 'GET',
       contentType: 'application/json',
       context: this,
-      url: `/products/${this.props.id}`,
-      data: { id: this.props.id },
+      url: `/products/${this.state.productsID}`,
+      data: { id: this.state.productsID },
       success: (data) => {
         this.setState({ product: data[0] });
       },
@@ -61,9 +63,9 @@ export default class OverView extends React.Component {
       type: 'GET',
       contentType: 'application/json',
       context: this,
-      url: `/products/${this.props.id}/styles`,
+      url: `/products/${this.state.productsID}/styles`,
       data: {
-        id: this.props.id
+        id: this.state.productsID
       },
       success: (data) => {
         console.log(data.results[0], 'data from stylesssss333')
@@ -75,20 +77,26 @@ export default class OverView extends React.Component {
       }
     });
 
-    // $.ajax({
-    //   type: 'GET',
-    //   contentType: 'application/json',
-    //   context: this,
-    //   data: {id: this.props.id},
-    //   url: `/getReview/${this.props.id}`,
-    //   success: (data) => {
-    //     console.log(data, 'data from reviewwww')
-    //     //this.setState({ reviews: data});
-    //   },
-    //   error: (error) => {
-    //     console.log(error, 'error geting data in ajaxxxx');
-    //   }
-    // });
+    $.ajax({
+      type: 'GET',
+      contentType: 'application/json',
+      context: this,
+      data: {id: this.state.productsID},
+      params: {
+        id: this.state.productsID
+      },
+      url: `/getReviewMeta`,
+      success: (data) => {
+        let count = 0;
+        for(var key in data.ratings){
+          count += parseInt(data.ratings[key])
+        }
+        this.setState({ reviews: data, reviewsLen: count});
+      },
+      error: (error) => {
+        console.log(error, 'error geting data in ajaxxxx reviewwww');
+      }
+    });
   }
 
   addToCart () {
@@ -141,7 +149,21 @@ export default class OverView extends React.Component {
     }
   }
 
-  componentDidMount () { this.getproducts() }
+  componentDidMount () {
+    this.getproducts()
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.id !== this.state.productsID) {
+      this.setState({
+        productsID: nextProps.id
+      }, () => {
+        console.log(this.state.productsID, 'state id')
+        this.getproducts()
+      })
+    }
+  }
+
   render () {
     if (this.state.styles === undefined || this.state.product === undefined) {
       return (
@@ -173,9 +195,9 @@ export default class OverView extends React.Component {
        <div>DESCRIPTION: {this.state.product.description} </div>
 
        <div>
-       {this.state.reviews.length > 0
+       {this.state.reviewsLen > 0
          ? <div> <div>STAR RATINGS: </div>
-       <a className="skip-link" href="#Reviews" onClick = {this.executeScroll}>Read all {this.state.reviews.length} reviews</a> </div>
+       <a className="skip-link" href="#Reviews" onClick = {this.executeScroll}>Read all {this.state.reviewsLen} reviews</a> </div>
          : <div></div>}
        </div>
        <button onClick = {this.starToggle}>LIKE</button>
