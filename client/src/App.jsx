@@ -33,7 +33,6 @@ class App extends React.Component{
         <RelatedItemsComp id ={this.state.productsID} click = {this.onclick}/>
         <Outfits id ={this.state.productsID} click = {this.onclick} />
         <QuestionAnswers id ={this.state.productsID} />
-        <QuestionAnswers id ={this.state.productsID} />
         <RatingsReviews id ={this.state.productsID}/>
       </div>
     )
