@@ -78,27 +78,27 @@ export default class OverView extends React.Component {
         console.log(error, 'error geting data in ajaxxxx');
       }
     });
-
-    $.ajax({
-      type: 'GET',
-      contentType: 'application/json',
-      context: this,
-      data: { id: this.state.productsID },
-      params: {
-        id: this.state.productsID
-      },
-      url: '/getReviewMeta',
-      success: (data) => {
-        let count = 0;
-        for (const key in data.ratings) {
-          count += parseInt(data.ratings[key])
-        }
-        this.setState({ reviews: data, reviewsLen: count });
-      },
-      error: (error) => {
-        console.log(error, 'error geting data in ajaxxxx reviewwww');
-      }
-    });
+    console.log(this.props.reviews, "ffff", this.props.reviewsLen, "dfskldfjk")
+    // $.ajax({
+    //   type: 'GET',
+    //   contentType: 'application/json',
+    //   context: this,
+    //   data: { id: this.state.productsID },
+    //   params: {
+    //     id: this.state.productsID
+    //   },
+    //   url: '/getReviewMeta',
+    //   success: (data) => {
+    //     let count = 0;
+    //     for (const key in data.ratings) {
+    //       count += parseInt(data.ratings[key])
+    //     }
+    //     this.setState({ reviews: data, reviewsLen: count });
+    //   },
+    //   error: (error) => {
+    //     console.log(error, 'error geting data in ajaxxxx reviewwww');
+    //   }
+    // });
   }
 
   addToCart () {
@@ -211,10 +211,10 @@ export default class OverView extends React.Component {
        <div>DESCRIPTION: {this.state.product.description} </div>
 
        <div>
-       {this.state.reviewsLen > 0
-         ? <div> <div>STAR RATINGS: </div>
-       <a className="skip-link" href="#Reviews" onClick = {this.executeScroll}>Read all {this.state.reviewsLen} reviews</a>
-       <div> {this.state.reviews !== [] ? <StarOverview  data = {this.state.reviews} component={"related"} />: "no reviews" }</div>
+       {this.props.reviewsLen > 0
+         ? <div> <div data-testid='reviews'>STAR RATINGS: </div>
+       <a className="skip-link" href="#Reviews" onClick = {this.executeScroll}>Read all {this.props.reviewsLen} reviews</a>
+       <div> {this.props.reviews !== [] ? <StarOverview data = {this.props.reviews} component={"related"} />: "no reviews" }</div>
        </div>
          : <div></div>}
        </div>
