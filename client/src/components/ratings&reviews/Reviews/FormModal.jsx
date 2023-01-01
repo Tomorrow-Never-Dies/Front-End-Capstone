@@ -26,6 +26,7 @@ function FormModal (props) {
     console.log(`new review is equal to ${JSON.stringify(newReview)}`)
   }
   function onCharacteristicChange (e) {
+    console.log(`radio button clicked : ${e.target.name}`)
     setReview({ ...newReview, characteristics: { ...newReview.characteristics, [e.target.name]: e.target.value } })
     console.log(`new review is equal to ${JSON.stringify(newReview)}`)
   }
@@ -56,7 +57,7 @@ function FormModal (props) {
       console.log(`key is equal to ${key} key in characteristics form is equal to ${JSON.stringify(props.characteristics[key].id)}`);
       charForm.push(
         <label onChange = {onCharacteristicChange}>
-      {key}
+      {`${key} and ${props.characteristics[key].id}`}
           <input type = 'radio' value = '1' name = {props.characteristics[key].id}/>
           1
           <input type = 'radio' value = '2' name = {props.characteristics[key].id}/>
