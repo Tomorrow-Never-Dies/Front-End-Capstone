@@ -30,7 +30,7 @@
 .carousel-item{
 
   position: relative;
-  height: 20rem;
+  height: 24rem;
   width: 15rem;
   align-items: center;
   justify-content: center;
@@ -39,6 +39,14 @@
   background-size: cover;
   transition: 1s cubic-bezier(0.39, 0.575, 0.565, 1);
   cursor: pointer;
+}
+
+.image{
+  height: 20rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: 1s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 .compare-button{
   align-items: top;
@@ -65,7 +73,7 @@
 .card{
   border-style: solid;
   position: relative;
-  height: 23rem;
+  height: 24rem;
   width: 15rem;
   margin-left: 20px;
   margin-right: 20px;
