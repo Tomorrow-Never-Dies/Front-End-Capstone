@@ -149,6 +149,6 @@ app.get('/products/:product_id/related', (req,res) => {
 // })
 
 app.listen(process.env.DEV_PORT, function() {
-  console.log(`listening on port 3033`);
+  console.log(`listening on port ${process.env.DEV_PORT}`);
 
 });

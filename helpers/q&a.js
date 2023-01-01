@@ -3,11 +3,11 @@ const config = require('../config.js');
 // require('dotenv').config()
 
 const getQuestions = function (itemid) {
-  // console.log('DEV PORT:', process.env.DEV_PORT)
+  // console.log('process:', process.env)
   const options = {
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/:hr-rpp/qa/questions/`,
     headers: {
-      Authorization: `${process.env.GITHUB_API}`,
+      Authorization: `${config.TOKEN}`,
       'Content-Type': 'application/json'
     },
     params: {
