@@ -29,7 +29,7 @@ export default function StarOverview (props) {
     return (
       <div className = 'ReviewOverview' key = 'ReviewOverview'>
         <div className = 'StarOverview' key = 'StarOverview'>
-        {rating}
+        {/* {rating} */}
         {starRating}
         </div>
         {/* {props.data.ratings ? <BarChart ratings = {props.data.ratings}/> : "loading"}
