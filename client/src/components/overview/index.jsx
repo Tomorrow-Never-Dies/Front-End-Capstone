@@ -5,6 +5,7 @@ import sampleProductId from '../../../../fixtures/Overview/ProductsID.js';
 import sampleData from '../../../../fixtures/ratings&reviews/ReviewExampleData.js'
 import $ from 'jquery';
 import './style.css';
+import StarOverview from '../ratings&reviews/Stars/StarOverview.jsx';
 
 export default class OverView extends React.Component {
   constructor (props) {
@@ -147,8 +148,12 @@ export default class OverView extends React.Component {
   setQuantity () {
     const label = document.getElementById('mySize').selectedOptions[0].label
     if (label === '---Select size---') {
-      return (<option disabled>-</option>)
-    } else if (label !== 'OUT OF STOCK') {
+      const select = document.getElementById('myQuantity')
+
+      const opt = document.createElement('option');
+      opt.innerHTML = '-';
+      select.appendChild(opt);
+    } else if (label !== 'OUT OF STOCK' && label !== '---Select size---') {
       const i = 1;
       let quan = 1;
       Object.keys(this.state.selectedStyle.skus).map((key) => {
@@ -208,7 +213,9 @@ export default class OverView extends React.Component {
        <div>
        {this.state.reviewsLen > 0
          ? <div> <div>STAR RATINGS: </div>
-       <a className="skip-link" href="#Reviews" onClick = {this.executeScroll}>Read all {this.state.reviewsLen} reviews</a> </div>
+       <a className="skip-link" href="#Reviews" onClick = {this.executeScroll}>Read all {this.state.reviewsLen} reviews</a>
+       <div> {this.state.reviews !== [] ? <StarOverview  data = {this.state.reviews} component={"related"} />: "no reviews" }</div>
+       </div>
          : <div></div>}
        </div>
        <button onClick = {this.starToggle}>LIKE</button>
@@ -242,9 +249,6 @@ export default class OverView extends React.Component {
         <form>
         <b> Select your Quantity </b>
         <select id = "myQuantity" >
-        {/* {document.getElementById('mySize') !== null
-          ? this.setQuantity()
-          : <div>waiting on page to load</div>} */}
         {Array.from({ length: this.state.quantity }).map((it, index) => { if (index <= 14) { return <option>{index + 1}</option> } })}
         </select>
         </form>
