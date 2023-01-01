@@ -20,7 +20,8 @@ export default class OverView extends React.Component {
       starToggled: false,
       mainImg: undefined,
       outofstock: false,
-      reviewsLen: 0
+      reviewsLen: 0,
+      quantity: null
     };
     // this.initialRender = this.initialRender.bind(this);
     this.starToggle = this.starToggle.bind(this);
@@ -81,17 +82,17 @@ export default class OverView extends React.Component {
       type: 'GET',
       contentType: 'application/json',
       context: this,
-      data: {id: this.state.productsID},
+      data: { id: this.state.productsID },
       params: {
         id: this.state.productsID
       },
-      url: `/getReviewMeta`,
+      url: '/getReviewMeta',
       success: (data) => {
         let count = 0;
-        for(var key in data.ratings){
+        for (const key in data.ratings) {
           count += parseInt(data.ratings[key])
         }
-        this.setState({ reviews: data, reviewsLen: count});
+        this.setState({ reviews: data, reviewsLen: count });
       },
       error: (error) => {
         console.log(error, 'error geting data in ajaxxxx reviewwww');
@@ -102,7 +103,7 @@ export default class OverView extends React.Component {
   addToCart () {
     console.log('added to cart!')
     if (document.getElementById('mySize').selectedOptions[0].label === '---Select size---' ||
-    document.getElementById('myQuantity').selectedOptions[0].label === '---Choose Quantity---') {
+    document.getElementById('myQuantity').selectedOptions[0].label === '-') {
       alert('Please select size and qauntity to add to cart!')
     }
   }
@@ -144,8 +145,18 @@ export default class OverView extends React.Component {
   }
 
   setQuantity () {
-    if (document.getElementById('mySize').selectedOptions[0].label === '---Select size---') {
-      return (<option>-</option>)
+    const label = document.getElementById('mySize').selectedOptions[0].label
+    if (label === '---Select size---') {
+      return (<option disabled>-</option>)
+    } else if (label !== 'OUT OF STOCK') {
+      const i = 1;
+      let quan = 1;
+      Object.keys(this.state.selectedStyle.skus).map((key) => {
+        if (this.state.selectedStyle.skus[key].size === label) {
+          quan = this.state.selectedStyle.skus[key].quantity
+        }
+      })
+      this.setState({ quantity: quan })
     }
   }
 
@@ -212,7 +223,7 @@ export default class OverView extends React.Component {
         <div>
         <form>
         <b> Select your Size </b>
-        <select id = 'mySize' >
+        <select id = 'mySize' onChange = {this.setQuantity}>
         <option id = 'sizeBanner' className = 'sizes'> ---Select size--- </option>
         {
           Object.keys(this.state.selectedStyle.skus).map((key) => {
@@ -231,11 +242,10 @@ export default class OverView extends React.Component {
         <form>
         <b> Select your Quantity </b>
         <select id = "myQuantity" >
-        <option> ---Choose Quantity--- </option>
-        {document.getElementById('mySize') !== null
+        {/* {document.getElementById('mySize') !== null
           ? this.setQuantity()
-          : <div>waiting on page to load</div>}
-
+          : <div>waiting on page to load</div>} */}
+        {Array.from({ length: this.state.quantity }).map((it, index) => { if (index <= 14) { return <option>{index + 1}</option> } })}
         </select>
         </form>
         <button onClick = {this.addToCart}>Add to cart!</button>
