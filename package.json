@@ -6,7 +6,11 @@
   "scripts": {
     "react-dev": "webpack --mode development --watch",
     "server-dev": "npx nodemon server/index.js",
-    "test": "jest",
+<<<<<<< HEAD
+    "test": "jest --coverage --maxWorkers 2",
+=======
+    "test": "jest --coverage",
+>>>>>>> 99b98bb926e48ccd57f639b12a36dce41dac19c9
     "build": "npx webpack"
   },
   "repository": {

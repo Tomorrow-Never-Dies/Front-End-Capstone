@@ -9,7 +9,7 @@ import MockAdapter from 'axios-mock-adapter'
 describe('Review tests', () => {
   it('should contain a header called  Ratings & Reviews', async () => {
     const mock = new MockAdapter(axios);
-    mock.onGet('/getReview').reply(200, sampleData)
+    mock.onGet('/getReview2').reply(200, sampleData)
     mock.onGet('/getReviewMeta').reply(200, sampleMetaData)
     render(<RatingsReviews/>);
     const heading = screen.getByText('Ratings & Reviews');
@@ -18,7 +18,7 @@ describe('Review tests', () => {
 
   it('should make API call to get initial Reviews and meta data', async () => {
     const mock = new MockAdapter(axios);
-    mock.onGet('/getReview').reply(200, sampleData);
+    mock.onGet('/getReview2').reply(200, sampleData);
     mock.onGet('/getReviewMeta').reply(200, sampleMetaData);
     const defaultProps = {
       id: 71697
@@ -29,7 +29,7 @@ describe('Review tests', () => {
 
   it('should have a more reviews button', async () => {
     const mock = new MockAdapter(axios);
-    mock.onGet('/getReview').reply(200, sampleData)
+    mock.onGet('/getReview2').reply(200, sampleData)
     mock.onGet('/getReviewMeta').reply(200, sampleMetaData)
     const defaultProps = {
       id: 71697
@@ -41,7 +41,7 @@ describe('Review tests', () => {
 
   it('should have a Ask a New Question button', async () => {
     const mock = new MockAdapter(axios);
-    mock.onGet('/getReview').reply(200, sampleData)
+    mock.onGet('/getReview2').reply(200, sampleData)
     mock.onGet('/getReviewMeta').reply(200, sampleMetaData)
     const defaultProps = {
       id: 71697
@@ -53,7 +53,7 @@ describe('Review tests', () => {
 
   it('should have correct number of initial reviews', async () => {
     const mock = new MockAdapter(axios);
-    mock.onGet('/getReview').reply(200, sampleData)
+    mock.onGet('/getReview2').reply(200, sampleData)
     mock.onGet('/getReviewMeta').reply(200, sampleMetaData)
     render(<RatingsReviews/>);
     expect(screen.getAllByTestId("singleReview")).toHaveLength(2)
@@ -61,7 +61,7 @@ describe('Review tests', () => {
 
   it('should render Form to create a new review', async () => {
     const mock = new MockAdapter(axios);
-    mock.onGet('/getReview').reply(200, sampleData)
+    mock.onGet('/getReview2').reply(200, sampleData)
     mock.onGet('/getReviewMeta').reply(200, sampleMetaData)
     const defaultProps = {
       id: 71697
