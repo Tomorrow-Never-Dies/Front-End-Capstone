@@ -107,7 +107,7 @@ function RatingsReviews (props) {
      </select>
       </div>
      {mappedReviews}
-     <FormModal show={showModal} onHide = {hideModal} characteristics = {metaData.characteristics} />
+     <FormModal show={showModal} onHide = {hideModal} characteristics = {metaData.characteristics} id={props.id} />
         <div className = 'ReviewButtons' onClick ={showAdditionalReviews}>
             <button>
               MORE REVIEWS
