@@ -1,5 +1,5 @@
 .singleReview {
-  border-style:dotted;
+  border-bottom:solid
 }
 
 .Reviews{
@@ -13,6 +13,9 @@
   flex-direction:column;
 }
 
+.helpfulAndReportButton{
+  padding:10px
+}
 .IndividualReviewButton{
   background:none;
     border:none;
@@ -64,9 +67,18 @@
   overflow: hidden;
   color: #f80;
 }
+.ratingNumberAndStar {
+  display:flex;
+  position:relative;
+  flex-direction:row;
+}
+.reviewRatingNumber {
+  font-weight: bold;
+  font-size:40px;
+  padding: 5px
+}
 #staroverview {
   margin-right: 2em;
-
   display: inline-block;
 }
 #star-100:after {

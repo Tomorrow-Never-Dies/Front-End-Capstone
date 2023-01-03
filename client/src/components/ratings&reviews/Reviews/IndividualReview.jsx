@@ -45,7 +45,10 @@ export default function IndividualReview (props) {
     {props.reviewInfo.recommend ? <div> <i className="fa fa-solid fa-check"></i> I recommend this product </div>: '' }
     {props.reviewInfo.response !== null ? <div className = "response"> Response : {props.reviewInfo.response}</div> : ''}
     <br/>
+    <div className = 'helpfulAndReportButton'>
     Was this review helpful? <button className = 'IndividualReviewButton' onClick = {markHelpful} >Yes</button> {props.reviewInfo.helpfulness > 0 ? `(${props.reviewInfo.helpfulness})` : '' } |    <button className = 'IndividualReviewButton' onClick ={reportReview}>Report</button>
+    </div>
   </div>
+
   )
 }
