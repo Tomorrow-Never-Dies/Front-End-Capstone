@@ -7,9 +7,12 @@ function ProductBreakdown (props) {
   console.log('characteristics:', characteristics);
   const [breakdown, setBreakdown] = useState([]);
   useEffect(() => {
-    // console.log(`props.characteristics inside pb is equal to ${JSON.stringify(props.characteristics)}`)
-    const Breakdown = reviewHelpers.factorBreakDown(characteristics);
-    setBreakdown([...Breakdown]);
+    console.log(`props is equal to ${JSON.stringify(characteristics)}`);
+    if (Object.keys(props.characteristics).length !== 0) {
+      console.log(`props.characteristics inside pb is equal to ${JSON.stringify(props.characteristics)}`)
+      const Breakdown = reviewHelpers.factorBreakDown(characteristics);
+      setBreakdown([...Breakdown]);
+    }
   },[props.characteristics])
 
   useEffect(() => {
