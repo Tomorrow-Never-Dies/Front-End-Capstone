@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios')
 const app = express();
-const { getReviews, addReviews, getMeta, getReviews2 } = require('../helpers/reviews.js');
+const { getReviews, addReviews, getMeta, getReviews2, markHelpful, reportReview } = require('../helpers/reviews.js');
 const config = require('../config.js');
 const cors = require('cors');
 require('dotenv').config()
@@ -54,7 +54,20 @@ app.post('/addReview', (req, res) => {
       throw (err);
     })
 })
+app.post('/helpful', (req, res) => {
+  console.log(`helpful is called, id is equal to ${req.body.id}`)
+  markHelpful(req.body.id)
+    .then((response) => {
+      res.send(response);
+    });
+})
 
+app.post('/reportReview', (req, res) => {
+  reportReview(req.body.id)
+  .then((response) => {
+    res.send(response);
+  })
+})
 app.get('/products', (req,res) => {
   console.log(`getting products`);
 

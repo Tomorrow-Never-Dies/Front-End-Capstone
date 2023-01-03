@@ -23,7 +23,7 @@ function RatingsReviews (props) {
     setModal(true);
   };
   const mappedReviews = reviews.map((review) => {
-    return <IndividualReview reviewInfo = {review} key = {review.review_id}/>
+    return <IndividualReview reviewInfo = {review} key = {review.review_id} review_id = {review.review_id}/>
   })
 
   const setReviewFilter = (event) => {
