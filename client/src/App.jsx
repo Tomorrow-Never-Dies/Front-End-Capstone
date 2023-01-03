@@ -14,9 +14,11 @@ class App extends React.Component{
       productsID:  71697,
       reviews: [],
       reviewsLen: 0,
+      starToggled: false,
     }
     this.onclick = this.onclick.bind(this)
     this.getReviewMeta = this.getReviewMeta.bind(this)
+    this.starToggle = this.starToggle.bind(this)
   }
 
   onclick(id){
@@ -28,6 +30,10 @@ class App extends React.Component{
 
   }
 
+  starToggle () {
+    console.log("clicked star")
+    this.setState({ starToggled: !this.state.starToggled }) // need to communitcate to yassir
+  }
   getReviewMeta() {
     $.ajax({
       type: 'GET',
@@ -57,9 +63,8 @@ class App extends React.Component{
   render(){
     return(
       <div>
-        <h1>Front End Capstone</h1>
-        <OverView id ={this.state.productsID} reviews = {this.state.reviews} reviewsLen = {this.state.reviewsLen}/>
-        <RelatedItemsComp id ={this.state.productsID} click = {this.onclick}/>
+        <OverView  starToggle = {this.starToggle} id ={this.state.productsID} reviews = {this.state.reviews} reviewsLen = {this.state.reviewsLen}/>
+        <RelatedItemsComp  starToggled = {this.state.starToggled} id ={this.state.productsID} click = {this.onclick}/>
         <Outfits id ={this.state.productsID} click = {this.onclick} />
         <QuestionAnswers id ={this.state.productsID} />
         <RatingsReviews id ={this.state.productsID} reviews = {this.state.reviews} reviewsLen = {this.state.reviewsLen}/>
