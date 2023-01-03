@@ -6,10 +6,24 @@ const config = require('../config.js');
 const cors = require('cors');
 require('dotenv').config()
 const PORT = process.env.DEV_PORT || 3033;
+var expressStaticGzip = require("express-static-gzip");
+const path = require('path');
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.json());
 app.use(cors());
+
+app.use(
+  expressStaticGzip(path.join(__dirname, 'build'), {
+  enableBrotli: true, // only if you have brotli files too
+  }),
+);
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/#Reviews', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.get('/getReview', (req, res) => {
   getReviews(req.query.id)
@@ -88,6 +102,7 @@ app.get('/products/:product_id', (req,res) => {
   }
 })
 .then((result) =>{
+
   res.send(result.data)
 })
 .catch((error) =>{

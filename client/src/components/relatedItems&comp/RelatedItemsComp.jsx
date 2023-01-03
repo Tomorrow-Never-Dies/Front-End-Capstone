@@ -27,6 +27,7 @@ class RelatedItemsComp extends React.Component{
     this.compare = this.compare.bind(this)
     this.carousel = this.carousel.bind(this)
     this.index = this.index.bind(this)
+    this.close_compare = this.close_compare.bind(this)
   }
 
   componentDidMount(){
@@ -128,12 +129,22 @@ class RelatedItemsComp extends React.Component{
         }
       })
       .then((result) =>{
+        console.log(result, 'ressullttss')
         this.setState({
           compare_product: this.state.compare_product.concat(result.data.features),
           compared: true
-        })
+        }, ()=>{ console.log(this.state, "state")})
 
       })
+    })
+
+  }
+
+  close_compare(){
+
+    console.log("hiiii")
+    this.setState({
+      compared: false
     })
 
   }
@@ -172,7 +183,14 @@ class RelatedItemsComp extends React.Component{
   render(){
     return(
       <div className="main">
-        {this.state.compared ? <Comparison current = {this.state.current_product} compare = {this.state.compare_product}/> : null}
+        {this.state.compared ?
+        <Comparison
+        current = {this.state.current_product}
+        compare = {this.state.compare_product}
+        close = {this.close_compare}
+        />
+
+        : null}
         <button data-testid='prev-button' className="scroll-left" onClick={()=>{ this.carousel('prev')}}>
         &larr;
         </button>

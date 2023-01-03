@@ -6,7 +6,6 @@ import StarOverview from "../ratings&reviews/Stars/StarOverview.jsx";
 
 function ProductCards (props) {
   var metaData = 0
-  console.log(props.metaData.data, "props.metadata")
   if(props.metaData.data !== undefined && props.type === "outfits"){
     metaData = props.metaData.data
   } else {
@@ -18,7 +17,6 @@ function ProductCards (props) {
       }
     }
     }
-  console.log(metaData, "metaData", props.type)
 
   var url=''
   if(props.item.photos[0].thumbnail_url === undefined){
@@ -33,7 +31,7 @@ function ProductCards (props) {
       backgroundImage:`url(${url})` }}>
 
           {props.type ==="outfits"?
-          <button className="delete_outfit" onClick={()=>props.delete(props.id)}>x</button> :
+          <button data-testid='delete-card' className="delete_outfit" onClick={()=>props.delete(props.id)}>x</button> :
           <button className = "compare-button" onClick={() => props.compare(props.id)} >
             compare
           </button> }
@@ -46,11 +44,11 @@ function ProductCards (props) {
 
        </div>
        </div>
-       <div className="card-info">
-          <div className="product-name">
+       <div data-testid='card-info' className="card-info">
+          <div data-testid='product-name' className="product-name">
             {props.item.name}
           </div>
-          <div className="product-price">
+          <div data-testid='product-price' className="product-price">
             {props.item.original_price}
           </div>
 
