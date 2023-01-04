@@ -2,10 +2,15 @@ import React, { useState, useEffect } from 'react';
 import StarRating from './StarRating.jsx';
 import axios from 'axios';
 import {FaStar} from 'react-icons/fa';
+import config from '../../../../../config.js';
+
+const MAX_FILES = 5;
 
 function FormModal (props) {
-  const [testArray, setTest] = useState([]);
+  const [testArray, setTest] = useState({photos:[]});
   const [characteristicForm, setCharForm] = useState([]);
+  const [uploadedPictures, setPictures] = useState({ photos: [] });
+  const [fileLimit, setFileLimit] = useState(false);
   const [newReview, setReview] = useState({
     product_id: props.id,
     rating: '',
@@ -17,6 +22,7 @@ function FormModal (props) {
     name: '',
     email: ''
   })
+
   function onRatingChange (e) {
     setReview(newReview =>({ ...newReview, rating: Number(e.target.value) }))
     console.log(`new review is equal to ${JSON.stringify(newReview)}`)
@@ -34,10 +40,45 @@ function FormModal (props) {
     // console.log(`new review is equal to ${JSON.stringify(newReview)}`)
   }
   function onFileChange (e) {
-    var testArray = [];
-    testArray.push(e.target.files[0])
-    console.log(`testarray is equal to ${Array.isArray(testArray)}`)
-    setReview(newReview => ({ ...newReview, photos: [...newReview.photos, ...testArray] }))
+    // const chosenFiles = Array.prototype.slice.call(e.target.files);
+    // console.log(`chosenFiles is equal to ${JSON.stringify(chosenFiles)}`);
+    // handleUploadFiles(chosenFiles);
+    var fileImage = new FormData;
+    var IMGBB_API = process.env.REACT_APP_IMGBB_API;
+    fileImage.append("image", event.target.files[0]);
+    // fileImage.append("key",config.IMGBB_TOKEN);
+    fileImage.append("key", IMGBB_API);
+    return axios({
+      method: 'post',
+      url: 'https://api.imgbb.com/1/upload',
+      data: fileImage
+    })
+    .then ((res) => {
+      console.log(`res from imgg is equal to ${JSON.stringify(res)}`);
+    })
+    .catch((err) => {
+      console.log(`err for uploading image is ${err}`);
+    })
+  }
+
+  function handleUploadFiles (files) {
+    const uploaded = [...uploadedPictures]
+    let limitExceeded = false;
+    files.some((file) => {
+      if (uploaded.findIndex((f) => f.name === file.name) === -1) {
+        uploaded.push(file);
+      }
+      if (uploaded.length > MAX_FILES) {
+        alert(`you can only add a maximum of ${MAX_FILES} files`)
+        setFileLimit(false);
+        limitExceeded = true;
+        return true;
+      }
+    })
+    if (!limitExceeded) {
+      setPictures({ photos: [...uploaded] })
+      setReview(newReview => ({...newReview, characteristics: newReview.characteristics, photos:[...uploadedPictures] }))
+    }
   }
   function onRecommendChange (e) {
     if (e.target.value === 'true') {
@@ -50,6 +91,7 @@ function FormModal (props) {
     e.preventDefault();
     console.log('submitting!');
     props.onHide();
+
     axios.post('addReview', newReview)
       .then((result) => {
         console.log(`result from posting a new review is ${JSON.stringify(result)}`);
@@ -67,9 +109,9 @@ function FormModal (props) {
   },[])
 
   useEffect(() => {
-    console.log(`testArray is equal to ${testArray}`);
-    console.log(`testArray type is equal to ${Array.isArray(testArray)}`)
-  },[testArray])
+    console.log(`uploadedPic type is equal to ${Array.isArray(uploadedPictures)}`);
+    console.log(`uploadedpic is equal to ${uploadedPictures}`);
+  },[uploadedPictures])
 
   useEffect(() => {
     var charForm = [];
@@ -209,8 +251,7 @@ function FormModal (props) {
       <br />
       <label onChange = {onChangeForm}>
       Photos
-      <input type = 'file' name = 'photos' onChange = {onFileChange}/>
-      <input type = 'file' name = 'photos2' onChange = {onFileChange}/>
+      <input type = 'file' name = 'photos' accept = 'image/png' onChange = {onFileChange} multiple/>
       </label>
       <br />
       <label onChange = {onChangeForm}>

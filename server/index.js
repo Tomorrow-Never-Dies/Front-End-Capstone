@@ -64,9 +64,9 @@ app.post('/helpful', (req, res) => {
 
 app.post('/reportReview', (req, res) => {
   reportReview(req.body.id)
-  .then((response) => {
-    res.send(response);
-  })
+    .then((response) => {
+      res.send(response);
+    })
 })
 app.get('/products', (req,res) => {
   console.log(`getting products`);
