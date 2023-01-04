@@ -1,3 +1,16 @@
+.RatingsAndReviews{
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction:column;
+}
+.RatingsAndReviewsHeader{
+  margin-right:auto;
+  width: 706.59px
+}
 .singleReview {
   border-bottom:solid
 }

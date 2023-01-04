@@ -96,8 +96,10 @@ function RatingsReviews (props) {
   }, [reviews])
 
   return (
-    <div>
-      Ratings & Reviews
+    <div className = 'RatingsAndReviews'>
+      <div className = 'RatingsAndReviewsTitle'>
+      <h1 className = 'RatingsAndReviewsHeader'>Ratings & Reviews</h1>
+      </div>
     <div className = 'Reviews'> <StarOverview key = {metaData} data = {metaData} />
      <div className = 'IndividualReviews'>
      <div class = "dropdown"> {totalNumOfReviews} reviews, sorted by  <select className = "selectReview" onChange={setReviewFilter}>

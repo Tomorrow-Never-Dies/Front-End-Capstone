@@ -210,6 +210,7 @@ function FormModal (props) {
       <label onChange = {onChangeForm}>
       Photos
       <input type = 'file' name = 'photos' onChange = {onFileChange}/>
+      <input type = 'file' name = 'photos2' onChange = {onFileChange}/>
       </label>
       <br />
       <label onChange = {onChangeForm}>

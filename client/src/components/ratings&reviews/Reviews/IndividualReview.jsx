@@ -9,10 +9,14 @@ export default function IndividualReview (props) {
 
   const [starRating, setRating] = useState(null);
   const [images, setImages] = useState(null);
+  const [helpfulness, setHelpfulness] = useState(null);
+  const [reported, setReported] = useState(false);
+  const [markedHelpful, setHelpful] = useState(true);
 
   function markHelpful (e) {
     e.preventDefault();
     console.log(`marking helpful!`)
+    setHelpfulness(helpfulness + 1);
     axios.post('helpful', {
       id: props.review_id
     })
@@ -25,7 +29,13 @@ export default function IndividualReview (props) {
       id: props.review_id
     })
   }
+
   useEffect(() => {
+    console.log(`helpfulness is equal to ${helpfulness}`);
+  }, [helpfulness])
+
+  useEffect(() => {
+    setHelpfulness(props.reviewInfo.helpfulness);
     console.log(`props.reviewInfo is equal to ${JSON.stringify(props.reviewInfo)}`); //use props.reviewInfo.rating
     var starRating = reviewHelpers.IndividualStarRating(props.reviewInfo.rating, props.reviewInfo.review_id)
     setRating(starRating);
@@ -46,7 +56,7 @@ export default function IndividualReview (props) {
     {props.reviewInfo.response !== null ? <div className = "response"> Response : {props.reviewInfo.response}</div> : ''}
     <br/>
     <div className = 'helpfulAndReportButton'>
-    Was this review helpful? <button className = 'IndividualReviewButton' onClick = {markHelpful} >Yes</button> {props.reviewInfo.helpfulness > 0 ? `(${props.reviewInfo.helpfulness})` : '' } |    <button className = 'IndividualReviewButton' onClick ={reportReview}>Report</button>
+    Was this review helpful? <button className = 'IndividualReviewButton' onClick = {markHelpful} >Yes</button> {helpfulness > 0 ? `(${helpfulness})` : '' } |    <button className = 'IndividualReviewButton' onClick ={reportReview}>Report</button>
     </div>
   </div>
 
