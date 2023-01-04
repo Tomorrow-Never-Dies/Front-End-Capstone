@@ -35,11 +35,13 @@ export default function IndividualReview (props) {
   }, [helpfulness])
 
   useEffect(() => {
+    console.log(`props.reviewInfo.photos is equal to ${props.reviewInfo.photos}`)
     setHelpfulness(props.reviewInfo.helpfulness);
     console.log(`props.reviewInfo is equal to ${JSON.stringify(props.reviewInfo)}`); //use props.reviewInfo.rating
     var starRating = reviewHelpers.IndividualStarRating(props.reviewInfo.rating, props.reviewInfo.review_id)
     setRating(starRating);
-    var ratingImages = props.reviewInfo.photos.map((imgSrc, index) => (<ReviewImages src={imgSrc.url} />))
+    var ratingImages = props.reviewInfo.photos.map((imgSrc, index) => (<ReviewImages src={imgSrc.url} alt="" />))
+    console.log(`images url is equal to ${JSON.stringify(ratingImages)}`);
     setImages(ratingImages)
   }, [props.reviewInfo])
   return (
