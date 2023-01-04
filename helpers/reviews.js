@@ -1,5 +1,5 @@
 const axios = require('axios')
-const config = require('../config.js');
+//const config = require('../config.js');
 
 const apiOptions = (itemid) => {
   const id = 71697
@@ -66,7 +66,7 @@ const getMeta = (itemid) => {
 }
 const addReviews = (review) => {
   // const options = apiOptions(1)
-  // console.log(`options is equal to ${JSON.stringify(options)}`);
+  console.log(`review is equal to ${JSON.stringify(review)}`);
   const options = {
     headers: {
       authorization: `${process.env.GITHUB_API}`
@@ -78,8 +78,9 @@ const addReviews = (review) => {
     recommend: true, name: 'Andy', email: 'andy@test.com', photos:[],
     characteristics:{["240583"]:1, ["240584"]:2, ["240585"]:3}}
 
-  return axios.post(url, sampleReview, options)
+  return axios.post(url, review, options)
     .then((response) => {
+      console.log(`response for successful addreview is equal to ${response}`)
       return response.data
     })
     .catch((err) => {

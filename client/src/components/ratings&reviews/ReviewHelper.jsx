@@ -68,7 +68,6 @@ const reviewHelpers = {
         return  <span className= "fa fa-star empty-star" id = "star-0"  key = {rating + 'star-0'+ reviewId + i }/>
       }
     })
-    //console.log(`fiveStars is equal to ${JSON.stringify(fiveStars)}`);
     return fiveStars
   },
 
@@ -81,7 +80,6 @@ const reviewHelpers = {
   },
 
   factorBreakDown : (FactorRatings) => {
-    console.log(`factorratings is equal to ${JSON.stringify(FactorRatings['Fit']['value'])}`);
 
     const tickTitles = {
       Size: { first: 'Too Small', third: 'Perfect', fifth: 'Too Large' },

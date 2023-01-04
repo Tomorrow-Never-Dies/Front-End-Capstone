@@ -4,40 +4,46 @@ import axios from 'axios';
 import {FaStar} from 'react-icons/fa';
 
 function FormModal (props) {
-  const [ characteristicForm, setCharForm] = useState([]);
-
+  const [testArray, setTest] = useState([]);
+  const [characteristicForm, setCharForm] = useState([]);
   const [newReview, setReview] = useState({
     product_id: props.id,
     rating: '',
-    recommended: '',
+    recommend: '',
     characteristics: {},
     summary: '',
     body: '',
-    photos: null,
+    photos: [],
     name: '',
     email: ''
   })
   function onRatingChange (e) {
-    setReview({ ...newReview, rating: Number(e.target.value) })
+    setReview(newReview =>({ ...newReview, rating: Number(e.target.value) }))
     console.log(`new review is equal to ${JSON.stringify(newReview)}`)
   }
   function onChangeForm (e) {
-    setReview({ ...newReview, [e.target.name]: e.target.value })
+    setReview(newReview => ({ ...newReview, [e.target.name]: e.target.value }))
     console.log(`new review is equal to ${JSON.stringify(newReview)}`)
   }
   function onCharacteristicChange (e) {
-    console.log(`radio button clicked : ${e.target.name}`)
-    setReview({ ...newReview, characteristics: { ...newReview.characteristics, [e.target.name]: e.target.value } })
-    console.log(`new review is equal to ${JSON.stringify(newReview)}`)
+    console.log(`radio button clicked : ${e.target.name}`);
+    var charHolder = newReview.characteristics;
+    charHolder[e.target.name] = Number(e.target.value);
+    console.log(`newReviewonchar is equal to ${JSON.stringify(charHolder)}`)
+    setReview(newReview => ({ ...newReview, ['characteristics'] : {...charHolder}}))
+    // console.log(`new review is equal to ${JSON.stringify(newReview)}`)
   }
   function onFileChange (e) {
-    setReview({ ...newReview, Photos: e.target.files[0] })
+    var testArray = [];
+    testArray.push(e.target.files[0])
+    console.log(`testarray is equal to ${Array.isArray(testArray)}`)
+    setReview(newReview => ({ ...newReview, photos: [...newReview.photos, ...testArray] }))
   }
-  function onRecommendChange(e) {
+  function onRecommendChange (e) {
     if (e.target.value === 'true') {
-      setReview({...newReview, recommended: true })
+      setReview(newReview => ({ ...newReview, recommend: true }))
     } else {
-      setReview({...newReview, recommended: false })
+      setReview(newReview => ({ ...newReview, recommend: false }))
     }
   }
   function handleSubmit (e) {
@@ -45,10 +51,25 @@ function FormModal (props) {
     console.log('submitting!');
     props.onHide();
     axios.post('addReview', newReview)
-      // .then((result) => {
-      //   console.log(`result from posting a new review is ${JSON.stringify(result)}`);
-      // })
+      .then((result) => {
+        console.log(`result from posting a new review is ${JSON.stringify(result)}`);
+      })
   }
+
+  useEffect(() => {
+    console.log(`newReview is equal to ${JSON.stringify(newReview)}`);
+    console.log(`photos type is equal to ${typeof newReview.photos}`)
+  },[newReview])
+
+  useEffect(() => {
+    console.log(`newReview is equal to ${JSON.stringify(newReview)}`);
+    console.log(`photos type is equal to ${typeof newReview.photos}`)
+  },[])
+
+  useEffect(() => {
+    console.log(`testArray is equal to ${testArray}`);
+    console.log(`testArray type is equal to ${Array.isArray(testArray)}`)
+  },[testArray])
 
   useEffect(() => {
     var charForm = [];
@@ -78,16 +99,16 @@ function FormModal (props) {
   return (
     <React.Fragment>
     {props.show &&
-    <form className = "modal">
+    <form className = "newReviewModal">
       <label>
         <StarRating handleStarRating = {onRatingChange}/>
       </label>
       <br />
       <label onChange = {onRecommendChange}>
         Recommended
-          <input type = 'radio' value = 'true' name = 'recommended'/>
+          <input type = 'radio' value = 'true' name = 'recommend'/>
           Yes
-          <input type = 'radio' value = 'false' name = 'recommended'/>
+          <input type = 'radio' value = 'false' name = 'recommend'/>
           No
       </label>
       <br />
@@ -176,14 +197,14 @@ function FormModal (props) {
       5
     </label>
     <br /> */}
-      <label onChange = {onChangeForm}>
+      <label className = 'labelSummary' onChange = {onChangeForm}>
       Review summary
-      <input type = 'text' name = 'summary'/>
+      <textarea className = 'summary' cols="40" rows = "5"></textarea>
       </label>
       <br />
-      <label onChange = {onChangeForm}>
+      <label className = 'labelBody' onChange = {onChangeForm}>
       Review Body
-      <input type = 'text' name = 'body' />
+      <textarea className = 'body' cols="40" rows = "5"></textarea>
       </label>
       <br />
       <label onChange = {onChangeForm}>

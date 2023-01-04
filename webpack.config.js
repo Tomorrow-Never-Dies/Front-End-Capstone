@@ -4,6 +4,7 @@ const WebpackBundleAnalyzer = require("webpack-bundle-analyzer").BundleAnalyzerP
 const CompressionPlugin = require('compression-webpack-plugin');
 
 
+
 module.exports = {
   mode:'development',
   entry: path.join(__dirname, "/client/src/index.jsx"),
@@ -34,17 +35,16 @@ module.exports = {
           // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
         },
       }),
+
     ],
+    usedExports: true,
   },
   plugins: [
     new WebpackBundleAnalyzer(),
     new CompressionPlugin({
-      filename: "[path].gz[query]",
       algorithm: "gzip",
-      test: /\.js$|\.css$|\.html$/,
-      threshold: 10240,
-      minRatio: 0.8
-    })
+    }),
+
  ],
   resolve: {
     fallback: {

@@ -16,8 +16,8 @@ class RelatedItemsComp extends React.Component{
       products:[],
       related_products:[],
       products_array:[],
-      current_product:[],
-      compare_product:[],
+      current_product:{},
+      compare_product:{},
       activeIndex: 0,
       metaData: [],
       compared: false,
@@ -93,14 +93,15 @@ class RelatedItemsComp extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.id !== this.state.productsID){
-      this.setState({
-        productsID:nextProps.id
-      },() =>{
-        console.log(this.state.productsID, "state id")
-        this.get_update()
-      })
+      if(nextProps.id !== this.state.productsID){
+        this.setState({
+          productsID:nextProps.id
+        },() =>{
+          console.log(this.state.productsID, "state id")
+          this.get_update()
+        })
     }
+
 
   }
 
@@ -116,8 +117,9 @@ class RelatedItemsComp extends React.Component{
       }
     })
     .then((result) =>{
+      console.log(result, "result")
       this.setState({
-        current_product: this.state.current_product.concat(result.data.features)
+        current_product: result.data
       })
     })
     .then(()=>{
@@ -131,7 +133,7 @@ class RelatedItemsComp extends React.Component{
       .then((result) =>{
         console.log(result, 'ressullttss')
         this.setState({
-          compare_product: this.state.compare_product.concat(result.data.features),
+          compare_product: result.data,
           compared: true
         }, ()=>{ console.log(this.state, "state")})
 
@@ -142,7 +144,6 @@ class RelatedItemsComp extends React.Component{
 
   close_compare(){
 
-    console.log("hiiii")
     this.setState({
       compared: false
     })

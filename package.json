@@ -7,7 +7,7 @@
     "react-dev": "webpack --mode development --watch",
     "server-dev": "npx nodemon server/index.js",
     "test": "jest --coverage",
-    "build": "npx webpack "
+    "build": "npx webpack"
   },
   "repository": {
     "type": "git",
@@ -16,6 +16,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.11.0",
+    "@mui/material": "^5.11.3",
     "@testing-library/jest-dom": "github:testing-library/jest-dom",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",

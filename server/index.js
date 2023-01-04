@@ -6,20 +6,16 @@ const config = require('../config.js');
 const cors = require('cors');
 require('dotenv').config()
 const PORT = process.env.DEV_PORT || 3033;
-var expressStaticGzip = require("express-static-gzip");
 const path = require('path');
+const expressStaticGzip = require("express-static-gzip")
 
-app.use(express.static(__dirname + '/../client/dist'));
+app.use(expressStaticGzip(__dirname + '/../client/dist'));
 app.use(express.json());
 app.use(cors());
 
-app.use(
-  expressStaticGzip(path.join(__dirname, 'build'), {
-  enableBrotli: true, // only if you have brotli files too
-  }),
-);
 
-app.use(express.static(path.join(__dirname, 'build')));
+
+app.use(expressStaticGzip(path.join(__dirname, 'build')));
 
 app.get('/#Reviews', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
@@ -76,7 +72,7 @@ app.get('/products', (req,res) => {
     method: 'get',
     url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/',
     headers :{
-      'Authorization': `${config.TOKEN}`
+      'Authorization': `${process.env.GITHUB_API}`
     }
   })
   .then((result) =>{
@@ -93,16 +89,15 @@ app.get('/products/:product_id', (req,res) => {
   axios({
   method: 'get',
   url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.query.id}`,
-  url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/`,
   params:{
     "products_id": req.query.id,
   },
   headers :{
-    'Authorization': `${config.TOKEN}`
+    'Authorization': `${process.env.GITHUB_API}`
   }
 })
 .then((result) =>{
-
+  console.log(result.data, "urlllll")
   res.send(result.data)
 })
 .catch((error) =>{
@@ -121,7 +116,7 @@ app.get('/products/:product_id/styles', (req,res) => {
   method: 'get',
   url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.query.id}/styles`,
   headers: {
-    Authorization: `${config.TOKEN}`,
+    Authorization: `${process.env.GITHUB_API}`,
     body: {}
   }
   })
@@ -143,7 +138,7 @@ app.get('/products/:product_id/related', (req,res) => {
   method: 'get',
   url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.query.id}/related`,
   headers: {
-    Authorization: `${config.TOKEN}`,
+    Authorization: `${process.env.GITHUB_API}`,
     body: {}
   }
 })

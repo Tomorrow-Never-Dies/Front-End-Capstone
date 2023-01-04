@@ -13,7 +13,8 @@ class Outfits extends React.Component{
       product_ids: [],
       product_styles:[],
       activeIndex: 0,
-      metaData:[]
+      metaData:[],
+      starToggled: false,
     }
     this.add = this.add.bind(this)
     this.get_products = this.get_products.bind(this)
@@ -60,6 +61,21 @@ class Outfits extends React.Component{
           })
   }
 
+  componentWillReceiveProps(nextProps){
+    console.log(this.props)
+    if(nextProps.starToggled){
+      console.log("toggeled")
+      this.setState({
+        productsID:nextProps.id
+      },() =>{
+        console.log(this.state.productsID, "state id")
+        this.add()
+      })
+  } else{
+    this.delete(this.state.productsID)
+  }
+
+  }
   add(){
     this.setState({
       productsID:this.props.id
