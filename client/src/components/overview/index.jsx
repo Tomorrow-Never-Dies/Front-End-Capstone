@@ -59,6 +59,7 @@ export default class OverView extends React.Component {
       url: `/products/${this.state.productsID}`,
       data: { id: this.state.productsID },
       success: (data) => {
+        console.log(data, "producttttt")
         this.setState({ product: data });
       },
       error: (error) => {
@@ -97,6 +98,7 @@ export default class OverView extends React.Component {
     for (let i = 0; i < this.state.styles.length; i++) {
       if (event.target.id == this.state.styles[i].style_id) {
         this.setState({ selectedStyle: this.state.styles[i], mainImg: this.state.styles[i].photos[0].url })
+        document.getElementsById(event.target.id).setAttribute("alt","10003");
         break;
       }
     }
@@ -114,6 +116,9 @@ export default class OverView extends React.Component {
       }else if (this.state.selectedStyle.photos[i].thumbnail_url == this.state.mainImg) {
         newMain = this.state.selectedStyle.photos[i-1].thumbnail_url
         break;
+      }else if (this.state.selectedStyle.photos[i].url == this.state.mainImg && i === 0){
+        newMain = this.state.selectedStyle.photos[this.state.selectedStyle.photos.length -1].thumbnail_url
+        break;
       }
     }
     this.setState({mainImg: newMain})
@@ -121,7 +126,6 @@ export default class OverView extends React.Component {
   changeMainImgForward() {
     for(var i = 0; i < this.state.selectedStyle.photos.length; i++){
       var newMain = '';
-      //console.log(this.state.selectedStyle.photos[i].thumbnail_url, this.state.mainImg, this.state.selectedStyle.photos[i].url == this.state.mainImg, "tutoooo")
       if(this.state.selectedStyle.photos[i].thumbnail_url == this.state.mainImg && i == this.state.selectedStyle.photos.length -1) {
         newMain = this.state.selectedStyle.photos[0].thumbnail_url
         break;
@@ -200,14 +204,17 @@ export default class OverView extends React.Component {
         </div>
       );
     } else {
+      console.log(this.state.selectedStyle, "sssss")
+
       return (
       <div className = 'all-overview'>
+        <h1 className = 'logo'>TND</h1>
       <div className = 'flex-container'>
        <div className = "leftSideImage">
        <div className = 'carousel'>
           <div className = 'carousel-buttons'>
-            <div className = 'carousel-button'><ArrowDropUpIcon/></div>
-            <div className = 'carousel-button'> <ArrowDropDownIcon/></div>
+            <div className = 'carousel-button_up' onClick = {this.changeMainImgBack}><ArrowDropUpIcon/></div>
+            <div className = 'carousel-button_down' onClick = {this.changeMainImgForward}> <ArrowDropDownIcon/></div>
           </div>
         <div className='side-images'>
         {this.state.selectedStyle.photos.map(image => (
@@ -220,7 +227,7 @@ export default class OverView extends React.Component {
         <div className = 'main-img-button_back' onClick = {this.changeMainImgBack}><ArrowBackIcon/></div>
         <div className = 'main-img-button_forward' onClick = {this.changeMainImgForward}> <ArrowForwardIcon/></div>
        {this.state.selectedStyle.photos !== {}
-         ? <img className = "mainImg" src={this.state.mainImg} />
+         ? <img className = "mainImg" src={this.state.mainImg} id = {this.state.selectedStyle.style_id} />
          : <div>  Please Wait while we load our products... </div> }
         </div>
        </div>
@@ -239,7 +246,7 @@ export default class OverView extends React.Component {
        <div className = 'thumbNails'>
        {this.state.styles.map(style => (<div className="thumb-nail" key = {style.style_id}>
 
-        <img className="styleList" src={style.photos[0].thumbnail_url} id ={style.style_id} onClick = {this.changeSelectedStyle} />
+        <img className="styleList" src={style.photos[0].thumbnail_url} id ={style.style_id} onClick = {this.changeSelectedStyle}/>
          </div>)
        )}
        </div>
@@ -284,10 +291,19 @@ export default class OverView extends React.Component {
 
       </div>
       </div>
+      <div className = "third_bottom">
 
       <div className = 'description'>
         <div className = 'title'><strong>{this.state.product.slogan}</strong></div>
         <div className = 'slogan'>{this.state.product.description} </div>
+      </div>
+      <div className = "vertical"></div>
+      <div className = 'features'>
+        {this.state.product.features.map((item) => {
+          return <div> &#x2713; {item.feature}: {item.value}</div>
+        })}
+
+      </div>
       </div>
 
       </div>

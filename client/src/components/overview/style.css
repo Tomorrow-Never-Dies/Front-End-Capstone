@@ -5,6 +5,7 @@
   border-width: .1.5em;
   border-style: solid;
   border-color: #000000;
+  content: "✔";
 }
 
 .selectedStyleImages
@@ -15,11 +16,10 @@
   display: block;
   opacity: 1;
   float: left;
+  max-height: 100%;
+  max-width: 100%;
 }
-/* .selectedStyleImages:hover
-{
-  opacity: 1;
-} */
+
 
 .flex-container {
   display: flex;
@@ -54,21 +54,27 @@
 .side-images {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  height: 10px;
-  max-height:100%;
+  position: relative;
+  max-width: 30px;
+  max-height: 400px;
+  top: 10px;
+  bottom: 100px;
+  z-index: 1;
 
 }
 .carousel {
   display: flex;
   flex-direction: column;
   position: relative;
+  /* top: 40px;
+  left: 40px; */
   height: 10px;
   max-height: 500px;
 
 }
 .flex-child {
   width: 100%;
+  height: 100%;
   position: relative;
   overflow: hidden;
 }
@@ -95,6 +101,20 @@
   font-size: 1.5rem;
 
 }
+.carousel-button_up {
+  background-color:rgb(255, 255, 255);
+  position: relative;
+  top: 10px;
+  font-size: 1.5rem;
+  z-index: 2;
+}
+.carousel-button_down {
+  background-color: rgb(255, 255, 255);
+  position: relative;
+  top: 400px;
+  font-size: 1.5rem;
+  z-index: 2;
+}
 .allReviews {
   display: flex;
 }
@@ -104,9 +124,6 @@
   flex-direction: column;
 }
 
-.description {
-  flex: 1;
-}
 
 .thumbNails {
   display: flex;
@@ -127,7 +144,6 @@
 
 }
 .all-overview {
-  padding-top: 50px;
   padding-right: 100px;
   padding-bottom: 100px;
   padding-left: 100px;
@@ -137,4 +153,39 @@
   border: 2px solid black;
   background-color: black;
   color: black;
+}
+
+.third_bottom {
+  display: flex;
+  padding-top: 30px;
+}
+.description{
+  padding-right: 40px;
+  height: 100px;
+  width: 100px;
+  flex: 1;
+
+
+}
+.features{
+  display: flex;
+  flex: 0.5;
+  flex-direction: column;
+
+}
+
+.vertical {
+  border-left: 3px solid black;
+  height: 70px;
+  position:relative;
+  padding-right: 20px;
+}
+
+.logo {
+  flex:1;
+  background-color: rgb(211, 211, 211);
+  text-decoration: underline;
+  height: 200px;
+  max-height: 100%;
+  padding-left: 50px;
 }
