@@ -13,13 +13,13 @@
   margin: 10px 0;
   cursor: pointer;
   display: block;
-  opacity: 0.4;
+  opacity: 1;
   float: left;
 }
-.selectedStyleImages:hover
+/* .selectedStyleImages:hover
 {
   opacity: 1;
-}
+} */
 
 .flex-container {
   display: flex;
@@ -59,7 +59,42 @@
   max-height:100%;
 
 }
+.carousel {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: 10px;
+  max-height: 500px;
 
+}
+.flex-child {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.main-img-button_back {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-10%);
+  padding: 0;
+  margin: 0.5rem;
+  font-size: 1.5rem;
+  right: 90%;
+  background-color: aliceblue;
+
+}
+.main-img-button_forward {
+  background-color: aliceblue;
+  right: 20%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-10%);
+
+  padding: 0;
+  margin: 0.5rem;
+  font-size: 1.5rem;
+
+}
 .allReviews {
   display: flex;
 }
