@@ -3,8 +3,8 @@ import reviewHelpers from '../ReviewHelper.jsx'
 
 function BarGroup(props) {
   let barPadding = 2
-  let barColour = '#c1c1c1'
-  let barColour2='#00db5a'
+  let barColour ='#D3D3D3'
+  let barColour2='#000000'
   let widthScale = d => d * 10
 
   let width = widthScale(10)
