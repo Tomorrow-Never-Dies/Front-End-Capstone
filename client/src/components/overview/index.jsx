@@ -3,6 +3,9 @@ import sampleProducts from '../../../../fixtures/Overview/Products.js';
 import sampleProductIdStyles from '../../../../fixtures/Overview/IdProducts.js';
 import sampleProductId from '../../../../fixtures/Overview/ProductsID.js';
 import sampleData from '../../../../fixtures/ratings&reviews/ReviewExampleData.js'
+import Button from '@mui/material/Button';
+import StarIcon from '@mui/icons-material/Star';
+import IconButton from '@mui/material/IconButton';
 import $ from 'jquery';
 import './style.css';
 import StarOverview from '../ratings&reviews/Stars/StarOverview.jsx';
@@ -18,14 +21,14 @@ export default class OverView extends React.Component {
       reviews: [],
       selectedStyle: {},
       selectedSize: {},
-      starToggled: false,
+      //starToggled: false,
       mainImg: undefined,
       outofstock: false,
       reviewsLen: 0,
       quantity: null
     };
     // this.initialRender = this.initialRender.bind(this);
-    this.starToggle = this.starToggle.bind(this);
+    //this.starToggle = this.starToggle.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.getproducts = this.getproducts.bind(this);
     this.changeSelectedStyle = this.changeSelectedStyle.bind(this);
@@ -43,9 +46,9 @@ export default class OverView extends React.Component {
   //   this.setState({ selectedStyle: sampleProductIdStyles.sampleProductIdStyles.results[0] })
   // }
 
-  starToggle () {
-    this.setState({ starToggled: !this.state.starToggled }) // need to communitcate to yassir
-  }
+  // starToggle () {
+  //   this.setState({ starToggled: !this.state.starToggled }) // need to communitcate to yassir
+  // }
 
   getproducts () {
     $.ajax({
@@ -55,7 +58,8 @@ export default class OverView extends React.Component {
       url: `/products/${this.state.productsID}`,
       data: { id: this.state.productsID },
       success: (data) => {
-        this.setState({ product: data[0] });
+        this.setState({ product: data });
+        console.log(data, "dddddd")
       },
       error: (error) => {
         console.log(error, 'error geting data in ajaxxxx');
@@ -78,34 +82,38 @@ export default class OverView extends React.Component {
         console.log(error, 'error geting data in ajaxxxx');
       }
     });
-
-    $.ajax({
-      type: 'GET',
-      contentType: 'application/json',
-      context: this,
-      data: { id: this.state.productsID },
-      params: {
-        id: this.state.productsID
-      },
-      url: '/getReviewMeta',
-      success: (data) => {
-        let count = 0;
-        for (const key in data.ratings) {
-          count += parseInt(data.ratings[key])
-        }
-        this.setState({ reviews: data, reviewsLen: count });
-      },
-      error: (error) => {
-        console.log(error, 'error geting data in ajaxxxx reviewwww');
-      }
-    });
+    console.log(this.props.reviews, 'ffff', this.props.reviewsLen, 'dfskldfjk')
+    // $.ajax({
+    //   type: 'GET',
+    //   contentType: 'application/json',
+    //   context: this,
+    //   data: { id: this.state.productsID },
+    //   params: {
+    //     id: this.state.productsID
+    //   },
+    //   url: '/getReviewMeta',
+    //   success: (data) => {
+    //     let count = 0;
+    //     for (const key in data.ratings) {
+    //       count += parseInt(data.ratings[key])
+    //     }
+    //     this.setState({ reviews: data, reviewsLen: count });
+    //   },
+    //   error: (error) => {
+    //     console.log(error, 'error geting data in ajaxxxx reviewwww');
+    //   }
+    // });
   }
 
-  addToCart () {
+  addToCart (event) {
     console.log('added to cart!')
-    if (document.getElementById('mySize').selectedOptions[0].label === '---Select size---' ||
-    document.getElementById('myQuantity').selectedOptions[0].label === '-') {
-      alert('Please select size and qauntity to add to cart!')
+    if (document.getElementById('mySize').selectedOptions[0].label === '---Select size---') {
+      console.log('no sizeeeee')
+    //   var event;
+    //  event = document.createEvent('MouseEvents');
+    // event.initMouseEvent('mousedown', true, true, window);
+    // document.getElementById('mySize').dispatchEvent(event)
+
     }
   }
 
@@ -166,6 +174,7 @@ export default class OverView extends React.Component {
   }
 
   componentDidMount () {
+    console.log(this.props, "propppppp")
     this.getproducts()
   }
 
@@ -189,14 +198,15 @@ export default class OverView extends React.Component {
       );
     } else {
       return (
-      <div>
-       <div className = "gallery">
-        <div>
+      <div className = 'all-overview'>
+      <div className = 'flex-container'>
+       <div className = "leftSideImage">
+        <div className="flex-child">
        {this.state.selectedStyle.photos !== {}
          ? <img className = "mainImg" src={this.state.mainImg} />
          : <div>  Please Wait while we load our products... </div> }
         </div>
-        <div>
+        <div className='side-images'>
         {this.state.selectedStyle.photos.map(image => (
           <img className="selectedStyleImages" src={image.thumbnail_url} onClick = {this.changeMainImg}/>
         )
@@ -204,55 +214,71 @@ export default class OverView extends React.Component {
         </div>
        </div>
 
-       <div data-testid='name header'>NAME: {this.state.product.name}</div>
-       <div>PRICE: ${this.state.selectedStyle.original_price}</div>
-       <div>CATEGORY: {this.state.product.category}</div>
-       <div>TITLE:{this.state.product.slogan} </div>
-       <div>DESCRIPTION: {this.state.product.description} </div>
-
-       <div>
-       {this.state.reviewsLen > 0
-         ? <div> <div>STAR RATINGS: </div>
-       <a className="skip-link" href="#Reviews" onClick = {this.executeScroll}>Read all {this.state.reviewsLen} reviews</a>
-       <div> {this.state.reviews !== [] ? <StarOverview  data = {this.state.reviews} component={"related"} />: "no reviews" }</div>
-       </div>
+      <div className = 'rightSideSelect'>
+       {this.props.reviewsLen > 0
+         ? <div className = 'allReviews'>
+            <div className = 'StarsOverview'> {this.props.reviews !== [] ? <StarOverview data = {this.props.reviews} component={'related'} /> : 'no reviews' }</div>
+            <a className="skip-link" href="#Reviews" onClick = {this.executeScroll}>Read all {this.props.reviewsLen} reviews</a>
+            </div>
          : <div></div>}
-       </div>
-       <button onClick = {this.starToggle}>LIKE</button>
-       <div>
-        Selected Style Name: {this.state.selectedStyle.name}
-       </div>
-       {this.state.styles.map(style => (<div key = {style.style_id}>
+       <div className = 'category'><font size="+2">{this.state.product.category}</font></div>
+       <div className = 'name' data-testid='name header'><font size="+4"><strong>{this.state.product.name}</strong></font></div>
+       <div className = 'price'>${this.state.selectedStyle.original_price}</div>
+       <div className = 'styleName'><strong>Style > </strong> {this.state.selectedStyle.name}</div>
+       <div className = 'thumbNails'>
+       {this.state.styles.map(style => (<div className="thumb-nail" key = {style.style_id}>
 
         <img className="styleList" src={style.photos[0].thumbnail_url} id ={style.style_id} onClick = {this.changeSelectedStyle} />
-          </div>)
+         </div>)
        )}
-        <div>
+       </div>
+
+
+       <div className = 'select-menu'>
+       <div className = 'SelectSize'>
         <form>
-        <b> Select your Size </b>
-        <select id = 'mySize' onChange = {this.setQuantity}>
-        <option id = 'sizeBanner' className = 'sizes'> ---Select size--- </option>
-        {
-          Object.keys(this.state.selectedStyle.skus).map((key) => {
-            if (this.state.selectedStyle.skus[key].quantity > 0) {
-              return <option className = 'sizes'> {this.state.selectedStyle.skus[key].size} </option>
+          <select id = 'mySize' onChange = {this.setQuantity}>
+            <option id = 'sizeBanner' className = 'sizes'>---Select size---</option>
+            {
+              Object.keys(this.state.selectedStyle.skus).map((key) => {
+                if (this.state.selectedStyle.skus[key].quantity > 0) {
+                  return <option className = 'sizes'> {this.state.selectedStyle.skus[key].size} </option>
+                }
+              })
             }
-          })
-      }
-        </select>
+          </select>
         </form>
-        </div>
-          {this.state.outofstock
-            ? this.disableoptions()
-            : null
-          }
+      </div>
+        <div className = 'selectQuantity'>
+        {this.state.outofstock
+          ? this.disableoptions()
+          : null
+        }
         <form>
-        <b> Select your Quantity </b>
         <select id = "myQuantity" >
         {Array.from({ length: this.state.quantity }).map((it, index) => { if (index <= 14) { return <option>{index + 1}</option> } })}
         </select>
         </form>
-        <button onClick = {this.addToCart}>Add to cart!</button>
+        </div>
+
+       </div>
+
+       <div className = 'select-menu'>
+        <Button variant="outlined" style={{color: "black", border: '1px solid black'}} onClick = {this.addToCart}  >Add to cart!</Button>
+
+        <Button variant="outlined" style={{color: "black",  border: '1px solid black'}} onClick = {()=>{this.props.starToggle()}} ><StarIcon/></Button>
+
+
+       </div>
+
+      </div>
+      </div>
+
+      <div className = 'description'>
+        <div className = 'title'><strong>{this.state.product.slogan}</strong></div>
+        <div className = 'slogan'>{this.state.product.description} </div>
+      </div>
+
       </div>
       )
     }
