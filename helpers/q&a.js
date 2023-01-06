@@ -1,6 +1,4 @@
 const axios = require('axios');
-const config = require('../config.js');
-// require('dotenv').config()
 
 const getQuestions = function (itemid) {
   // console.log('process:', process.env)

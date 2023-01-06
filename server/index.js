@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios')
 const app = express();
 const { getReviews, addReviews, getMeta, getReviews2 } = require('../helpers/reviews.js');
-const config = require('../config.js');
+// const config = require('../config.js');
 const cors = require('cors');
 require('dotenv').config()
 
@@ -61,7 +61,7 @@ app.get('/products', (req,res) => {
     method: 'get',
     url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/',
     headers :{
-      'Authorization': `${config.TOKEN}`
+      'Authorization': `${process.env.GITHUB_API}`
     }
   })
   .then((result) =>{
@@ -83,7 +83,7 @@ app.get('/products/:product_id', (req,res) => {
     "products_id": req.query.id,
   },
   headers :{
-    'Authorization': `${config.TOKEN}`
+    'Authorization': `${process.env.GITHUB_API}`
   }
 })
 .then((result) =>{
@@ -105,7 +105,7 @@ app.get('/products/:product_id/styles', (req,res) => {
   method: 'get',
   url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.query.id}/styles`,
   headers: {
-    Authorization: `${config.TOKEN}`,
+    Authorization: `${process.env.GITHUB_API}`,
     body: {}
   }
   })
@@ -127,7 +127,7 @@ app.get('/products/:product_id/related', (req,res) => {
   method: 'get',
   url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.query.id}/related`,
   headers: {
-    Authorization: `${config.TOKEN}`,
+    Authorization: `${process.env.GITHUB_API}`,
     body: {}
   }
 })

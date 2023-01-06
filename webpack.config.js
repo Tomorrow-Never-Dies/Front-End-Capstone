@@ -32,7 +32,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.REACT_APP_GIT_API': JSON.stringify('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')
+      'process.env.REACT_APP_GIT_API': JSON.stringify('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')
     })
   ]
 };

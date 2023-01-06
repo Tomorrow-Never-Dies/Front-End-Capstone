@@ -1,5 +1,5 @@
 const axios = require('axios')
-const config = require('../config.js');
+// const config = require('../config.js');
 
 const apiOptions = (itemid) => {
   const id = 71697

@@ -12,7 +12,7 @@ function Answers(props) {
   }
   // Need to pass Answer Author to props, create an iteratable structure for both Answer & Author pairs
   return (
-    <p>
+    <div>
       {getAnswer(props).map((curr) => (
         <div className='answers'>
           A: {curr.body}
@@ -24,7 +24,7 @@ function Answers(props) {
         </div>
 
       ))}
-    </p>
+    </div>
   )
 }
 
