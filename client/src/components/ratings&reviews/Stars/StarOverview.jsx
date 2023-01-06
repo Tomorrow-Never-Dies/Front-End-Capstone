@@ -25,15 +25,13 @@ export default function StarOverview (props) {
     setRating(reviewHelpers.calculateAverage(ratings));
    //setRecommended(recommendedPercentage);
   }, [props.data])
-  if(props.component === "related"){
+  if(props.component === "related" || props.component === "outfits"){
     return (
       <div className = 'ReviewOverview' key = 'ReviewOverview'>
         <div className = 'StarOverview' key = 'StarOverview'>
         {/* {rating} */}
         {starRating}
         </div>
-        {/* {props.data.ratings ? <BarChart ratings = {props.data.ratings}/> : "loading"}
-        {props.data.ratings ? <ProductBreakdown characteristics = {props.data.characteristics}/> : "loading"} */}
       </div>
   )}
   else{

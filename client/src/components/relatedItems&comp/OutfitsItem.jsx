@@ -12,7 +12,9 @@ class Outfits extends React.Component{
       productsID: props.id,
       product_ids: [],
       product_styles:[],
-      activeIndex: 0
+      activeIndex: 0,
+      metaData:[],
+      starToggled: false,
     }
     this.add = this.add.bind(this)
     this.get_products = this.get_products.bind(this)
@@ -22,6 +24,7 @@ class Outfits extends React.Component{
   }
 
   get_products(){
+    var star_promises = []
         axios({
             method: 'get',
             url: "/products/:product_id/styles",
@@ -35,11 +38,44 @@ class Outfits extends React.Component{
               product_styles: this.state.product_styles.concat(result)
             })
           })
+          .then(()=>{
+            axios.get('/getReviewMeta', {
+              params: {
+                id: this.state.productsID
+              }
+            })
+            .then((result) =>{
+              console.log(this.state.productsID)
+              console.log(result)
+            this.setState({
+              metaData: result,
+            }, ()=>{
+              console.log(this.state.metaData)})
+          })
+          })
+
+
+
           .catch((err) =>{
             console.log(err, "inner error")
           })
   }
 
+  componentWillReceiveProps(nextProps){
+    console.log(this.props)
+    if(nextProps.starToggled){
+      console.log("toggeled")
+      this.setState({
+        productsID:nextProps.id
+      },() =>{
+        console.log(this.state.productsID, "state id")
+        this.add()
+      })
+  } else{
+    this.delete(this.state.productsID)
+  }
+
+  }
   add(){
     this.setState({
       productsID:this.props.id
@@ -112,8 +148,9 @@ class Outfits extends React.Component{
                 products = {this.state.product_styles}
                 id_update = {this.update_id}
                 click = {this.props.click}
-                type = {"outfits"}
                 delete = {this.delete}
+                metaData = {this.state.metaData}
+                type = {"outfits"}
 
                 />
               </div>

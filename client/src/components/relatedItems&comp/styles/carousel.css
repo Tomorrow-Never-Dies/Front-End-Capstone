@@ -2,7 +2,7 @@
   position: relative;
   background: whitesmoke;
   display: flex;
-  width: 170%;
+  width: 75%;
   height: 25rem;
   margin: auto;
   border-color: azure;
@@ -30,7 +30,7 @@
 .carousel-item{
 
   position: relative;
-  height: 20rem;
+  height: 24rem;
   width: 15rem;
   align-items: center;
   justify-content: center;
@@ -39,6 +39,14 @@
   background-size: cover;
   transition: 1s cubic-bezier(0.39, 0.575, 0.565, 1);
   cursor: pointer;
+}
+
+.image{
+  height: 20rem;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: 1s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 .compare-button{
   align-items: top;
@@ -65,7 +73,7 @@
 .card{
   border-style: solid;
   position: relative;
-  height: 23rem;
+  height: 24rem;
   width: 15rem;
   margin-left: 20px;
   margin-right: 20px;
@@ -87,6 +95,53 @@ align-items: right;
   font-size:small;
   color:cadetblue;
 }
+.modal {
+  position: fixed;
+  z-index: 7;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+    align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+}
 
+.modal-main {
+  position: relative;
+  background: white;
+  width: 60%;
+  height: auto;
+  top:50%;
+  left:50%;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%,-50%);
+}
+.current-product{
+  margin-left: 20px;
+  margin-right: 20px;
+  justify-content: center;
+}
 
+.compare-product{
+  margin-left: 20px;
+  margin-right: 20px;
+  justify-content: right;
+}
+
+.compare-name{
+  font-weight: bold;
+  font-size: large;
+}
+
+.comparison-title{
+  align-items: center;
+  justify-content: center;
+
+}
+
+.comparison{
+  display: flex;
+}
 
