@@ -66,7 +66,7 @@ class App extends React.Component{
         <OverView  starToggle = {this.starToggle} id ={this.state.productsID} reviews = {this.state.reviews} reviewsLen = {this.state.reviewsLen}/>
         <RelatedItemsComp   id ={this.state.productsID} click = {this.onclick}/>
         <Outfits id ={this.state.productsID} click = {this.onclick} starToggled = {this.state.starToggled} />
-        {/* <QuestionAnswers id ={this.state.productsID} /> */}
+         <QuestionAnswers id ={this.state.productsID} />
         <RatingsReviews id ={this.state.productsID} reviews = {this.state.reviews} reviewsLen = {this.state.reviewsLen}/>
       </div>
     )

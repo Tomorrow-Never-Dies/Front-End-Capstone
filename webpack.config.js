@@ -1,6 +1,9 @@
 const path = require('path');
 var webpack = require('webpack');
 var dotenv = require('dotenv').config({path: __dirname + '/.env'});
+const TerserPlugin = require('terser-webpack-plugin');
+const WebpackBundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   mode:'development',
