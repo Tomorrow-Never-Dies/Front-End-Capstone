@@ -1,7 +1,7 @@
 import React from "react";
 const postAnswer = require('../../../../helpers/q&a.js')
 
-import './questionModal.css';
+import './q&a.css';
 
 const QuestionModal = props => {
     const showHideClassName = props.show ? 'modal display-block' : 'modal display-none';

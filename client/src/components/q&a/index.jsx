@@ -3,6 +3,7 @@ import sampleData from "./fixtures/sampleData"
 import IndividualQuestion from "./individualQuestion.jsx"
 import Answers from "./answers.jsx"
 import QuestionModal from "./questionModal.jsx";
+import './q&a.css';
 const getQuestions = require('../../../../helpers/q&a.js');
 
 class QuestionAnswers extends React.Component {
@@ -37,8 +38,8 @@ class QuestionAnswers extends React.Component {
 
   render () {
     return (
-      <div>
-        <h1>
+      <div className="entire-widget">
+        <h1 className="header">
           Q&A
         </h1>
         <input

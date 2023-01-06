@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   mode:'development',
@@ -28,5 +29,10 @@ module.exports = {
       http: require.resolve('stream-http'),
       https: require.resolve('https-browserify'),
     }
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.REACT_APP_GIT_API': JSON.stringify('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')
+    })
+  ]
 };

@@ -7,7 +7,7 @@ const getQuestions = function (itemid) {
   const options = {
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/:hr-rpp/qa/questions/`,
     headers: {
-      Authorization: `${config.TOKEN}`,
+      Authorization: `${process.env.REACT_APP_GIT_API}`,
       'Content-Type': 'application/json'
     },
     params: {
