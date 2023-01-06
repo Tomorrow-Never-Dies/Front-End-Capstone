@@ -37,6 +37,7 @@ bower_components/
 config.js
 node_modules
 .DS_Store
+webpack.config.js
 
 .config.js
 .env

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './q&a.css';
 
 function Answers(props) {
   // console.log('Answer props:', props)
@@ -11,9 +12,9 @@ function Answers(props) {
   }
   // Need to pass Answer Author to props, create an iteratable structure for both Answer & Author pairs
   return (
-    <small>
+    <div>
       {getAnswer(props).map((curr) => (
-        <div>
+        <div className='answers'>
           A: {curr.body}
           <div>
             <small>
@@ -23,7 +24,7 @@ function Answers(props) {
         </div>
 
       ))}
-    </small>
+    </div>
   )
 }
 
