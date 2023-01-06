@@ -13,7 +13,9 @@ export default function ReviewImages(props) {
   const getModal = data => {
     setModal(true);
   };
-
+  useEffect(() => {
+    console.log(`props.src for image is equal to ${props.src}`)
+  },[props.src])
   return(
     <div className = 'reviewImages'>
       <img className = 'singleReviewImage' width = "100" height = "100" src={props.src} key={props.src} alt="alt tag" onClick = {getModal}/>

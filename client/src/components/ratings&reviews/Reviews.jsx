@@ -23,7 +23,7 @@ function RatingsReviews (props) {
     setModal(true);
   };
   const mappedReviews = reviews.map((review) => {
-    return <IndividualReview reviewInfo = {review} key = {review.review_id}/>
+    return <IndividualReview reviewInfo = {review} key = {review.review_id} review_id = {review.review_id}/>
   })
 
   const setReviewFilter = (event) => {
@@ -96,8 +96,10 @@ function RatingsReviews (props) {
   }, [reviews])
 
   return (
-    <div>
-      Ratings & Reviews
+    <div className = 'RatingsAndReviews'>
+      <div className = 'RatingsAndReviewsTitle'>
+      <h1 className = 'RatingsAndReviewsHeader'>Ratings & Reviews</h1>
+      </div>
     <div className = 'Reviews'> <StarOverview key = {metaData} data = {metaData} />
      <div className = 'IndividualReviews'>
      <div class = "dropdown"> {totalNumOfReviews} reviews, sorted by  <select className = "selectReview" onChange={setReviewFilter}>
@@ -106,10 +108,12 @@ function RatingsReviews (props) {
           <option value="newest">Newest</option>
      </select>
       </div>
+      <div className = 'mappedReviews'>
      {mappedReviews}
+      </div>
      <FormModal show={showModal} onHide = {hideModal} characteristics = {metaData.characteristics} id={props.id} />
-        <div className = 'ReviewButtons' onClick ={showAdditionalReviews}>
-            <button>
+        <div className = 'ReviewButtons' >
+            <button className = 'moreReviewButtons' onClick ={showAdditionalReviews}>
               MORE REVIEWS
             </button>
             <button name = "addReviewButton" data-testid = "addReviewButton" onClick = {getModal} >

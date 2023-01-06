@@ -1,9 +1,9 @@
 const path = require('path');
+var webpack = require('webpack');
+var dotenv = require('dotenv').config({path: __dirname + '/.env'});
 const TerserPlugin = require('terser-webpack-plugin');
-const WebpackBundleAnalyzer = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const WebpackBundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const CompressionPlugin = require('compression-webpack-plugin');
-
-
 
 module.exports = {
   mode:'development',
@@ -52,5 +52,10 @@ module.exports = {
       http: require.resolve('stream-http'),
       https: require.resolve('https-browserify'),
     }
-  }
+  },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.REACT_APP_IMGBB_API':JSON.stringify('32afd28d526fb3f23e543894fbad7e6e')
+    })
+  ]
 };

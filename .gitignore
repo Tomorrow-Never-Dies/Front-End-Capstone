@@ -40,7 +40,5 @@ node_modules
 
 .config.js
 .env
-PEM
-.PEM
 bundle.js
 

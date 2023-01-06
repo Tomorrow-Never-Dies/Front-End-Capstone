@@ -2,10 +2,16 @@ import React, { useState, useEffect } from 'react';
 import StarRating from './StarRating.jsx';
 import axios from 'axios';
 import {FaStar} from 'react-icons/fa';
+import config from '../../../../../config.js';
+
+const MAX_FILES = 5;
 
 function FormModal (props) {
-  const [testArray, setTest] = useState([]);
+  const [testArray, setTest] = useState({photos:[]});
   const [characteristicForm, setCharForm] = useState([]);
+  const [uploadedPictures, setPictures] = useState({ photos: [] });
+  const [fileLimit, setFileLimit] = useState(false);
+  const [fileLimitExceed, setExceed] = useState(false);
   const [newReview, setReview] = useState({
     product_id: props.id,
     rating: '',
@@ -17,27 +23,79 @@ function FormModal (props) {
     name: '',
     email: ''
   })
+
+  const radioTitles = {
+    Size: { 1: 'A size too small', 2: '1/2 a size too small', 3: 'Perfect', 4: '1/2 a size too big', 5: 'A size too wide' },
+    Width: { 1: 'Too narrow', 2: 'Slightly narrow', 3: 'Perfect', 4: 'Slightly wide', 5: 'Too wide' },
+    Comfort: { 1: 'Uncomfortable', 2: 'Slightly uncomfortable', 3: 'Ok', 4: 'Comfortable', 5: 'Perfect' },
+    Quality: { 1: 'Poor', 2: 'Below average', 3: 'What I expected', 4: 'Pretty great', 5: 'Perfect' },
+    Length: { 1: 'Runs Short', 2: 'Runs slightly short', 3: 'Perfect', 4: 'Runs slightly long', 5: 'Runs long' },
+    Fit: { 1: 'Runs tight', 2: 'Runs slightly tight', 3: 'Perfect', 4: 'Runs slightly long', 5: 'Runs long' }
+  };
   function onRatingChange (e) {
     setReview(newReview =>({ ...newReview, rating: Number(e.target.value) }))
-    console.log(`new review is equal to ${JSON.stringify(newReview)}`)
   }
   function onChangeForm (e) {
     setReview(newReview => ({ ...newReview, [e.target.name]: e.target.value }))
-    console.log(`new review is equal to ${JSON.stringify(newReview)}`)
   }
   function onCharacteristicChange (e) {
-    console.log(`radio button clicked : ${e.target.name}`);
     var charHolder = newReview.characteristics;
     charHolder[e.target.name] = Number(e.target.value);
-    console.log(`newReviewonchar is equal to ${JSON.stringify(charHolder)}`)
     setReview(newReview => ({ ...newReview, ['characteristics'] : {...charHolder}}))
-    // console.log(`new review is equal to ${JSON.stringify(newReview)}`)
   }
   function onFileChange (e) {
-    var testArray = [];
-    testArray.push(e.target.files[0])
-    console.log(`testarray is equal to ${Array.isArray(testArray)}`)
-    setReview(newReview => ({ ...newReview, photos: [...newReview.photos, ...testArray] }))
+    const uploadedFiles = Array.prototype.slice.call(e.target.files)
+    const promisifiedIMGBB = uploadedFiles.map(fileObject => {
+      let fileImage = new FormData;
+      let IMGBB_API = process.env.REACT_APP_IMGBB_API;
+      fileImage.append("image", event.target.files[0]);
+      fileImage.append('key', IMGBB_API);
+      return axios({
+        method: 'post',
+        url: 'https://api.imgbb.com/1/upload',
+        data: fileImage
+      })
+        .then ((res) => {
+          return res;
+        })
+    })
+    Promise.all(promisifiedIMGBB)
+      .then((url) => {
+        let urlResults = url.map(imgLink => {
+          return imgLink.data.data.url
+        })
+        return urlResults
+      })
+      .then ((results) => {
+        if (results.length > MAX_FILES) {
+          let randomString = Math.random().toString(36);
+          setExceed(randomString);
+          alert(`you can only add a maximum of ${MAX_FILES} files`);
+          return true;
+        } else {
+          setReview(newReview => ({...newReview, characteristics: newReview.characteristics, photos:[...results] }))
+        }
+      })
+  }
+
+  function handleUploadFiles (files) {
+    const uploaded = [...uploadedPictures]
+    let limitExceeded = false;
+    files.some((file) => {
+      if (uploaded.findIndex((f) => f.name === file.name) === -1) {
+        uploaded.push(file);
+      }
+      if (uploaded.length > MAX_FILES) {
+        alert(`you can only add a maximum of ${MAX_FILES} files`)
+        setFileLimit(false);
+        limitExceeded = true;
+        return true;
+      }
+    })
+    if (!limitExceeded) {
+      setPictures({ photos: [...uploaded] })
+      setReview(newReview => ({...newReview, characteristics: newReview.characteristics, photos:[...uploadedPictures] }))
+    }
   }
   function onRecommendChange (e) {
     if (e.target.value === 'true') {
@@ -48,48 +106,46 @@ function FormModal (props) {
   }
   function handleSubmit (e) {
     e.preventDefault();
-    console.log('submitting!');
     props.onHide();
+
     axios.post('addReview', newReview)
       .then((result) => {
         console.log(`result from posting a new review is ${JSON.stringify(result)}`);
       })
   }
-
   useEffect(() => {
     console.log(`newReview is equal to ${JSON.stringify(newReview)}`);
-    console.log(`photos type is equal to ${typeof newReview.photos}`)
-  },[newReview])
-
-  useEffect(() => {
-    console.log(`newReview is equal to ${JSON.stringify(newReview)}`);
-    console.log(`photos type is equal to ${typeof newReview.photos}`)
-  },[])
-
-  useEffect(() => {
-    console.log(`testArray is equal to ${testArray}`);
-    console.log(`testArray type is equal to ${Array.isArray(testArray)}`)
-  },[testArray])
-
+  }, [newReview])
   useEffect(() => {
     var charForm = [];
    if(props.characteristics) {
     Object.keys(props.characteristics).forEach ( function (key, index) {
-      console.log(`key is equal to ${key} key in characteristics form is equal to ${JSON.stringify(props.characteristics[key].id)}`);
       charForm.push(
-        <label onChange = {onCharacteristicChange}>
-      {`${key} and ${props.characteristics[key].id}`}
-          <input type = 'radio' value = '1' name = {props.characteristics[key].id}/>
-          1
-          <input type = 'radio' value = '2' name = {props.characteristics[key].id}/>
-          2
-          <input type = 'radio' value = '3' name = {props.characteristics[key].id}/>
-          3
-          <input type = 'radio' value = '4' name = {props.characteristics[key].id}/>
-          4
-          <input type = 'radio' value = '5' name = {props.characteristics[key].id}/>
-          5
-      </label>
+      //   <label onChange = {onCharacteristicChange}>
+      // {`${key}`}
+      //     <label>
+      //     <input type = 'radio' value = '1' name = {props.characteristics[key].id}/>
+      //     {radioTitles[key][1]}
+      //     </label>
+      //     <input type = 'radio' value = '2' name = {props.characteristics[key].id}/>
+      //     {radioTitles[key][2]}
+      //     <input type = 'radio' value = '3' name = {props.characteristics[key].id}/>
+      //     {radioTitles[key][3]}
+      //     <input type = 'radio' value = '4' name = {props.characteristics[key].id}/>
+      //     {radioTitles[key][4]}
+      //     <input type = 'radio' value = '5' name = {props.characteristics[key].id}/>
+      //     {radioTitles[key][5]}
+      // </label>
+      <div>
+        {`${key}`}
+        <label onChange = {onCharacteristicChange} >
+        <label className = 'CharacteristicRadioButton'><input type="radio" name={props.characteristics[key].id} value = '1' />{radioTitles[key][1]}</label>
+        <label className = 'CharacteristicRadioButton'><input type="radio" name={props.characteristics[key].id} value = '2' />{radioTitles[key][2]}</label>
+        <label className = 'CharacteristicRadioButton'><input type="radio" name={props.characteristics[key].id} value = '3' />{radioTitles[key][3]}</label>
+        <label className = 'CharacteristicRadioButton'><input type="radio" name={props.characteristics[key].id} value = '4' />{radioTitles[key][4]}</label>
+        <label className = 'CharacteristicRadioButton'><input type="radio" name={props.characteristics[key].id} value = '5' />{radioTitles[key][5]}</label>
+        </label>
+    </div>
       )
       charForm.push(<br/>)
     })
@@ -113,103 +169,20 @@ function FormModal (props) {
       </label>
       <br />
       {characteristicForm}
-      {/* <label onChange = {onCharacteristicChange}>
-      Size
-          <input type = 'radio' value = '1' name = '14'/>
-          1
-          <input type = 'radio' value = '2' name = '14'/>
-          2
-          <input type = 'radio' value = '3' name = '14'/>
-          3
-          <input type = 'radio' value = '4' name = '14'/>
-          4
-          <input type = 'radio' value = '5' name = '14'/>
-          5
-      </label>
-      <br />
-      <label onChange = {onCharacteristicChange}>
-      Width
-          <input type = 'radio' value = '1' name = '15'/>
-          1
-          <input type = 'radio' value = '2' name = '15'/>
-          2
-          <input type = 'radio' value = '3' name = '15'/>
-          3
-          <input type = 'radio' value = '4' name = '15'/>
-          4
-          <input type = 'radio' value = '5' name = '15'/>
-          5
-      </label>
-      <br />
-      <label onChange = {onCharacteristicChange}>
-      Comfort
-          <input type = 'radio' value = '1' name = '16'/>
-          1
-          <input type = 'radio' value = '2' name = '16'/>
-          2
-          <input type = 'radio' value = '3' name = '16'/>
-          3
-          <input type = 'radio' value = '4' name = '16'/>
-          4
-          <input type = 'radio' value = '5' name = '16'/>
-          5
-      </label>
-      <br />
-      <label onChange = {onCharacteristicChange}>
-      Quality
-      <input type = 'radio' value = '1' name = '17'/>
-      1
-      <input type = 'radio' value = '2' name = '17'/>
-      2
-      <input type = 'radio' value = '3' name = '17'/>
-      3
-      <input type = 'radio' value = '4' name = '17'/>
-      4
-      <input type = 'radio' value = '5' name = '17'/>
-      5
-    </label>
-    <br />
-    <label onChange = {onCharacteristicChange}>
-      Length
-      <input type = 'radio' value = '1' name = '18'/>
-      1
-      <input type = 'radio' value = '2' name = '18'/>
-      2
-      <input type = 'radio' value = '3' name = '18'/>
-      3
-      <input type = 'radio' value = '4' name = '18'/>
-      4
-      <input type = 'radio' value = '5' name = '18'/>
-      5
-    </label>
-    <br />
-    <label onChange = {onCharacteristicChange}>
-      Fit
-      <input type = 'radio' value = '1' name = '19'/>
-      1
-      <input type = 'radio' value = '2' name = '19'/>
-      2
-      <input type = 'radio' value = '3' name = '19'/>
-      3
-      <input type = 'radio' value = '4' name = '19'/>
-      4
-      <input type = 'radio' value = '5' name = '19'/>
-      5
-    </label>
-    <br /> */}
-      <label className = 'labelSummary' onChange = {onChangeForm}>
+
+      <label className = 'labelSummary'>
       Review summary
-      <textarea className = 'summary' cols="40" rows = "5"></textarea>
+      <textarea className = 'summary' cols="40" rows = "5" onChange = {onChangeForm}></textarea>
       </label>
       <br />
-      <label className = 'labelBody' onChange = {onChangeForm}>
+      <label className = 'labelBody'>
       Review Body
-      <textarea className = 'body' cols="40" rows = "5"></textarea>
+      <textarea className = 'body' cols="40" rows = "5" onChange = {onChangeForm}></textarea>
       </label>
       <br />
       <label onChange = {onChangeForm}>
       Photos
-      <input type = 'file' name = 'photos' onChange = {onFileChange}/>
+      <input type = 'file' key={fileLimitExceed || ''} name = 'photos' accept = 'image/png/jpeg' onChange = {onFileChange} multiple/>
       </label>
       <br />
       <label onChange = {onChangeForm}>
