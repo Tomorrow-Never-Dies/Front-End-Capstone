@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import StarRating from './StarRating.jsx';
 import axios from 'axios';
 import {FaStar} from 'react-icons/fa';
-import config from '../../../../../config.js';
+// import config from '../../../../../config.js';
 
 const MAX_FILES = 5;
 

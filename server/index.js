@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios')
 const app = express();
 const { getReviews, addReviews, getMeta, getReviews2 } = require('../helpers/reviews.js');
-const config = require('../config.js');
+// const config = require('../config.js');
 const cors = require('cors');
 require('dotenv').config()
 const PORT = process.env.DEV_PORT || 3033;
