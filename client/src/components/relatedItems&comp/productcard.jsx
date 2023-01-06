@@ -27,8 +27,8 @@ function ProductCards (props) {
   return(
     //article
     <article className="card">
-          <div className="image" style={{
-      backgroundImage:`url(${url})` }}>
+
+          <div className="image" style={{backgroundImage:`url(${url})` }}  >
 
           {props.type ==="outfits"?
           <button data-testid='delete-card' className="delete_outfit" onClick={()=>props.delete(props.id)}>x</button> :
@@ -36,14 +36,12 @@ function ProductCards (props) {
             compare
           </button> }
 
-
-         <div data-testid='product-card' className="carousel-item"   onClick={() => (
-        props.click(props.id)
-        )}>
+          </div>
+          <div data-testid='product-card' className="carousel-item" onClick={() => (props.click(props.id))} >
 
 
-       </div>
-       </div>
+
+
        <div data-testid='card-info' className="card-info">
           <div data-testid='product-name' className="product-name">
             {props.item.name}
@@ -54,7 +52,7 @@ function ProductCards (props) {
 
           {metaData !== 0 ? <StarOverview  data = { metaData} component={props.type} />: "no reviews" }
 
-
+          </div>
 
        </div>
 
