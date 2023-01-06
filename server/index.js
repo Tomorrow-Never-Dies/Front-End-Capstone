@@ -1,8 +1,8 @@
 const express = require('express');
 const axios = require('axios')
 const app = express();
-const { getReviews, addReviews, getMeta, getReviews2, markHelpful, reportReview } = require('../helpers/reviews.js');
-const config = require('../config.js');
+const { getReviews, addReviews, getMeta, getReviews2 } = require('../helpers/reviews.js');
+// const config = require('../config.js');
 const cors = require('cors');
 require('dotenv').config()
 const PORT = process.env.DEV_PORT || 3033;
@@ -172,7 +172,7 @@ app.get('/products/:product_id/related', (req,res) => {
 //   console.log('Getting questions');
 // })
 
-app.listen(PORT, function() {
-  console.log(`listening on port`, PORT);
+app.listen(process.env.DEV_PORT, function() {
+  console.log(`listening on port 3033`);
 
 });

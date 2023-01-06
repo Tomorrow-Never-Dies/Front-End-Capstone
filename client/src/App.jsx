@@ -7,8 +7,8 @@ import RelatedItemsComp from './components/relatedItems&comp/RelatedItemsComp.js
 import Outfits from './components/relatedItems&comp/OutfitsItem.jsx'
 import $ from 'jquery';
 
-class App extends React.Component{
-  constructor(props){
+class App extends React.Component {
+  constructor(props) {
     super(props)
     this.state = {
       productsID:  71697,
@@ -21,10 +21,10 @@ class App extends React.Component{
     this.starToggle = this.starToggle.bind(this)
   }
 
-  onclick(id){
+  onclick(id) {
     this.setState({
       productsID: id
-    }, () =>{
+    }, () => {
       console.log("app.jsx")
     })
 

@@ -3,13 +3,14 @@ import sampleData from "./fixtures/sampleData"
 import IndividualQuestion from "./individualQuestion.jsx"
 import Answers from "./answers.jsx"
 import QuestionModal from "./questionModal.jsx";
+import './q&a.css';
 const getQuestions = require('../../../../helpers/q&a.js');
 
 class QuestionAnswers extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      item_id: 71698,
+      item_id: this.props.id,
       questions: [],
       show: false
     };
@@ -33,13 +34,12 @@ class QuestionAnswers extends React.Component {
 
   hideModal () {
     this.setState({ show: false});
-
   }
 
   render () {
     return (
-      <div>
-        <h1>
+      <div className="entire-widget">
+        <h1 className="header">
           Q&A
         </h1>
         <input
@@ -58,7 +58,7 @@ class QuestionAnswers extends React.Component {
           <button>More Answered Questions</button>
           <button type="button" onClick={this.showModal}>Ask a New Question</button>
           <QuestionModal show={this.state.show} handleClose={this.hideModal}>
-            <form id>
+            <form>
               <label>
                 Question:
                 <input type='text' name="question" required/>
