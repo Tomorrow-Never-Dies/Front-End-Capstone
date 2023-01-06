@@ -31,7 +31,7 @@ export default function StarOverview (props) {
   useEffect(() => {
   console.log(`barChartRating is equal to ${JSON.stringify(barChartRating)}`);
   }, [barChartRating])
-  if (props.component === 'related' || props.components === 'outfits') {
+  if (props.component === 'related' || props.component === 'outfits') {
     return (
       <div className = 'ReviewOverview' key = 'ReviewOverview'>
         <div className = 'StarOverview' key = 'StarOverview'>
