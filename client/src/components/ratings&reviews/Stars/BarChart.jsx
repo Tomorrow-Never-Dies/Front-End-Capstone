@@ -7,24 +7,24 @@ function BarGroup(props) {
   let barColour2='#000000'
   let widthScale = d => d * 10
 
-  let width = widthScale(10)
+  let width = widthScale(15)
   let yMid = props.barHeight * 0.5
   let totalPercentage = (props.d.value)/(props.totalNumOfRatings)*100
   // console.log(`totalpercentage is equal to ${totalPercentage}`)
   return <g className="bar-group" key = {totalPercentage}>
-    <text className="name-label" x="-6" y={yMid} alignmentBaseline="middle" key = {props.d.value + 'name-label'}>{props.d.name}</text>
+    <text className="name-label" x="-20" y={yMid} alignmentBaseline="middle" key = {props.d.value + 'name-label'}>{props.d.name}</text>
     <rect className = "star-breakdown"y={barPadding * 0.5} width={width} height={props.barHeight - barPadding} fill={barColour} key = {props.d.value + 'star-breakdown'} />
     <rect y={barPadding * 0.5} width={totalPercentage} height={props.barHeight - barPadding} fill={barColour2} key = {props.d.value + 'padding'} />
     <text className="value-label" x={width- 8} y={yMid} alignmentBaseline="middle" key = {props.d.value + 'value-label'} >{props.d.value}</text>
   </g>
 }
 
-
 export default function BarChart (props) {
-    const [barGraph, setBar] = useState([]);
+  const [barGraph, setBar] = useState([]);
 
-    useEffect(() => {
-      //console.log(`props.ratings is equal to ${props.ratings}`);
+  useEffect(() => {
+    console.log(`props.ratings in barchart component is equal to ${JSON.stringify(props.ratings)}`);
+    if (props.ratings) {
       let barHeight = 20
       let totalNumOfRatings = reviewHelpers.barChartPercentage(props.ratings)
       let barGroups = [...Array(5)].map((d, i) => {
@@ -35,15 +35,15 @@ export default function BarChart (props) {
               </g>)
       })
       setBar([...barGroups]);
-    },[props.rating])
+    }
+  }, [props.ratings])
 
-    return (<svg width="300" height="200" className = 'barChart'>
+  return (<svg width="300" height="200" className = 'barChart'>
              <g className="container">
               <g className="chart" transform="translate(100,60)">
               {barGraph}
               </g>
               </g>
               </svg>
-    )
+  )
 }
-

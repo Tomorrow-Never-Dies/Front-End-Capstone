@@ -24,6 +24,14 @@ function FormModal (props) {
     email: ''
   })
 
+  const radioTitles = {
+    Size: { 1: 'A size too small', 2: '1/2 a size too small', 3: 'Perfect', 4: '1/2 a size too big', 5: 'A size too wide' },
+    Width: { 1: 'Too narrow', 2: 'Slightly narrow', 3: 'Perfect', 4: 'Slightly wide', 5: 'Too wide' },
+    Comfort: { 1: 'Uncomfortable', 2: 'Slightly uncomfortable', 3: 'Ok', 4: 'Comfortable', 5: 'Perfect' },
+    Quality: { 1: 'Poor', 2: 'Below average', 3: 'What I expected', 4: 'Pretty great', 5: 'Perfect' },
+    Length: { 1: 'Runs Short', 2: 'Runs slightly short', 3: 'Perfect', 4: 'Runs slightly long', 5: 'Runs long' },
+    Fit: { 1: 'Runs tight', 2: 'Runs slightly tight', 3: 'Perfect', 4: 'Runs slightly long', 5: 'Runs long' }
+  };
   function onRatingChange (e) {
     setReview(newReview =>({ ...newReview, rating: Number(e.target.value) }))
   }
@@ -105,25 +113,39 @@ function FormModal (props) {
         console.log(`result from posting a new review is ${JSON.stringify(result)}`);
       })
   }
-
+  useEffect(() => {
+    console.log(`newReview is equal to ${JSON.stringify(newReview)}`);
+  }, [newReview])
   useEffect(() => {
     var charForm = [];
    if(props.characteristics) {
     Object.keys(props.characteristics).forEach ( function (key, index) {
       charForm.push(
-        <label onChange = {onCharacteristicChange}>
-      {`${key} and ${props.characteristics[key].id}`}
-          <input type = 'radio' value = '1' name = {props.characteristics[key].id}/>
-          1
-          <input type = 'radio' value = '2' name = {props.characteristics[key].id}/>
-          2
-          <input type = 'radio' value = '3' name = {props.characteristics[key].id}/>
-          3
-          <input type = 'radio' value = '4' name = {props.characteristics[key].id}/>
-          4
-          <input type = 'radio' value = '5' name = {props.characteristics[key].id}/>
-          5
-      </label>
+      //   <label onChange = {onCharacteristicChange}>
+      // {`${key}`}
+      //     <label>
+      //     <input type = 'radio' value = '1' name = {props.characteristics[key].id}/>
+      //     {radioTitles[key][1]}
+      //     </label>
+      //     <input type = 'radio' value = '2' name = {props.characteristics[key].id}/>
+      //     {radioTitles[key][2]}
+      //     <input type = 'radio' value = '3' name = {props.characteristics[key].id}/>
+      //     {radioTitles[key][3]}
+      //     <input type = 'radio' value = '4' name = {props.characteristics[key].id}/>
+      //     {radioTitles[key][4]}
+      //     <input type = 'radio' value = '5' name = {props.characteristics[key].id}/>
+      //     {radioTitles[key][5]}
+      // </label>
+      <div>
+        {`${key}`}
+        <label onChange = {onCharacteristicChange} >
+        <label className = 'CharacteristicRadioButton'><input type="radio" name={props.characteristics[key].id} value = '1' />{radioTitles[key][1]}</label>
+        <label className = 'CharacteristicRadioButton'><input type="radio" name={props.characteristics[key].id} value = '2' />{radioTitles[key][2]}</label>
+        <label className = 'CharacteristicRadioButton'><input type="radio" name={props.characteristics[key].id} value = '3' />{radioTitles[key][3]}</label>
+        <label className = 'CharacteristicRadioButton'><input type="radio" name={props.characteristics[key].id} value = '4' />{radioTitles[key][4]}</label>
+        <label className = 'CharacteristicRadioButton'><input type="radio" name={props.characteristics[key].id} value = '5' />{radioTitles[key][5]}</label>
+        </label>
+    </div>
       )
       charForm.push(<br/>)
     })
@@ -150,12 +172,12 @@ function FormModal (props) {
 
       <label className = 'labelSummary'>
       Review summary
-      <textarea name = 'summary' cols="40" rows = "5" onChange = {onChangeForm}></textarea>
+      <textarea className = 'summary' cols="40" rows = "5" onChange = {onChangeForm}></textarea>
       </label>
       <br />
       <label className = 'labelBody'>
       Review Body
-      <textarea name = 'body' cols="40" rows = "5" onChange = {onChangeForm}></textarea>
+      <textarea className = 'body' cols="40" rows = "5" onChange = {onChangeForm}></textarea>
       </label>
       <br />
       <label onChange = {onChangeForm}>

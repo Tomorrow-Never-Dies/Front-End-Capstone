@@ -108,10 +108,12 @@ function RatingsReviews (props) {
           <option value="newest">Newest</option>
      </select>
       </div>
+      <div className = 'mappedReviews'>
      {mappedReviews}
+      </div>
      <FormModal show={showModal} onHide = {hideModal} characteristics = {metaData.characteristics} id={props.id} />
-        <div className = 'ReviewButtons' onClick ={showAdditionalReviews}>
-            <button>
+        <div className = 'ReviewButtons' >
+            <button className = 'moreReviewButtons' onClick ={showAdditionalReviews}>
               MORE REVIEWS
             </button>
             <button name = "addReviewButton" data-testid = "addReviewButton" onClick = {getModal} >
