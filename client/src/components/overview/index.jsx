@@ -10,6 +10,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import FullscreenIcon from '@mui/icons-material/Fullscreen';
 import $ from 'jquery';
 import './style.css';
 import StarOverview from '../ratings&reviews/Stars/StarOverview.jsx';
@@ -41,6 +42,7 @@ export default class OverView extends React.Component {
     this.setQuantity = this.setQuantity.bind(this)
     this.changeMainImgBack = this.changeMainImgBack.bind(this);
     this.changeMainImgForward = this.changeMainImgForward.bind(this);
+    this.fullScreen = this.fullScreen.bind(this);
   }
 
   // initialRender () {
@@ -107,6 +109,11 @@ export default class OverView extends React.Component {
   changeMainImg (event) {
     this.setState({ mainImg: event.target.src })
   }
+
+  checkMark() {
+    //if selected id equal to stylelist style id
+    //return div with checkmark inside thumbnails div as child div
+  }
   changeMainImgBack() {
     for(var i = 0; i < this.state.selectedStyle.photos.length; i++){
       var newMain = '';
@@ -123,6 +130,11 @@ export default class OverView extends React.Component {
     }
     this.setState({mainImg: newMain})
   }
+
+  fullScreen() {
+    document.querySelector('.mainImg').classList.toggle('expand');
+  }
+
   changeMainImgForward() {
     for(var i = 0; i < this.state.selectedStyle.photos.length; i++){
       var newMain = '';
@@ -226,6 +238,7 @@ export default class OverView extends React.Component {
         <div className="flex-child">
         <div className = 'main-img-button_back' onClick = {this.changeMainImgBack}><ArrowBackIcon/></div>
         <div className = 'main-img-button_forward' onClick = {this.changeMainImgForward}> <ArrowForwardIcon/></div>
+        <div className = 'fullscreen' onClick ={this.fullScreen}><FullscreenIcon/></div>
        {this.state.selectedStyle.photos !== {}
          ? <img className = "mainImg" src={this.state.mainImg} id = {this.state.selectedStyle.style_id} />
          : <div>  Please Wait while we load our products... </div> }

@@ -33,6 +33,7 @@
   max-height:100%;
   height: 500px;
   width: 500px;
+  z-index: 2;
 }
 
 .leftSideImage {
@@ -122,6 +123,7 @@
 .all-overview {
   display: flex;
   flex-direction: column;
+  font-family:'roboto';
 }
 
 
@@ -188,4 +190,21 @@
   height: 200px;
   max-height: 100%;
   padding-left: 50px;
+}
+
+.expand {
+  max-width: 400%;
+}
+
+.fullScreen {
+  background-color: aqua;
+  right: 20%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-10%);
+
+  padding: 0;
+  margin: 0.5rem;
+  font-size: 1.5rem;
+
 }
