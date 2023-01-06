@@ -6,14 +6,17 @@ import StarOverview from "../ratings&reviews/Stars/StarOverview.jsx";
 
 function ProductCards (props) {
   var metaData = 0
+  if(props.metaData.data !== undefined && props.type === "outfits"){
+    metaData = props.metaData.data
+  } else {
   if(props.metaData !== undefined){
-    for(var i =0 ; i< props.metaData.length ; i++){
-      if(props.metaData[i].data.product_id === props.id){
-        metaData = props.metaData[i].data
+      for(var i =0 ; i< props.metaData.length ; i++){
+        if(props.metaData[i].data.product_id === props.id){
+          metaData = props.metaData[i].data
+        }
       }
     }
-  }
-
+    }
 
   var url=''
   if(props.item.photos[0].thumbnail_url === undefined){
@@ -24,29 +27,37 @@ function ProductCards (props) {
   return(
     //article
     <article className="card">
-         <div data-testid='product-card' className="carousel-item" style={{
-      backgroundImage:`url(${url})` }}  onClick={() => (
-        props.click(props.id)
-        )}>
+          <div className="image" style={{
+      backgroundImage:`url(${url})` }}>
+
           {props.type ==="outfits"?
-          <button className="delete_outfit" onClick={()=>props.delete(props.id)}>x</button> :
+          <button data-testid='delete-card' className="delete_outfit" onClick={()=>props.delete(props.id)}>x</button> :
           <button className = "compare-button" onClick={() => props.compare(props.id)} >
             compare
           </button> }
+
+
+         <div data-testid='product-card' className="carousel-item"   onClick={() => (
+        props.click(props.id)
+        )}>
+
+
        </div>
-       <div className="card-info">
-          <div className="product-name">
+       </div>
+       <div data-testid='card-info' className="card-info">
+          <div data-testid='product-name' className="product-name">
             {props.item.name}
           </div>
-          <div className="product-price">
+          <div data-testid='product-price' className="product-price">
             {props.item.original_price}
           </div>
 
-          {metaData !== 0 ? <StarOverview  data = { metaData} component={"related"} />: "no reviews" }
+          {metaData !== 0 ? <StarOverview  data = { metaData} component={props.type} />: "no reviews" }
 
 
 
        </div>
+
    </article>
 
   )

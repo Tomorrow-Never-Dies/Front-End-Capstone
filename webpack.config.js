@@ -1,4 +1,9 @@
 const path = require('path');
+const TerserPlugin = require('terser-webpack-plugin');
+const WebpackBundleAnalyzer = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const CompressionPlugin = require('compression-webpack-plugin');
+
+
 
 module.exports = {
   mode:'development',
@@ -22,6 +27,25 @@ module.exports = {
       }
     ],
   },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        terserOptions: {
+          // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
+        },
+      }),
+
+    ],
+    usedExports: true,
+  },
+  plugins: [
+    new WebpackBundleAnalyzer(),
+    new CompressionPlugin({
+      algorithm: "gzip",
+    }),
+
+ ],
   resolve: {
     fallback: {
       url: require.resolve("url/"),
