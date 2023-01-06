@@ -38,8 +38,6 @@ export default function StarOverview (props) {
         {/* {rating} */}
         {starRating}
         </div>
-        {/* {props.data.ratings ? <BarChart ratings = {props.data.ratings}/> : "loading"}
-        {props.data.ratings ? <ProductBreakdown characteristics = {props.data.characteristics}/> : "loading"} */}
       </div>
     )}
   else {

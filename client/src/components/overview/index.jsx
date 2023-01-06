@@ -6,6 +6,10 @@ import sampleData from '../../../../fixtures/ratings&reviews/ReviewExampleData.j
 import Button from '@mui/material/Button';
 import StarIcon from '@mui/icons-material/Star';
 import IconButton from '@mui/material/IconButton';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import $ from 'jquery';
 import './style.css';
 import StarOverview from '../ratings&reviews/Stars/StarOverview.jsx';
@@ -21,14 +25,12 @@ export default class OverView extends React.Component {
       reviews: [],
       selectedStyle: {},
       selectedSize: {},
-      //starToggled: false,
       mainImg: undefined,
       outofstock: false,
       reviewsLen: 0,
       quantity: null
     };
     // this.initialRender = this.initialRender.bind(this);
-    //this.starToggle = this.starToggle.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.getproducts = this.getproducts.bind(this);
     this.changeSelectedStyle = this.changeSelectedStyle.bind(this);
@@ -37,6 +39,8 @@ export default class OverView extends React.Component {
     this.checkForInventory = this.checkForInventory.bind(this);
     this.disableoptions = this.disableoptions.bind(this);
     this.setQuantity = this.setQuantity.bind(this)
+    this.changeMainImgBack = this.changeMainImgBack.bind(this);
+    this.changeMainImgForward = this.changeMainImgForward.bind(this);
   }
 
   // initialRender () {
@@ -46,9 +50,6 @@ export default class OverView extends React.Component {
   //   this.setState({ selectedStyle: sampleProductIdStyles.sampleProductIdStyles.results[0] })
   // }
 
-  // starToggle () {
-  //   this.setState({ starToggled: !this.state.starToggled }) // need to communitcate to yassir
-  // }
 
   getproducts () {
     $.ajax({
@@ -58,8 +59,8 @@ export default class OverView extends React.Component {
       url: `/products/${this.state.productsID}`,
       data: { id: this.state.productsID },
       success: (data) => {
+        console.log(data, "producttttt")
         this.setState({ product: data });
-        console.log(data, "dddddd")
       },
       error: (error) => {
         console.log(error, 'error geting data in ajaxxxx');
@@ -74,7 +75,6 @@ export default class OverView extends React.Component {
         id: this.state.productsID
       },
       success: (data) => {
-        console.log(data.results[0], 'data from stylesssss333')
         this.setState({ styles: data.results, selectedStyle: data.results[0], mainImg: data.results[0].photos[0].url });
         this.checkForInventory()
       },
@@ -82,33 +82,10 @@ export default class OverView extends React.Component {
         console.log(error, 'error geting data in ajaxxxx');
       }
     });
-    console.log(this.props.reviews, 'ffff', this.props.reviewsLen, 'dfskldfjk')
-    // $.ajax({
-    //   type: 'GET',
-    //   contentType: 'application/json',
-    //   context: this,
-    //   data: { id: this.state.productsID },
-    //   params: {
-    //     id: this.state.productsID
-    //   },
-    //   url: '/getReviewMeta',
-    //   success: (data) => {
-    //     let count = 0;
-    //     for (const key in data.ratings) {
-    //       count += parseInt(data.ratings[key])
-    //     }
-    //     this.setState({ reviews: data, reviewsLen: count });
-    //   },
-    //   error: (error) => {
-    //     console.log(error, 'error geting data in ajaxxxx reviewwww');
-    //   }
-    // });
   }
 
   addToCart (event) {
-    console.log('added to cart!')
     if (document.getElementById('mySize').selectedOptions[0].label === '---Select size---') {
-      console.log('no sizeeeee')
     //   var event;
     //  event = document.createEvent('MouseEvents');
     // event.initMouseEvent('mousedown', true, true, window);
@@ -121,6 +98,7 @@ export default class OverView extends React.Component {
     for (let i = 0; i < this.state.styles.length; i++) {
       if (event.target.id == this.state.styles[i].style_id) {
         this.setState({ selectedStyle: this.state.styles[i], mainImg: this.state.styles[i].photos[0].url })
+        document.getElementsById(event.target.id).setAttribute("alt","10003");
         break;
       }
     }
@@ -129,7 +107,38 @@ export default class OverView extends React.Component {
   changeMainImg (event) {
     this.setState({ mainImg: event.target.src })
   }
-
+  changeMainImgBack() {
+    for(var i = 0; i < this.state.selectedStyle.photos.length; i++){
+      var newMain = '';
+      if(this.state.selectedStyle.photos[i].thumbnail_url == this.state.mainImg && i == 0) {
+        newMain = this.state.selectedStyle.photos[this.state.selectedStyle.photos.length -1].thumbnail_url
+        break;
+      }else if (this.state.selectedStyle.photos[i].thumbnail_url == this.state.mainImg) {
+        newMain = this.state.selectedStyle.photos[i-1].thumbnail_url
+        break;
+      }else if (this.state.selectedStyle.photos[i].url == this.state.mainImg && i === 0){
+        newMain = this.state.selectedStyle.photos[this.state.selectedStyle.photos.length -1].thumbnail_url
+        break;
+      }
+    }
+    this.setState({mainImg: newMain})
+  }
+  changeMainImgForward() {
+    for(var i = 0; i < this.state.selectedStyle.photos.length; i++){
+      var newMain = '';
+      if(this.state.selectedStyle.photos[i].thumbnail_url == this.state.mainImg && i == this.state.selectedStyle.photos.length -1) {
+        newMain = this.state.selectedStyle.photos[0].thumbnail_url
+        break;
+      }else if (this.state.selectedStyle.photos[i].thumbnail_url == this.state.mainImg) {
+        newMain = this.state.selectedStyle.photos[i+1].thumbnail_url
+        break;
+      }else if (this.state.selectedStyle.photos[i].url == this.state.mainImg && i === 0){
+        newMain = this.state.selectedStyle.photos[i+1].thumbnail_url
+        break;
+      }
+    }
+    this.setState({mainImg: newMain})
+  }
   executeScroll () {
     document.getElementsByClassName('Reviews')[0].scrollIntoView({ behavior: 'smooth' })
   }
@@ -174,7 +183,6 @@ export default class OverView extends React.Component {
   }
 
   componentDidMount () {
-    console.log(this.props, "propppppp")
     this.getproducts()
   }
 
@@ -183,7 +191,6 @@ export default class OverView extends React.Component {
       this.setState({
         productsID: nextProps.id
       }, () => {
-        console.log(this.state.productsID, 'state id')
         this.getproducts()
       })
     }
@@ -197,20 +204,31 @@ export default class OverView extends React.Component {
         </div>
       );
     } else {
+      console.log(this.state.selectedStyle, "sssss")
+
       return (
       <div className = 'all-overview'>
+        <h1 className = 'logo'>TND</h1>
       <div className = 'flex-container'>
        <div className = "leftSideImage">
-        <div className="flex-child">
-       {this.state.selectedStyle.photos !== {}
-         ? <img className = "mainImg" src={this.state.mainImg} />
-         : <div>  Please Wait while we load our products... </div> }
-        </div>
+       <div className = 'carousel'>
+          <div className = 'carousel-buttons'>
+            <div className = 'carousel-button_up' onClick = {this.changeMainImgBack}><ArrowDropUpIcon/></div>
+            <div className = 'carousel-button_down' onClick = {this.changeMainImgForward}> <ArrowDropDownIcon/></div>
+          </div>
         <div className='side-images'>
         {this.state.selectedStyle.photos.map(image => (
           <img className="selectedStyleImages" src={image.thumbnail_url} onClick = {this.changeMainImg}/>
         )
         )}
+        </div>
+        </div>
+        <div className="flex-child">
+        <div className = 'main-img-button_back' onClick = {this.changeMainImgBack}><ArrowBackIcon/></div>
+        <div className = 'main-img-button_forward' onClick = {this.changeMainImgForward}> <ArrowForwardIcon/></div>
+       {this.state.selectedStyle.photos !== {}
+         ? <img className = "mainImg" src={this.state.mainImg} id = {this.state.selectedStyle.style_id} />
+         : <div>  Please Wait while we load our products... </div> }
         </div>
        </div>
 
@@ -228,7 +246,7 @@ export default class OverView extends React.Component {
        <div className = 'thumbNails'>
        {this.state.styles.map(style => (<div className="thumb-nail" key = {style.style_id}>
 
-        <img className="styleList" src={style.photos[0].thumbnail_url} id ={style.style_id} onClick = {this.changeSelectedStyle} />
+        <img className="styleList" src={style.photos[0].thumbnail_url} id ={style.style_id} onClick = {this.changeSelectedStyle}/>
          </div>)
        )}
        </div>
@@ -273,10 +291,19 @@ export default class OverView extends React.Component {
 
       </div>
       </div>
+      <div className = "third_bottom">
 
       <div className = 'description'>
         <div className = 'title'><strong>{this.state.product.slogan}</strong></div>
         <div className = 'slogan'>{this.state.product.description} </div>
+      </div>
+      <div className = "vertical"></div>
+      <div className = 'features'>
+        {this.state.product.features.map((item) => {
+          return <div> &#x2713; {item.feature}: {item.value}</div>
+        })}
+
+      </div>
       </div>
 
       </div>

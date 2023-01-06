@@ -41,4 +41,4 @@ node_modules
 .config.js
 .env
 bundle.js
-.pem
+

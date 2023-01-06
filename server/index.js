@@ -6,10 +6,20 @@ const config = require('../config.js');
 const cors = require('cors');
 require('dotenv').config()
 const PORT = process.env.DEV_PORT || 3033;
+const path = require('path');
+const expressStaticGzip = require("express-static-gzip")
 
-app.use(express.static(__dirname + '/../client/dist'));
+app.use(expressStaticGzip(__dirname + '/../client/dist'));
 app.use(express.json());
 app.use(cors());
+
+
+
+app.use(expressStaticGzip(path.join(__dirname, 'build')));
+
+app.get('/#Reviews', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.get('/getReview', (req, res) => {
   getReviews(req.query.id)
