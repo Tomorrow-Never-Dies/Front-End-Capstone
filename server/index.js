@@ -2,13 +2,24 @@ const express = require('express');
 const axios = require('axios')
 const app = express();
 const { getReviews, addReviews, getMeta, getReviews2 } = require('../helpers/reviews.js');
-// const config = require('../config.js');
+const config = require('../config.js');
 const cors = require('cors');
 require('dotenv').config()
+const PORT = process.env.DEV_PORT || 3033;
+const path = require('path');
+const expressStaticGzip = require("express-static-gzip")
 
-app.use(express.static(__dirname + '/../client/dist'));
+app.use(expressStaticGzip(__dirname + '/../client/dist'));
 app.use(express.json());
 app.use(cors());
+
+
+
+app.use(expressStaticGzip(path.join(__dirname, 'build')));
+
+app.get('/#Reviews', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.get('/getReview', (req, res) => {
   getReviews(req.query.id)
@@ -53,7 +64,20 @@ app.post('/addReview', (req, res) => {
       throw (err);
     })
 })
+app.post('/helpful', (req, res) => {
+  console.log(`helpful is called, id is equal to ${req.body.id}`)
+  markHelpful(req.body.id)
+    .then((response) => {
+      res.send(response);
+    });
+})
 
+app.post('/reportReview', (req, res) => {
+  reportReview(req.body.id)
+    .then((response) => {
+      res.send(response);
+    })
+})
 app.get('/products', (req,res) => {
   console.log(`getting products`);
 
@@ -78,7 +102,6 @@ app.get('/products/:product_id', (req,res) => {
   axios({
   method: 'get',
   url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/${req.query.id}`,
-  url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/products/`,
   params:{
     "products_id": req.query.id,
   },
@@ -87,6 +110,7 @@ app.get('/products/:product_id', (req,res) => {
   }
 })
 .then((result) =>{
+  console.log(result.data, "urlllll")
   res.send(result.data)
 })
 .catch((error) =>{
@@ -149,6 +173,6 @@ app.get('/products/:product_id/related', (req,res) => {
 // })
 
 app.listen(process.env.DEV_PORT, function() {
-  console.log(`listening on port ${process.env.DEV_PORT}`);
+  console.log(`listening on port 3033`);
 
 });

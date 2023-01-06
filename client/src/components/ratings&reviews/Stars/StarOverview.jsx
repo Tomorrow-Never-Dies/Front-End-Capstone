@@ -10,6 +10,7 @@ export default function StarOverview (props) {
   const [rating, setRating] = useState(null);
   const [starRating,setStarRating] = useState([]);
   const [recommendedRating, setRecommended] = useState(null);
+  const [barChartRating, setBarRatings] = useState(null)
   useEffect(() => {
     // console.log(`props meta is equal to ${JSON.stringify(props.data.characteristics)}`);
     console.log(`props meta is equal to ${JSON.stringify(props.data)}`);
@@ -17,42 +18,42 @@ export default function StarOverview (props) {
     // console.log(ratings, "ratings")
     let totalStars = reviewHelpers.avgStarRating(ratings);
     console.log(`recommended data is equal to ${props.data.recommended}`);
-    if(props.data.recommended) {
+    if (props.data.recommended) {
       let recommendedPercentage = reviewHelpers.recommend(props.data.recommended);
       setRecommended(recommendedPercentage);
     }
     setStarRating(totalStars);
     setRating(reviewHelpers.calculateAverage(ratings));
+    setBarRatings(props.data.ratings);
    //setRecommended(recommendedPercentage);
   }, [props.data])
-  if(props.component === "related"){
+
+  useEffect(() => {
+  console.log(`barChartRating is equal to ${JSON.stringify(barChartRating)}`);
+  }, [barChartRating])
+  if (props.component === 'related' || props.component === 'outfits') {
     return (
       <div className = 'ReviewOverview' key = 'ReviewOverview'>
         <div className = 'StarOverview' key = 'StarOverview'>
-        {rating}
+        {/* {rating} */}
         {starRating}
         </div>
-        {/* {props.data.ratings ? <BarChart ratings = {props.data.ratings}/> : "loading"}
-        {props.data.ratings ? <ProductBreakdown characteristics = {props.data.characteristics}/> : "loading"} */}
       </div>
-  )}
-  else{
-  return (
+    )}
+  else {
+    return (
     <div className = 'ReviewOverview' key = 'ReviewOverview'>
       <div className = 'StarOverview' key = 'StarOverview'>
-      {rating}
-      {starRating}
+        <div className = 'ratingNumberAndStar'>
+          <div className = 'reviewRatingNumber'>{rating} </div>  <div className = "StarOverviewRating">{starRating}</div>
+        </div>
       <br/>
       <div className = 'recommendPercentage'>
       {recommendedRating}% of reviews recommend this product
       </div>
       </div>
-      {props.data.ratings ? <BarChart ratings = {props.data.ratings}/> : "loading"}
+      {props.data.ratings ? <BarChart key = {barChartRating} ratings = {barChartRating}/> : "loading"}
       {props.data.ratings ? <ProductBreakdown characteristics = {props.data.characteristics}/> : "loading"}
     </div>
   )}
-
-
 }
-
-

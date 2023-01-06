@@ -16,8 +16,8 @@ class RelatedItemsComp extends React.Component{
       products:[],
       related_products:[],
       products_array:[],
-      current_product:[],
-      compare_product:[],
+      current_product:{},
+      compare_product:{},
       activeIndex: 0,
       metaData: [],
       compared: false,
@@ -27,6 +27,7 @@ class RelatedItemsComp extends React.Component{
     this.compare = this.compare.bind(this)
     this.carousel = this.carousel.bind(this)
     this.index = this.index.bind(this)
+    this.close_compare = this.close_compare.bind(this)
   }
 
   componentDidMount(){
@@ -92,14 +93,15 @@ class RelatedItemsComp extends React.Component{
   }
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.id !== this.state.productsID){
-      this.setState({
-        productsID:nextProps.id
-      },() =>{
-        console.log(this.state.productsID, "state id")
-        this.get_update()
-      })
+      if(nextProps.id !== this.state.productsID){
+        this.setState({
+          productsID:nextProps.id
+        },() =>{
+          console.log(this.state.productsID, "state id")
+          this.get_update()
+        })
     }
+
 
   }
 
@@ -115,8 +117,9 @@ class RelatedItemsComp extends React.Component{
       }
     })
     .then((result) =>{
+      console.log(result, "result")
       this.setState({
-        current_product: this.state.current_product.concat(result.data.features)
+        current_product: result.data
       })
     })
     .then(()=>{
@@ -128,12 +131,21 @@ class RelatedItemsComp extends React.Component{
         }
       })
       .then((result) =>{
+        console.log(result, 'ressullttss')
         this.setState({
-          compare_product: this.state.compare_product.concat(result.data.features),
+          compare_product: result.data,
           compared: true
-        })
+        }, ()=>{ console.log(this.state, "state")})
 
       })
+    })
+
+  }
+
+  close_compare(){
+
+    this.setState({
+      compared: false
     })
 
   }
@@ -172,7 +184,14 @@ class RelatedItemsComp extends React.Component{
   render(){
     return(
       <div className="main">
-        {this.state.compared ? <Comparison current = {this.state.current_product} compare = {this.state.compare_product}/> : null}
+        {this.state.compared ?
+        <Comparison
+        current = {this.state.current_product}
+        compare = {this.state.compare_product}
+        close = {this.close_compare}
+        />
+
+        : null}
         <button data-testid='prev-button' className="scroll-left" onClick={()=>{ this.carousel('prev')}}>
         &larr;
         </button>

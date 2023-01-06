@@ -1,5 +1,9 @@
 const path = require('path');
-const webpack = require('webpack');
+var webpack = require('webpack');
+var dotenv = require('dotenv').config({path: __dirname + '/.env'});
+const TerserPlugin = require('terser-webpack-plugin');
+const WebpackBundleAnalyzer = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   mode:'development',
@@ -23,6 +27,25 @@ module.exports = {
       }
     ],
   },
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        terserOptions: {
+          // https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions
+        },
+      }),
+
+    ],
+    usedExports: true,
+  },
+  plugins: [
+    new WebpackBundleAnalyzer(),
+    new CompressionPlugin({
+      algorithm: "gzip",
+    }),
+
+ ],
   resolve: {
     fallback: {
       url: require.resolve("url/"),
@@ -33,6 +56,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.REACT_APP_GIT_API': JSON.stringify('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')
+      'process.env.REACT_APP_IMGBB_API':JSON.stringify('32afd28d526fb3f23e543894fbad7e6e')
     })
   ]
 };

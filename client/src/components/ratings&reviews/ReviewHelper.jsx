@@ -68,7 +68,6 @@ const reviewHelpers = {
         return  <span className= "fa fa-star empty-star" id = "star-0"  key = {rating + 'star-0'+ reviewId + i }/>
       }
     })
-    //console.log(`fiveStars is equal to ${JSON.stringify(fiveStars)}`);
     return fiveStars
   },
 
@@ -81,7 +80,6 @@ const reviewHelpers = {
   },
 
   factorBreakDown : (FactorRatings) => {
-    console.log(`factorratings is equal to ${JSON.stringify(FactorRatings['Fit']['value'])}`);
 
     const tickTitles = {
       Size: { first: 'Too Small', third: 'Perfect', fifth: 'Too Large' },
@@ -92,12 +90,12 @@ const reviewHelpers = {
       Fit: { first: 'Too Small', third: 'Perfect', fifth: 'Too Long' }
     };
 
-    let factorBreakdownResult = Object.keys(FactorRatings || {}).map( (key, index) => {
+    let factorBreakdownResult = Object.keys(FactorRatings || {}).map((key, index) => {
         if(tickTitles[key].length === 3) {
           return (
           <div key = {key + index}>
                {key}
-            <input key = {FactorRatings[key]['value']}  type="range" min="0" max="5" value={Number(FactorRatings[key]['value'])} step = "0.1" className="slider" readOnly/>
+            <input className ="slider" key = {FactorRatings[key]['value']}  type="range" min="0" max="5" value={Number(FactorRatings[key]['value'])} step = "0.1" className="slider" readOnly/>
               <div className="sliderticks" key = {FactorRatings.id + 'sliderticks' + index + key}>
               <p key = {FactorRatings.id + 'tick1' + index + key}>{tickTitles[key]['first']}</p>
               <p key = {FactorRatings.id + 'tick2' + index + key}>{tickTitles[key]['third']}</p>
