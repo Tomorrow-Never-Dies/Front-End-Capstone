@@ -48,7 +48,7 @@ Your Outfit's Carousel:
 
 
 **#Installation:**
-To run Atelier, make sure you have Nodejs and npm installed on your machine. Then, clone the repository and navigate to the root directory. Run npm install to install all necessary dependencies, and then npm start to start the server. “npm run client-dev” will compile the react application. The app will be available at http://localhost:3000.
+To run Atelier, make sure you have Nodejs and npm installed on your machine. Then, clone the repository and navigate to the root directory. Run npm install to install all necessary dependencies, and then npm start to start the server. “npm run client-dev” will compile the react application. The app will be available at http://localhost:3033.
 
 We hope you enjoy using Atelier! If you have any issues or suggestions, please don't hesitate to reach out.
 
