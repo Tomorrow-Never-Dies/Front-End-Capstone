@@ -14,12 +14,12 @@ This repo comprises four widgets that create a single product page for our organ
 
 
 
-**Overview Widget:**
+**#Overview Widget:**
 
 
 
 
-**Related Products Widget:**
+**#Related Products Widget:**
 
 
 This widget contains 2 carousels:
@@ -39,21 +39,21 @@ Your Outfit's Carousel:
 
 
 
-**Questions Widget:**
+**#Questions Widget:**
 
 
 
-**Ratings and Reviews Widget:**
+**#Ratings and Reviews Widget:**
 
 
 
-**Installation:**
+**#Installation:**
 To run Atelier, make sure you have Nodejs and npm installed on your machine. Then, clone the repository and navigate to the root directory. Run npm install to install all necessary dependencies, and then npm start to start the server. “npm run client-dev” will compile the react application. The app will be available at http://localhost:3000.
 
 We hope you enjoy using Atelier! If you have any issues or suggestions, please don't hesitate to reach out.
 
 
-**Team Members:**
+**#Team Members:**
 * Andre Nga: Questions
 * Yaser Eisa: Related Products
 * Aman Arabi: Overview
