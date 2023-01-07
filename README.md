@@ -40,11 +40,15 @@ Your Outfit's Carousel:
 
 
 **#Questions & Answers Widget:**
+
+
 This widget displays Questions asked by curious shoppers and their respective answers.
 At the moment, it will render all questions associated to the currently displayed item - this is rendered in a component that allows for scrolling.
 With that said, the Questions & Answers widget allows for shoppers/customers to add questions to the currently selected item.
 
 Features to be implemented: Add answers, adjustment of and sorting by Question/Answer "Helpfulness" and Question search
+
+Entire Q&A Widget: ![alt text](https://drive.google.com/file/d/1EyLcbo2o6A5E4pCXd6Z6BtGmXOZwwrov/view?usp=sharing)
 
 **#Ratings and Reviews Widget:**
 
