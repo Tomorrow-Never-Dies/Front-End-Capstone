@@ -12,7 +12,6 @@ const reviewHelpers = {
       totalRating += Number(ratings[key]);
     });
     let ratingResult = (weightedSum / totalRating)
-    //console.log(`ratingResult is equal to ${ratingResult}`);
     return parseFloat(""+ratingResult).toFixed(1);
   },
 
@@ -37,7 +36,6 @@ const reviewHelpers = {
         return  <span className= "fa fa-star empty-star" id = "star-0"  key = {rating + 'star-0'+ i }/>
       }
     })
-    //console.log(`fiveStars is equal to ${JSON.stringify(fiveStars)}`);
     return fiveStars
   },
 

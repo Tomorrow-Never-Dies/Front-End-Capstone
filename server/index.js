@@ -36,7 +36,6 @@ app.get('/getReview2', (req, res) => {
   console.log(`req.querycount is equal to ${req.query.count}`);
   getReviews2(req.query.id, req.query.sort, req.query.count)
     .then((response) => {
-      console.log(`response of getreviews2 is equal to ${response}`)
       res.send(response)
     })
     .catch((err) => {
