@@ -156,6 +156,7 @@ function FormModal (props) {
     <React.Fragment>
     {props.show &&
     <form className = "newReviewModal">
+       <button onClick={props.onHide}>Close Modal</button>
       <label>
         <StarRating handleStarRating = {onRatingChange}/>
       </label>

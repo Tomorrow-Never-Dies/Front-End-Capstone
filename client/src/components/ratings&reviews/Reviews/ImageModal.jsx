@@ -8,8 +8,8 @@ export default function ImageModal(props) {
     <React.Fragment>
     {props.show && (
       <div className="modal">
+        <button onClick={props.onHide}>x</button>
         <img className = 'ModalReviewImage' src={props.img} key={`${props.img} modal`} alt="alt tag"/>
-        <button onClick={props.onHide}>Close Modal</button>
       </div>
     )}
   </React.Fragment>
