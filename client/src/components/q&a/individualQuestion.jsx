@@ -12,7 +12,7 @@ function IndividualQuestion(props) {
   return (
     <aside>
       {/* { getKey(props.currentAnswers).map((curr) => (console.log(curr)))} */}
-      {console.log(props)}
+      {/* {console.log(props)} */}
       <h2> Q: {props.currentQuestion}</h2>
       <div><Answers currentAnswers={props.currentAnswers} /></div>
     </aside>
