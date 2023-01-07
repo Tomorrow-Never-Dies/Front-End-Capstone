@@ -7,7 +7,7 @@ import './q&a.css';
 const getQuestions = require('../../../../helpers/q&a.js');
 
 class QuestionAnswers extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
       item_id: this.props.id,
@@ -27,13 +27,27 @@ class QuestionAnswers extends React.Component {
       });
   };
 
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.id !== this.state.item_id) {
+      this.setState({
+        item_id: nextProps.id
+      }, () => {
+        getQuestions.getQuestions(this.state.item_id)
+          .then((newResult) => {
+            this.setState({
+              questions: newResult.data.results
+            })
+          })
+      })
+    }
+  }
+
   showModal () {
     this.setState({ show: true });
-    // console.log(this.state.show);
   }
 
   hideModal () {
-    this.setState({ show: false});
+    this.setState({ show: false });
   }
 
   render () {
@@ -42,15 +56,15 @@ class QuestionAnswers extends React.Component {
         <h1 className="header">
           Q&A
         </h1>
-        <input
+        {/* <input
           id="QuestionSearch"
           type="text"
           placeholder="Have a Question?"
-        />
-        <div id="QuestionList">
+        /> */}
+        <div className="QuestionList">
           <h4 id="Question">
             {this.state.questions.map((current) => (
-              <IndividualQuestion key={current.question_id} questionKey={current.question_id} currentQuestion={current.question_body} currentAnswers={current.answers}/>
+              <IndividualQuestion key={current.question_id} questionKey={current.question_id} currentQuestion={current.question_body} currentAnswers={current.answers} />
             ))}
           </h4>
         </div>
@@ -61,17 +75,17 @@ class QuestionAnswers extends React.Component {
             <form>
               <label>
                 Question:
-                <input type='text' name="question" required/>
+                <input type='text' name="question" required />
               </label>
               <label>
                 Nickname:
-                <input type='text' name='nickname' required/>
+                <input type='text' name='nickname' required />
               </label>
               <label>
                 Email:
-                <input type='text' name='email' required/>
+                <input type='text' name='email' required />
               </label>
-              <input type="submit" value="Submit"/>
+              <input type="submit" value="Submit" />
             </form>
           </QuestionModal>
         </div>
