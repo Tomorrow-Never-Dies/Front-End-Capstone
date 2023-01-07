@@ -25,9 +25,11 @@ function RatingsReviews (props) {
   const getModal = data => {
     setModal(true);
   };
+
   const mappedReviews = reviews.map((review) => {
     return <IndividualReview reviewInfo = {review} key = {review.review_id} review_id = {review.review_id}/>
   })
+
 
   const setReviewFilter = (event) => {
     setFilter(event.target.value);
