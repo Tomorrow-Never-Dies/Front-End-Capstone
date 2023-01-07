@@ -140,9 +140,7 @@ function RatingsReviews (props) {
       setfilteredReviews({['1']:[...FilteredReviewsByStars], ['2']: [...FilteredReviewsBy2Stars], ['3']:[...FilteredReviewsBy3Stars],['4']: [...FilteredReviewsBy4Stars], ['5']:[...FilteredReviewsBy5Stars]});
   }, [allReviews])
 
-  useEffect(() => {
-    console.log(`filterreviews has changed it is equal to ${JSON.stringify(filteredReviews)}`);
-  },[filteredReviews])
+
   return (
     <div className = 'RatingsAndReviews'>
       <div className = 'RatingsAndReviewsTitle'>

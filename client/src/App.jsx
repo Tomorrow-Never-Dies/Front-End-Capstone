@@ -89,7 +89,7 @@ class App extends React.Component {
         <RelatedItemsComp   id ={this.state.productsID} click = {this.onclick} track = {this.track}/>
         <Outfits id ={this.state.productsID} click = {this.onclick} starToggled = {this.state.starToggled} />
          <QuestionAnswers id ={this.state.productsID} />
-        {/* <RatingsReviews id ={this.state.productsID} reviews = {this.state.reviews} reviewsLen = {this.state.reviewsLen}/> */}
+        <RatingsReviews id ={this.state.productsID} reviews = {this.state.reviews} reviewsLen = {this.state.reviewsLen}/>
       </div>
     )
   }
