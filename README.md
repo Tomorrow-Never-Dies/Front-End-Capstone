@@ -36,6 +36,7 @@ Your Outfit's Carousel:
 - Also adds products from the overview star toggle button
 - Clicking on a related product will update the overview component
 - Each product can be removed from the carousel by clicking the x buton
+![alt_text](https://github.com/Tomorrow-Never-Dies/Front-End-Capstone/blob/main/screenshots/Your%20outfits.png)
 
 **#Questions & Answers Widget:**
 This widget displays Questions asked by curious shoppers and their respective answers.
