@@ -16,6 +16,7 @@ function Items (props) {
                metaData = {props.metaData}
                type = {props.type}
                delete = {props.delete}
+               track = {props.track}
                />
 
                ))}

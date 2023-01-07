@@ -15,10 +15,12 @@ class App extends React.Component {
       reviews: [],
       reviewsLen: 0,
       starToggled: false,
+      track:{}
     }
     this.onclick = this.onclick.bind(this)
     this.getReviewMeta = this.getReviewMeta.bind(this)
     this.starToggle = this.starToggle.bind(this)
+    this.track = this.track.bind(this)
   }
 
   onclick(id) {
@@ -28,8 +30,28 @@ class App extends React.Component {
       console.log("app.jsx")
     })
 
-  }
+    this.track(id)
 
+  }
+  track(id){
+    //need to add objects correctly
+    console.log()
+    var keys = Object.keys(this.state.track)
+    console.log(keys)
+    if(keys.includes(id.toString())){
+      this.setState({
+        track : {
+          [id]: this.state.track[toString(id)]+1
+        }
+      }, console.log(this.state.track, "track"))
+    } else{
+      this.setState({
+        track : {
+          [id]: 1
+        }
+      } , console.log(this.state.track, "track"))
+    }
+  }
   starToggle () {
     console.log("clicked star")
     this.setState({ starToggled: !this.state.starToggled }) // need to communitcate to yassir
@@ -64,7 +86,7 @@ class App extends React.Component {
     return(
       <div>
         <OverView  starToggle = {this.starToggle} id ={this.state.productsID} reviews = {this.state.reviews} reviewsLen = {this.state.reviewsLen}/>
-        <RelatedItemsComp   id ={this.state.productsID} click = {this.onclick}/>
+        <RelatedItemsComp   id ={this.state.productsID} click = {this.onclick} track = {this.track}/>
         <Outfits id ={this.state.productsID} click = {this.onclick} starToggled = {this.state.starToggled} />
          <QuestionAnswers id ={this.state.productsID} />
         {/* <RatingsReviews id ={this.state.productsID} reviews = {this.state.reviews} reviewsLen = {this.state.reviewsLen}/> */}

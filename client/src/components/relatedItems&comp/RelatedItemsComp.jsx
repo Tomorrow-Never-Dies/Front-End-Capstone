@@ -204,6 +204,7 @@ class RelatedItemsComp extends React.Component{
                 compare = {this.compare}
                 metaData = {this.state.metaData}
                 type = {"related"}
+                track = {this.props.track}
               />
             </div>
          </div>

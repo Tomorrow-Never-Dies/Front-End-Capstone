@@ -114,7 +114,7 @@ class Outfits extends React.Component{
   }
 
   carousel(str){
-    if(this.state.activeIndex < (this.state.related_products.length - 3)*.25 && str === 'next') {
+    if(this.state.activeIndex < (this.state.product_ids.length - 2)*.25 && str === 'next') {
       this.setState({
         activeIndex: this.state.activeIndex+.25
       }, ()=>{console.log(this.state.activeIndex)})
@@ -128,7 +128,7 @@ class Outfits extends React.Component{
       }, ()=>{console.log(this.state.activeIndex)})
       } else if(str === 'prev'){
         this.setState({
-          activeIndex: (this.state.related_products.length -3)*.25
+          activeIndex: (this.state.product_ids.length -2)*.25
         }, ()=>{console.log(this.state.activeIndex)})
       }
 

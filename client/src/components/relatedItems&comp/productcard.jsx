@@ -1,6 +1,7 @@
 import React from "react"
 import './styles/carousel.css'
 import StarOverview from "../ratings&reviews/Stars/StarOverview.jsx";
+import StarIcon from '@mui/icons-material/Star';
 
 
 
@@ -31,9 +32,9 @@ function ProductCards (props) {
           <div className="image" style={{backgroundImage:`url(${url})` }}  >
 
           {props.type ==="outfits"?
-          <button data-testid='delete-card' className="delete_outfit" onClick={()=>props.delete(props.id)}>x</button> :
-          <button className = "compare-button" onClick={() => props.compare(props.id)} >
-            compare
+          <button data-testid='delete-card' className="delete_outfit" style={{ float: "right"}} onClick={()=>props.delete(props.id)}>x</button> :
+          <button className = "compare-button" variant="outlined" style={{color: "white", float: "right"}} onClick={() => props.compare(props.id)} >
+            <StarIcon/>
           </button> }
 
           </div>

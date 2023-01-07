@@ -13,11 +13,10 @@ export default function StarOverview (props) {
   const [barChartRating, setBarRatings] = useState(null)
   useEffect(() => {
     // console.log(`props meta is equal to ${JSON.stringify(props.data.characteristics)}`);
-    console.log(`props meta is equal to ${JSON.stringify(props.data)}`);
     let ratings = props.data.ratings;
     // console.log(ratings, "ratings")
     let totalStars = reviewHelpers.avgStarRating(ratings);
-    console.log(`recommended data is equal to ${props.data.recommended}`);
+    // console.log(`recommended data is equal to ${props.data.recommended}`);
     if (props.data.recommended) {
       let recommendedPercentage = reviewHelpers.recommend(props.data.recommended);
       setRecommended(recommendedPercentage);
@@ -29,7 +28,7 @@ export default function StarOverview (props) {
   }, [props.data])
 
   useEffect(() => {
-  console.log(`barChartRating is equal to ${JSON.stringify(barChartRating)}`);
+  //console.log(`barChartRating is equal to ${JSON.stringify(barChartRating)}`);
   }, [barChartRating])
   if (props.component === 'related' || props.component === 'outfits') {
     return (
