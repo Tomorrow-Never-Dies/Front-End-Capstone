@@ -1,11 +1,10 @@
 .styleList {
-  border-radius: 2.3em;
+  border-radius: 3.3em;
   width: 5em;
   height: 5em;
-  border-width: .1.5em;
+  border-width: .2em;
   border-style: solid;
   border-color: #000000;
-  content: "✔";
 }
 
 .selectedStyleImages
@@ -192,19 +191,27 @@
   padding-left: 50px;
 }
 
-.expand {
-  max-width: 400%;
+.rightSideSelect.expand {
+  display: none;
+}
+.mainImg.expand {
+  width: 1000px;
 }
 
-.fullScreen {
-  background-color: aqua;
+
+.fullscreen {
+  /* background-color: rgb(234, 233, 242); */
   right: 20%;
   position: absolute;
-  top: 50%;
+  top: 3%;
   transform: translateY(-10%);
 
   padding: 0;
   margin: 0.5rem;
   font-size: 1.5rem;
 
+}
+
+.styleList.check {
+  border-color:  #ffc107;
 }

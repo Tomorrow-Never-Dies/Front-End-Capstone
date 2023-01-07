@@ -29,7 +29,8 @@ export default class OverView extends React.Component {
       mainImg: undefined,
       outofstock: false,
       reviewsLen: 0,
-      quantity: null
+      quantity: null,
+      checked: false
     };
     // this.initialRender = this.initialRender.bind(this);
     this.addToCart = this.addToCart.bind(this);
@@ -43,6 +44,8 @@ export default class OverView extends React.Component {
     this.changeMainImgBack = this.changeMainImgBack.bind(this);
     this.changeMainImgForward = this.changeMainImgForward.bind(this);
     this.fullScreen = this.fullScreen.bind(this);
+    this.checkMark = this.checkMark.bind(this);
+    this.removeCheck = this.removeCheck.bind(this);
   }
 
   // initialRender () {
@@ -79,28 +82,40 @@ export default class OverView extends React.Component {
       success: (data) => {
         this.setState({ styles: data.results, selectedStyle: data.results[0], mainImg: data.results[0].photos[0].url });
         this.checkForInventory()
+        document.getElementById(this.state.styles[0].style_id).classList.toggle('check')
       },
       error: (error) => {
         console.log(error, 'error geting data in ajaxxxx');
       }
-    });
+    })
+    // .then(
+    //   document.getElementById(this.state.styles[0].style_id).classList.toggle('check')
+    // )
   }
 
   addToCart (event) {
-    if (document.getElementById('mySize').selectedOptions[0].label === '---Select size---') {
+    console.log("added to cart!")
+    //if (document.getElementById('mySize').selectedOptions[0].label === '---Select size---') {
     //   var event;
     //  event = document.createEvent('MouseEvents');
     // event.initMouseEvent('mousedown', true, true, window);
     // document.getElementById('mySize').dispatchEvent(event)
 
-    }
   }
 
+  removeCheck (){
+    this.state.styles.forEach((element) =>{
+      document.getElementById(element.style_id).classList.remove('check')
+    })
+
+  }
   changeSelectedStyle (event) {
+    this.removeCheck()
     for (let i = 0; i < this.state.styles.length; i++) {
       if (event.target.id == this.state.styles[i].style_id) {
+        document.getElementById(event.target.id).classList.toggle('check')
         this.setState({ selectedStyle: this.state.styles[i], mainImg: this.state.styles[i].photos[0].url })
-        document.getElementsById(event.target.id).setAttribute("alt","10003");
+
         break;
       }
     }
@@ -113,6 +128,7 @@ export default class OverView extends React.Component {
   checkMark() {
     //if selected id equal to stylelist style id
     //return div with checkmark inside thumbnails div as child div
+    console.log(this.state.selectedStyle, "ahshshsss")
   }
   changeMainImgBack() {
     for(var i = 0; i < this.state.selectedStyle.photos.length; i++){
@@ -132,6 +148,7 @@ export default class OverView extends React.Component {
   }
 
   fullScreen() {
+    document.querySelector('.rightSideSelect').classList.toggle('expand');
     document.querySelector('.mainImg').classList.toggle('expand');
   }
 
@@ -240,7 +257,7 @@ export default class OverView extends React.Component {
         <div className = 'main-img-button_forward' onClick = {this.changeMainImgForward}> <ArrowForwardIcon/></div>
         <div className = 'fullscreen' onClick ={this.fullScreen}><FullscreenIcon/></div>
        {this.state.selectedStyle.photos !== {}
-         ? <img className = "mainImg" src={this.state.mainImg} id = {this.state.selectedStyle.style_id} />
+         ? <img className = "mainImg" src={this.state.mainImg} />
          : <div>  Please Wait while we load our products... </div> }
         </div>
        </div>
