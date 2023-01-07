@@ -66,12 +66,13 @@ class Outfits extends React.Component{
     if(nextProps.starToggled){
       console.log("toggeled")
       this.setState({
-        productsID:nextProps.id
+        productsID:nextProps.id,
+        starToggled: true
       },() =>{
         console.log(this.state.productsID, "state id")
         this.add()
       })
-  } else{
+  } else if(nextProps.starToggled !== this.state.starToggled){
     this.delete(this.state.productsID)
   }
 
@@ -113,23 +114,24 @@ class Outfits extends React.Component{
   }
 
   carousel(str){
-    if(this.state.activeIndex < this.state.product_ids.length  && str === 'next') {
+    if(this.state.activeIndex < (this.state.product_ids.length - 2)*.25 && str === 'next') {
       this.setState({
-        activeIndex: this.state.activeIndex+.5
-      })
+        activeIndex: this.state.activeIndex+.25
+      }, ()=>{console.log(this.state.activeIndex)})
     } else if(str === 'next'){
       this.setState({
         activeIndex: 0
-      })
+      }, ()=>{console.log(this.state.activeIndex)})
     } else if(this.state.activeIndex > 0 && str === 'prev') {
       this.setState({
-       activeIndex: this.state.activeIndex-.5
-      })
+       activeIndex: this.state.activeIndex-.25
+      }, ()=>{console.log(this.state.activeIndex)})
       } else if(str === 'prev'){
         this.setState({
-          activeIndex: this.state.product_ids.length
-        })
+          activeIndex: (this.state.product_ids.length -2)*.25
+        }, ()=>{console.log(this.state.activeIndex)})
       }
+
  }
 
   render(){

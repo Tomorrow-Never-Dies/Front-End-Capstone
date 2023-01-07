@@ -1,6 +1,7 @@
 import React from "react"
 import './styles/carousel.css'
 import StarOverview from "../ratings&reviews/Stars/StarOverview.jsx";
+import StarIcon from '@mui/icons-material/Star';
 
 
 
@@ -27,23 +28,21 @@ function ProductCards (props) {
   return(
     //article
     <article className="card">
-          <div className="image" style={{
-      backgroundImage:`url(${url})` }}>
+
+          <div className="image" style={{backgroundImage:`url(${url})` }}  >
 
           {props.type ==="outfits"?
-          <button data-testid='delete-card' className="delete_outfit" onClick={()=>props.delete(props.id)}>x</button> :
-          <button className = "compare-button" onClick={() => props.compare(props.id)} >
-            compare
+          <button data-testid='delete-card' className="delete_outfit" style={{ float: "right"}} onClick={()=>props.delete(props.id)}>x</button> :
+          <button className = "compare-button" variant="outlined" style={{color: "white", float: "right"}} onClick={() => props.compare(props.id)} >
+            <StarIcon/>
           </button> }
 
-
-         <div data-testid='product-card' className="carousel-item"   onClick={() => (
-        props.click(props.id)
-        )}>
+          </div>
+          <div data-testid='product-card' className="carousel-item" onClick={() => (props.click(props.id))} >
 
 
-       </div>
-       </div>
+
+
        <div data-testid='card-info' className="card-info">
           <div data-testid='product-name' className="product-name">
             {props.item.name}
@@ -54,7 +53,7 @@ function ProductCards (props) {
 
           {metaData !== 0 ? <StarOverview  data = { metaData} component={props.type} />: "no reviews" }
 
-
+          </div>
 
        </div>
 

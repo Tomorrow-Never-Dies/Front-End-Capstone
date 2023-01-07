@@ -17,16 +17,14 @@ function Answers(props) {
         <div className='answers'>
           A: {curr.body}
           <div>
-            <small>
+            <sub className='subscript'>
               by {curr.answerer_name}, {new Date(curr.date).toLocaleDateString('en-US', { year: "numeric", month: "long", day: "numeric" })} | Helpful? <span>Yes</span> {'(' + curr.helpfulness + ')'}
-            </small>
+            </sub>
           </div>
         </div>
-
       ))}
     </div>
   )
 }
-
 
 export default Answers;
