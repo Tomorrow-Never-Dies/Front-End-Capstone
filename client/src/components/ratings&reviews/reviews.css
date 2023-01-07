@@ -10,7 +10,7 @@
 }
 .RatingsAndReviewsHeader{
   margin-right:auto;
-  width: 635.54px
+  width: 900.01px
 }
 .singleReview {
   border-bottom:solid
@@ -28,6 +28,12 @@
   flex-direction:row;
 }
 
+.moreReviewButtons{
+  font-family:'roboto'
+}
+.addReviewButton{
+  font-family:'roboto'
+}
 .IndividualReviews{
   display:flex;
   position:relative;
@@ -279,13 +285,14 @@ input[type="range"] {
 .newReviewModal {
   position: fixed;
   right: 50%;
-  bottom: -5%;
-  left: 10%;
+  bottom: -40%;
+  /* left: 10%; */
   padding: 20px;
   box-shadow: 0 10px 30px 0 rgba(127, 127, 127, 0.3);
   background: rgba(255, 255, 255, 0.8);
   padding:20px;
   transform: translate(50%, -50%);
+  width: 400px;
 }
 input[type=text] {
   padding:10px;
@@ -298,24 +305,26 @@ input[type=file] {
   margin:10px 0;
 }
 
-.CharacteristicRadioButton input[type=radio] {
-  display: block;
-  margin: 0 auto;
+ .characteristic-grid .CharacteristicRadioButton{
+  display:block
 }
-.CharacteristicRadioButton {
-  display: inline-block;
-  font-size:15px;
-  padding-top: 5px;
-  padding:10px
+
+.characteristic-grid > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 30px;
 }
 
 .summary{
   vertical-align:middle;
+  padding:20px;
+  /* height:50px */
 }
 
 .body{
   vertical-align:middle;
-
+  padding:20px;
 }
 
 /* form {
@@ -330,6 +339,7 @@ form.input{
   display: inline-block;
   width: 28%;
   margin-right: 1%;
+  padding:100px
 }
 .body.summary {
 display: inline-block;
@@ -337,9 +347,16 @@ float: left;
 }
 
 textarea{
-  display:block;
   resize:none;
-  margin-left: auto;
   margin-right: auto;
+  padding: 10px
 }
 
+.review_modal_body_review{
+  display:block;
+  padding:10px
+}
+
+.Name_And_Email_Review{
+  padding:10px;
+}
