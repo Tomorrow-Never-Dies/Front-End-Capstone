@@ -15,7 +15,6 @@ export default function IndividualReview (props) {
 
   function markHelpful (e) {
     e.preventDefault();
-    console.log(`marking helpful!`)
     setHelpfulness(helpfulness + 1);
     axios.post('helpful', {
       id: props.review_id
@@ -24,28 +23,21 @@ export default function IndividualReview (props) {
 
   function reportReview (e) {
     e.preventDefault();
-    console.log(`reporting!`);
     axios.post('/reportReview', {
       id: props.review_id
     })
   }
 
-  useEffect(() => {
-    console.log(`helpfulness is equal to ${helpfulness}`);
-  }, [helpfulness])
 
   useEffect(() => {
-    console.log(`props.reviewInfo.photos is equal to ${props.reviewInfo.photos}`)
     setHelpfulness(props.reviewInfo.helpfulness);
-    console.log(`props.reviewInfo is equal to ${JSON.stringify(props.reviewInfo)}`); //use props.reviewInfo.rating
     var starRating = reviewHelpers.IndividualStarRating(props.reviewInfo.rating, props.reviewInfo.review_id)
     setRating(starRating);
     var ratingImages = props.reviewInfo.photos.map((imgSrc, index) => (<ReviewImages src={imgSrc.url} alt="" />))
-    console.log(`images url is equal to ${JSON.stringify(ratingImages)}`);
     setImages(ratingImages)
   }, [props.reviewInfo])
   return (
-  <div className = 'singleReview' data-testid = "singleReview">
+  <div className = 'singleReview' data-testid = "singleReview" key={props.review_id}>
     {starRating}
     <ReviewDate username = {props.reviewInfo.reviewer_name} date = {props.reviewInfo.date}/>
     <br/>

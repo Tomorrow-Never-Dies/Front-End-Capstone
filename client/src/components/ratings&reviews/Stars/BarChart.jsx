@@ -10,7 +10,6 @@ function BarGroup(props) {
   let width = widthScale(15)
   let yMid = props.barHeight * 0.5
   let totalPercentage = (props.d.value)/(props.totalNumOfRatings)*100
-  // console.log(`totalpercentage is equal to ${totalPercentage}`)
   return <g className="bar-group" key = {totalPercentage}>
     <text className="name-label" x="-20" y={yMid} alignmentBaseline="middle" key = {props.d.value + 'name-label'}>{props.d.name}</text>
     <rect className = "star-breakdown"y={barPadding * 0.5} width={width} height={props.barHeight - barPadding} fill={barColour} key = {props.d.value + 'star-breakdown'} />
@@ -22,15 +21,17 @@ function BarGroup(props) {
 export default function BarChart (props) {
   const [barGraph, setBar] = useState([]);
 
+  const filterReviews = (e) => {
+    props.onClick(e.currentTarget.id)
+  }
   useEffect(() => {
-    console.log(`props.ratings in barchart component is equal to ${JSON.stringify(props.ratings)}`);
     if (props.ratings) {
       let barHeight = 20
       let totalNumOfRatings = reviewHelpers.barChartPercentage(props.ratings)
       let barGroups = [...Array(5)].map((d, i) => {
         let index = 5-i; //makes 5 star bar on top
         var ratingData = {name:`${index} stars`, value:props.ratings[index.toString()]};
-        return (<g transform={`translate(0, ${i * barHeight})`} key = {props.ratings + 'g-transform' + index}>
+        return (<g transform={`translate(0, ${i * barHeight})`} key = {props.ratings + 'g-transform' + index} id = {index} onClick={filterReviews} >
               <BarGroup d={ratingData} totalNumOfRatings = {totalNumOfRatings} barHeight={barHeight} key = {props.ratings} />
               </g>)
       })
