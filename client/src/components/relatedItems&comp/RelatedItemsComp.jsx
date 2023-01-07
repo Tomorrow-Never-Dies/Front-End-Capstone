@@ -158,13 +158,14 @@ class RelatedItemsComp extends React.Component{
   return clicks
  }
 
+ //.25 = 1 product card
+ //4-3
+
 
  carousel(str){
-    console.log(this.state.related_products.length)
-    console.log(this.index(this.state.related_products.length))
-    if(this.state.activeIndex < this.state.related_products.length -3 && str === 'next') {
+    if(this.state.activeIndex < (this.state.related_products.length - 3)*.25 && str === 'next') {
       this.setState({
-        activeIndex: this.state.activeIndex+.20
+        activeIndex: this.state.activeIndex+.25
       }, ()=>{console.log(this.state.activeIndex)})
     } else if(str === 'next'){
       this.setState({
@@ -172,11 +173,11 @@ class RelatedItemsComp extends React.Component{
       }, ()=>{console.log(this.state.activeIndex)})
     } else if(this.state.activeIndex > 0 && str === 'prev') {
       this.setState({
-       activeIndex: this.state.activeIndex-.5
+       activeIndex: this.state.activeIndex-.25
       }, ()=>{console.log(this.state.activeIndex)})
       } else if(str === 'prev'){
         this.setState({
-          activeIndex: this.state.related_products.length -3
+          activeIndex: (this.state.related_products.length -3)*.25
         }, ()=>{console.log(this.state.activeIndex)})
       }
 
@@ -203,6 +204,7 @@ class RelatedItemsComp extends React.Component{
                 compare = {this.compare}
                 metaData = {this.state.metaData}
                 type = {"related"}
+                track = {this.props.track}
               />
             </div>
          </div>

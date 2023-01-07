@@ -2,7 +2,7 @@
   position: relative;
   background: whitesmoke;
   display: flex;
-  width: 75%;
+  width: 60%;
   height: 25rem;
   margin: auto;
   border-color: azure;
@@ -19,7 +19,8 @@
 }
 
 .main{
-  white-space: nowrap;
+  /* white-space: nowrap; */
+  word-wrap: break-word;
   height: 25rem;
   display: flex;
   align-items: center;
@@ -36,6 +37,8 @@
   justify-content: center;
   background-position: center;
   background-repeat: no-repeat;
+  margin-left: 20px;
+  margin-right: 20px;
   background-size: cover;
   transition: 1s cubic-bezier(0.39, 0.575, 0.565, 1);
   cursor: pointer;
@@ -53,6 +56,9 @@
   height: 2rem;
   width: 4rem;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
+
 }
 .scroll-left{
   background-color: white;
@@ -97,11 +103,12 @@ align-items: right;
 }
 .modal {
   position: fixed;
-  z-index: 7;
-  top: 0;
-  left: 0;
-  width:100%;
-  height: 100%;
+  padding: 0%;
+  /* /z-index: 7; */
+  top: 10%;
+  left: 10%;
+  width:75%;
+  height: 50%;
     align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.6);
@@ -110,23 +117,27 @@ align-items: right;
 .modal-main {
   position: relative;
   background: white;
-  width: 60%;
-  height: auto;
-  top:50%;
-  left:50%;
+  opacity: .75;
+  width: 100%;
+  height: 100%;
+  word-wrap: break-word;
   align-items: center;
   justify-content: center;
   transform: translate(-50%,-50%);
 }
 .current-product{
-  margin-left: 20px;
-  margin-right: 20px;
+  /* margin-left: 20px;
+  margin-right: 20px; */
+  width: 100%;
+  word-wrap: break-word;
   justify-content: center;
 }
 
 .compare-product{
-  margin-left: 20px;
-  margin-right: 20px;
+  /* margin-left: 20px;
+  margin-right: 20px; */
+  width: 100%;
+  word-wrap: break-word;
   justify-content: right;
 }
 
@@ -136,12 +147,37 @@ align-items: right;
 }
 
 .comparison-title{
+  display: flex;
   align-items: center;
   justify-content: center;
 
 }
 
 .comparison{
-  display: flex;
+  /* display: flex; */
+  width: 100%;
+  word-wrap: break-word;
 }
 
+.middle{
+  font-size: large;
+  font-weight: bold;
+  margin-left: 5%;
+  margin-right: 5%;
+
+}
+td {
+  text-align: center;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.delete_outfit{
+  font-size: larger;
+  font-weight: bolder;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
