@@ -48,20 +48,23 @@ With that said, the Questions & Answers widget allows for shoppers/customers to 
 
 Features to be implemented: Add answers, adjustment of and sorting by Question/Answer "Helpfulness" and Question search
 
-Entire Q&A Widget: ![alt text](https://drive.google.com/file/d/1EyLcbo2o6A5E4pCXd6Z6BtGmXOZwwrov/view?usp=sharing)
+Entire Q&A Widget: ![alt text](https://github.com/Tomorrow-Never-Dies/Front-End-Capstone/blob/main/screenshots/Entire%20Q%26A.png)
+
+
+Add Question Modal: ![alt text](https://github.com/Tomorrow-Never-Dies/Front-End-Capstone/blob/main/screenshots/Add%20Question.png)
 
 **#Ratings and Reviews Widget:**
 
 
 
 **#Installation:**
-To run Atelier, make sure you have Nodejs and npm installed on your machine. Then, clone the repository and navigate to the root directory. Run npm install to install all necessary dependencies, and then npm start to start the server. “npm run client-dev” will compile the react application. The app will be available at http://localhost:3000.
+To run Atelier, make sure you have Nodejs and npm installed on your machine. Then, clone the repository and navigate to the root directory. Run npm install to install all necessary dependencies, and then npm start to start the server. “npm run client-dev” will compile the react application. The app will be available at http://localhost:3033.
 
 We hope you enjoy using Atelier! If you have any issues or suggestions, please don't hesitate to reach out.
 
 
 **#Team Members:**
-* Andre Nga: Questions
+* Andre Ngo: Questions
 * Yaser Eisa: Related Products
 * Aman Arabi: Overview
 * Andy Ma: Reviews
