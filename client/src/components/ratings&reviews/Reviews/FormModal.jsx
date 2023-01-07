@@ -110,12 +110,10 @@ function FormModal (props) {
 
     axios.post('addReview', newReview)
       .then((result) => {
-        console.log(`result from posting a new review is ${JSON.stringify(result)}`);
+       return
       })
   }
-  useEffect(() => {
-    console.log(`newReview is equal to ${JSON.stringify(newReview)}`);
-  }, [newReview])
+
   useEffect(() => {
     var charForm = [];
    if(props.characteristics) {
@@ -138,6 +136,7 @@ function FormModal (props) {
       // </label>
       <div>
         {`${key}`}
+        <div className = "characteristic-grid" >
         <label onChange = {onCharacteristicChange} >
         <label className = 'CharacteristicRadioButton'><input type="radio" name={props.characteristics[key].id} value = '1' />{radioTitles[key][1]}</label>
         <label className = 'CharacteristicRadioButton'><input type="radio" name={props.characteristics[key].id} value = '2' />{radioTitles[key][2]}</label>
@@ -145,6 +144,7 @@ function FormModal (props) {
         <label className = 'CharacteristicRadioButton'><input type="radio" name={props.characteristics[key].id} value = '4' />{radioTitles[key][4]}</label>
         <label className = 'CharacteristicRadioButton'><input type="radio" name={props.characteristics[key].id} value = '5' />{radioTitles[key][5]}</label>
         </label>
+        </div>
     </div>
       )
       charForm.push(<br/>)
@@ -160,23 +160,25 @@ function FormModal (props) {
         <StarRating handleStarRating = {onRatingChange}/>
       </label>
       <br />
+      <div className = "characteristic-grid">
       <label onChange = {onRecommendChange}>
         Recommended
-          <input type = 'radio' value = 'true' name = 'recommend'/>
+           <input type = 'radio' value = 'true' name = 'recommend'/>
           Yes
           <input type = 'radio' value = 'false' name = 'recommend'/>
           No
       </label>
+      </div>
       <br />
       {characteristicForm}
 
       <label className = 'labelSummary'>
-      Review summary
+      <label className = 'review_modal_body_review'>Review summary</label>
       <textarea className = 'summary' cols="40" rows = "5" onChange = {onChangeForm}></textarea>
       </label>
       <br />
-      <label className = 'labelBody'>
-      Review Body
+      <label className = 'labelSummary'>
+      <label className = 'review_modal_body_review'>Review body</label>
       <textarea className = 'body' cols="40" rows = "5" onChange = {onChangeForm}></textarea>
       </label>
       <br />
@@ -186,14 +188,15 @@ function FormModal (props) {
       </label>
       <br />
       <label onChange = {onChangeForm}>
-      Name
+      <label className = 'Name_And_Email_Review'>Name</label>
       <input type = 'text' name = 'name' />
       </label>
       <br />
       <label onChange = {onChangeForm}>
-      Email
+      <label className = 'Name_And_Email_Review'>Email</label>
       <input type = 'text' name = 'email' />
       </label>
+      <br/>
       <button type="submit" onClick = {handleSubmit}>Submit</button>
     </form>
 }

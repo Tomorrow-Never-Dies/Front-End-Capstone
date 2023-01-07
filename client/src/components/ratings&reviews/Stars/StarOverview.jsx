@@ -12,11 +12,8 @@ export default function StarOverview (props) {
   const [recommendedRating, setRecommended] = useState(null);
   const [barChartRating, setBarRatings] = useState(null)
   useEffect(() => {
-    // console.log(`props meta is equal to ${JSON.stringify(props.data.characteristics)}`);
     let ratings = props.data.ratings;
-    // console.log(ratings, "ratings")
     let totalStars = reviewHelpers.avgStarRating(ratings);
-    // console.log(`recommended data is equal to ${props.data.recommended}`);
     if (props.data.recommended) {
       let recommendedPercentage = reviewHelpers.recommend(props.data.recommended);
       setRecommended(recommendedPercentage);
@@ -24,17 +21,12 @@ export default function StarOverview (props) {
     setStarRating(totalStars);
     setRating(reviewHelpers.calculateAverage(ratings));
     setBarRatings(props.data.ratings);
-   //setRecommended(recommendedPercentage);
   }, [props.data])
 
-  useEffect(() => {
-  //console.log(`barChartRating is equal to ${JSON.stringify(barChartRating)}`);
-  }, [barChartRating])
   if (props.component === 'related' || props.component === 'outfits') {
     return (
       <div className = 'ReviewOverview' key = 'ReviewOverview'>
         <div className = 'StarOverview' key = 'StarOverview'>
-        {/* {rating} */}
         {starRating}
         </div>
       </div>
@@ -51,7 +43,7 @@ export default function StarOverview (props) {
       {recommendedRating}% of reviews recommend this product
       </div>
       </div>
-      {props.data.ratings ? <BarChart key = {barChartRating} ratings = {barChartRating}/> : "loading"}
+      {props.data.ratings ? <BarChart key = {barChartRating} ratings = {barChartRating} onClick = {props.onClickBarChart}/> : "loading"}
       {props.data.ratings ? <ProductBreakdown characteristics = {props.data.characteristics}/> : "loading"}
     </div>
   )}

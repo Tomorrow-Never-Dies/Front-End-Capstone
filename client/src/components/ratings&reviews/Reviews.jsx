@@ -3,19 +3,22 @@ import axios from 'axios';
 import IndividualReview from './Reviews/IndividualReview.jsx';
 import { sampleData } from '../../../../fixtures/ratings&reviews/ReviewExampleData.js'
 import StarOverview from './Stars/StarOverview.jsx'
-import Form from './Reviews/Form.jsx'
 import FormModal from './Reviews/FormModal.jsx'
 import './reviews.css';
 
 function RatingsReviews (props) {
   const [reviews, setReviews] = useState(sampleData.results);
+  const [allReviews, setAllReviews] = useState([]);
+  const [filteredReviews,setfilteredReviews] = useState({"1":[],"2":[],"3":[],"4":[],"5":[]});
   const [metaData, setMeta] = useState({});
   const [enableForm, setForm] = useState(false);
   const [showModal, setModal] = useState(false);
   const [modalData, setData] = useState(null);
   const [totalNumOfReviews, setNumReviews] = useState(null);
   const [totalShownReviews, setShownReviews] = useState(5);
-  const [reviewFilter, setFilter] = useState('relevant')
+  const [reviewFilter, setFilter] = useState('relevant');
+  const [currentFilter, setCurrentFilter] = useState('reviewType')
+  const [starFilter, setStarFilter] = useState(null)
   const hideModal = () => {
     setModal(false);
   };
@@ -27,13 +30,19 @@ function RatingsReviews (props) {
   })
 
   const setReviewFilter = (event) => {
-    setFilter(event.target.value)
+    setFilter(event.target.value);
+    setCurrentFilter('reviewType');
   }
 
   const showAdditionalReviews = () => {
     setShownReviews(totalShownReviews+2)
   }
 
+  const filterReviewsByStars = (starRating) => {
+      setStarFilter(starRating.toString());
+      setCurrentFilter(`${starRating}-stars`);
+
+  }
   const getFilteredReviews = () => {
     axios.get('/getReview2', {
       params: {
@@ -43,7 +52,6 @@ function RatingsReviews (props) {
       }
     })
     .then ((reviews) => {
-      console.log(`filtered reviews is equal to ${JSON.stringify(reviews.data.results)}`);
       setReviews(reviews.data.results)
     })
   }
@@ -84,7 +92,6 @@ function RatingsReviews (props) {
 
   useEffect(() => {
     if(metaData.recommended) {
-      console.log(`metaData is equal to ${JSON.stringify(metaData)}`)
     var totalNum = Number(metaData.recommended.true) + Number(metaData.recommended.false);
     setNumReviews(totalNum)
     }
@@ -92,15 +99,56 @@ function RatingsReviews (props) {
 
 
   useEffect(() => {
-    console.log(`reviews is equal to ${JSON.stringify(reviews)}`);
-  }, [reviews])
+    axios.get('/getReview2', {
+      params: {
+        id: props.id,// swap this to parent prop id after testing
+        count: Number(totalNumOfReviews)
+      }
+    })
+    .then ((result) => {
+      var data = result.data.results;
+      setAllReviews(data);
+    })
+  }, [totalNumOfReviews])
 
+  useEffect(() => {
+      const FilteredReviewsByStars = allReviews.map((review) => {
+        if(review.rating === 1) {
+          return <IndividualReview reviewInfo = {review} key = {review.review_id} review_id = {review.review_id}/>
+        }
+      })
+      const FilteredReviewsBy2Stars = allReviews.map((review) => {
+        if(review.rating === 2) {
+          return <IndividualReview reviewInfo = {review} key = {review.review_id} review_id = {review.review_id}/>
+        }
+      })
+      const FilteredReviewsBy3Stars = allReviews.map((review) => {
+        if(review.rating === 3) {
+          return <IndividualReview reviewInfo = {review} key = {review.review_id} review_id = {review.review_id}/>
+        }
+      })
+      const FilteredReviewsBy4Stars = allReviews.map((review) => {
+        if(review.rating === 4) {
+          return <IndividualReview reviewInfo = {review} key = {review.review_id} review_id = {review.review_id}/>
+        }
+      })
+      const FilteredReviewsBy5Stars = allReviews.map((review) => {
+        if(review.rating === 5) {
+          return <IndividualReview reviewInfo = {review} key = {review.review_id} review_id = {review.review_id}/>
+        }
+      })
+      setfilteredReviews({['1']:[...FilteredReviewsByStars], ['2']: [...FilteredReviewsBy2Stars], ['3']:[...FilteredReviewsBy3Stars],['4']: [...FilteredReviewsBy4Stars], ['5']:[...FilteredReviewsBy5Stars]});
+  }, [allReviews])
+
+  useEffect(() => {
+    console.log(`filterreviews has changed it is equal to ${JSON.stringify(filteredReviews)}`);
+  },[filteredReviews])
   return (
     <div className = 'RatingsAndReviews'>
       <div className = 'RatingsAndReviewsTitle'>
       <h1 className = 'RatingsAndReviewsHeader'>Ratings & Reviews</h1>
       </div>
-    <div className = 'Reviews'> <StarOverview key = {metaData} data = {metaData} />
+    <div className = 'Reviews'> <StarOverview key = {metaData} data = {metaData} onClickBarChart = {filterReviewsByStars}/>
      <div className = 'IndividualReviews'>
      <div className = "dropdown"> {totalNumOfReviews} reviews, sorted by  <select className = "selectReview" onChange={setReviewFilter}>
           <option value="relevant">relevance</option>
@@ -109,14 +157,15 @@ function RatingsReviews (props) {
      </select>
       </div>
       <div className = 'mappedReviews'>
-     {mappedReviews}
+      {currentFilter === 'reviewType' ? mappedReviews : filteredReviews[starFilter]}
+
       </div>
      <FormModal show={showModal} onHide = {hideModal} characteristics = {metaData.characteristics} id={props.id} />
         <div className = 'ReviewButtons' >
             <button className = 'moreReviewButtons' onClick ={showAdditionalReviews}>
               MORE REVIEWS
             </button>
-            <button name = "addReviewButton" data-testid = "addReviewButton" onClick = {getModal} >
+            <button className = "addReviewButton" data-testid = "addReviewButton" onClick = {getModal} >
               ADD A REVIEW
             </button>
         </div>
