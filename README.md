@@ -28,6 +28,7 @@ Related Products Carousel:
 - Clicking on a related product will update the overview component
 - Clicking on the star icon will compare that product to the product rendered in the overview
 - The carousel loops
+![alt_text](https://github.com/Tomorrow-Never-Dies/Front-End-Capstone/blob/main/screenshots/Related%20Items.png)
 
 Your Outfit's Carousel:
 - Displays products that the user has added to the my outfits carousel
