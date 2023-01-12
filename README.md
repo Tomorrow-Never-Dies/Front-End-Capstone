@@ -18,6 +18,12 @@ This repo comprises four widgets that create a single product page for our organ
 
 ![alt_text](https://github.com/Tomorrow-Never-Dies/Front-End-Capstone/blob/main/screenshots/Screen%20Shot%202023-01-12%20at%2012.20.34%20PM.png)
 
+This widget contains the overview information for the currently selected product. It allows users the capablity of:
+- Selecting from the different styles for the current product
+- Viewing and switching between all the images for the currently selected style
+- Once the style is selected it will allow user to select size and quantity based on stock availiblity
+- View an expanded version of the currently selected image
+- Viewing product detials and current price 
 
 
 **#Related Products Widget:**
