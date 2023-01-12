@@ -23,7 +23,8 @@ This widget contains the overview information for the currently selected product
 - Viewing and switching between all the images for the currently selected style
 - Once the style is selected it will allow user to select size and quantity based on stock availiblity
 - View an expanded version of the currently selected image
-- Viewing product detials and current price 
+- Viewing product detials and current price
+- View rating for the current product and a link to scroll to the ratings widget 
 
 
 **#Related Products Widget:**
