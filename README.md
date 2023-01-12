@@ -16,6 +16,7 @@ This repo comprises four widgets that create a single product page for our organ
 
 **#Overview Widget:**
 
+![alt_text](https://github.com/Tomorrow-Never-Dies/Front-End-Capstone/blob/main/screenshots/Screen%20Shot%202023-01-12%20at%2012.20.34%20PM.png)
 
 
 
