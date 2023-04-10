@@ -44,14 +44,14 @@ Your Outfit's Carousel:
 - Each product can be removed from the carousel by clicking the x buton
 ![alt_text](https://github.com/Tomorrow-Never-Dies/Front-End-Capstone/blob/main/screenshots/Your%20outfits.png)
 
-**# Questions & Answers Widget:**
+**Questions & Answers Widget:**
 This widget displays Questions asked by curious shoppers and their respective answers.
 At the moment, it will render all questions associated to the currently displayed item - this is rendered in a component that allows for scrolling.
 With that said, the Questions & Answers widget allows for shoppers/customers to add questions to the currently selected item.
 
 Features to be implemented: Add answers, adjustment of and sorting by Question/Answer "Helpfulness" and Question search
 
-**# Ratings and Reviews Widget:**
+**Ratings and Reviews Widget:**
 This widget displays the Ratings data and Reviews data coming from the Atlier API.
 The current star rating only shows in 0.25% increments but can easily be changed to show 0.1% increments.
 The user is able to filter reviews by helpfulness, relevance, and newest. On top of this, reviews can also be filtered out by star rating by clicking on the bar chart on the side of the reviews.
