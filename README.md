@@ -16,7 +16,15 @@ This repo comprises four widgets that create a single product page for our organ
 
 **#Overview Widget:**
 
+![alt_text](https://github.com/Tomorrow-Never-Dies/Front-End-Capstone/blob/main/screenshots/Screen%20Shot%202023-01-12%20at%2012.20.34%20PM.png)
 
+This widget contains the overview information for the currently selected product. It allows users the capablity of:
+- Selecting from the different styles for the current product
+- Viewing and switching between all the images for the currently selected style
+- Once the style is selected it will allow user to select size and quantity based on stock availiblity
+- View an expanded version of the currently selected image
+- Viewing product detials and current price
+- View rating for the current product and a link to scroll to the ratings widget 
 
 
 **#Related Products Widget:**
@@ -28,6 +36,7 @@ Related Products Carousel:
 - Clicking on a related product will update the overview component
 - Clicking on the star icon will compare that product to the product rendered in the overview
 - The carousel loops
+![alt_text](https://github.com/Tomorrow-Never-Dies/Front-End-Capstone/blob/main/screenshots/Related%20Items.png)
 
 Your Outfit's Carousel:
 - Displays products that the user has added to the my outfits carousel
@@ -35,6 +44,7 @@ Your Outfit's Carousel:
 - Also adds products from the overview star toggle button
 - Clicking on a related product will update the overview component
 - Each product can be removed from the carousel by clicking the x buton
+![alt_text](https://github.com/Tomorrow-Never-Dies/Front-End-Capstone/blob/main/screenshots/Your%20outfits.png)
 
 **#Questions & Answers Widget:**
 This widget displays Questions asked by curious shoppers and their respective answers.

@@ -43,3 +43,4 @@ webpack.config.js
 .env
 bundle.js
 
+node_modules
