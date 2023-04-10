@@ -12,7 +12,7 @@ This repo comprises four widgets that create a single product page for our organ
 *[Ratings And Reviews Widget](#RatingsAndReviewsWidget)
 *[Team Members](#TeamMembers)
 
-**# Overview Widget:**
+**Overview Widget:**
 
 ![alt_text](https://github.com/Tomorrow-Never-Dies/Front-End-Capstone/blob/main/screenshots/Screen%20Shot%202023-01-12%20at%2012.20.34%20PM.png)
 
@@ -25,7 +25,7 @@ This widget contains the overview information for the currently selected product
 - View rating for the current product and a link to scroll to the ratings widget
 
 
-**# Related Products Widget: **
+**Related Products Widget:**
 
 This widget contains 2 carousels:
 
@@ -62,12 +62,12 @@ Overall the main goal of this widget is to display the reviews data in a digesta
 
 ![alt text](https://github.com/Tomorrow-Never-Dies/Front-End-Capstone/blob/main/screenshots/Screen%20Shot%202023-01-07%20at%201.06.45%20PM.png)
 
-**# Installation:**
+**Installation:**
 To run Atelier, make sure you have Nodejs and npm installed on your machine. Then, clone the repository and navigate to the root directory. Run npm install to install all necessary dependencies, and then npm start to start the server. “npm run client-dev” will compile the react application. The app will be available at http://localhost:3033.
 
 We hope you enjoy using Atelier! If you have any issues or suggestions, please don't hesitate to reach out.
 
-**# Team Members:**
+**Team Members:**
 * Andre Nga: Questions
 * Yaser Eisa: Related Products
 * Aman Arabi: Overview
