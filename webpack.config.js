@@ -55,7 +55,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.REACT_APP_GIT_API': JSON.stringify('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'),
+      'process.env.REACT_APP_GIT_API’: JSON.stringify(‘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’),
       'process.env.REACT_APP_IMGBB_API':JSON.stringify('32afd28d526fb3f23e543894fbad7e6e')
     })
   ]
